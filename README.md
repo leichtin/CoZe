@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="images/logo-seal.png" alt="CC Prüfung Logo" width="160" />
+  <img src="images/logo-seal.png" alt="CoZe Logo" width="160" />
 </p>
 
-<h1 align="center">CC Prüfung — Copilot Consultant Theorieprüfung</h1>
+<h1 align="center">Consultant Zertifizierung (kurz CoZe)</h1>
 
 <p align="center">
   <em>Die inoffizielle „Führerscheinprüfung" für Microsoft 365 Copilot Consultants.</em><br/>
@@ -20,7 +20,7 @@
 
 ## 🚗 Was ist das?
 
-Die **CC Prüfung** ist ein satirisches Quiz im Stil der deutschen Fahrschul-Theorieprüfung — nur dreht sich hier alles um **Microsoft 365 Copilot Consulting**.
+Die **Consultant Zertifizierung (CoZe)** ist ein satirisches Quiz im Stil der deutschen Fahrschul-Theorieprüfung — nur dreht sich hier alles um **Microsoft 365 Copilot Consulting**.
 
 Statt Verkehrsregeln werden Themen abgefragt wie:
 - 🧠 **Grounding & Prompt Engineering** — Warum liefert der Agent Unsinn, wenn der SharePoint-Ordner 6.000 ungepflegte Dokumente enthält?
