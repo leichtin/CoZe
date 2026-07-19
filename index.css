@@ -936,13 +936,16 @@ body {
 }
 
 .green-btn {
-    background-color: #009036;
-    color: #ffffff;
-    border: 1px solid #006b28;
+    background-color: #ffffff;
+    color: #1f7339;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .green-btn:hover {
-    background-color: #007d2f;
+    background-color: #eaf7ee;
+    color: #134f26;
+    border-color: #eaf7ee;
 }
 
 /* Row 2: Navigation Buttons */
