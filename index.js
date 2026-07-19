@@ -442,10 +442,10 @@ const copilotQuestionsPool = [
         pictureDesc: "Szenario: Zentraler Radiosender sendet ohne lokale Antennen (Champion-Netzwerk) in den Tälern.",
         isVideo: false,
         answers: [
-            { text: "Ein aktives „Champion-Netzwerk“. Es braucht lokale Multiplikatoren und Key-User in den Abteilungen, die das Wissen organisch, auf Augenhöhe und praxisnah an die Kollegen weitergeben.", correct: true },
+            { text: "Ein aktives „Champion-Netzwerk“. Es braucht lokale Multiplikatoren und Key-User in den Abteilungen, die das Wissen organisch, auf Augenhöhe und praxisnah an die Kollegen weitergeben.", correct: false },
             { text: "Der Flurfunk des Unternehmens wurde unzureichend als Kommunikationskanal genutzt.", correct: false },
             { text: "Die Intranetseite wurde nicht ausgedruckt an die Mitarbeiter verteilt.", correct: false },
-            { text: "Es fehlt ein LinkedIn Post, der diese Inhalte als Theorieprüfung für „Copilot Consultants“ im Stil der Führerscheinprüfung vorstellt.", correct: false }
+            { text: "Es fehlt ein LinkedIn Post, der diese Inhalte als Theorieprüfung für „Copilot Consultants“ im Stil der Führerscheinprüfung vorstellt.", correct: true }
         ]
     }
 ];
