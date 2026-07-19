@@ -153,9 +153,3 @@ cc-pruefung/
 - **Google Fonts** (Inter, Poppins, Share Tech Mono)
 - **Font Awesome 6** für Icons
 - Optimierte JPEG-Bilder (~155 KB pro Bild, 4,6 MB gesamt)
-
----
-
-## 📄 Lizenz
-
-Dieses Projekt ist ein privates Community-Projekt. Fragen zur Nutzung gerne per Issue.
