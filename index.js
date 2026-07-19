@@ -414,7 +414,7 @@ const copilotQuestionsPool = [
         answers: [
             { text: "Einführung von automatisierten Data-Lifecycle-Richtlinien mit Ablaufdaten (TTL) und regelmäßigen Review-Schleifen für Content-Owner.", correct: true },
             { text: "Ich stelle einen Werkstudenten ein, der die Antworten als Human-in-the-Loop manuell prüft.", correct: false },
-            { text: "Alle alten Standorte einfach wieder neu eröffnen, um die Datenkonsistency zu wahren.", correct: false },
+            { text: "Alle alten Standorte einfach wieder neu eröffnen, um die Datenkonsistency [sic!] zu wahren.", correct: false },
             { text: "Keine Maßnahme erforderlich. Das ist ein klassischer Fall von KI Halluzination.", correct: false }
         ]
     },
