@@ -634,6 +634,12 @@ function loadQuestion(index) {
     currentIndex = index;
     const q = questions[index];
 
+    // Scroll canvas to top
+    const canvas = document.querySelector(".quiz-canvas");
+    if (canvas) {
+        canvas.scrollTop = 0;
+    }
+
     // Meta updates
     document.getElementById("question-id").textContent = `Frage ${index + 1}`;
     
