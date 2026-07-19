@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Fragen-29-2e7d32?style=flat-square" alt="29 Fragen" />
-  <img src="https://img.shields.io/badge/Zeitlimit-45%20Min-2e7d32?style=flat-square" alt="45 Minuten" />
-  <img src="https://img.shields.io/badge/Framework-Vanilla%20JS-f7df1e?style=flat-square&logo=javascript&logoColor=black" alt="Vanilla JS" />
-  <img src="https://img.shields.io/badge/Hosting-Static%20HTML-333?style=flat-square" alt="Static HTML" />
+  📝 <strong>29 Fragen</strong> &nbsp;·&nbsp; 
+  ⏱️ <strong>45 Minuten</strong> &nbsp;·&nbsp; 
+  ⚡ <strong>Vanilla JS</strong> &nbsp;·&nbsp; 
+  🌐 <strong>Static HTML</strong>
 </p>
 
 ---
@@ -53,7 +53,6 @@ Jede Frage hat **eine richtige Antwort** und drei humorvolle, aber lehrreiche Di
 - 🖼️ **29 Szenario-Bilder** — Jede Frage hat ein thematisches Cockpit-Bild aus Fahrerperspektive als visuelle Metapher
 - ⏱️ **45-Minuten-Countdown** — Automatische Abgabe bei Zeitablauf
 - ⭐ **Fragen markieren** — Schwierige Fragen für später vormerken
-- 👀 **Sofortige Auflösung** — Pro Frage einzeln die richtige Antwort aufdecken
 - 📊 **Detaillierte Auswertung** — Fehlerpunkte, Fehlerquote, Zeitverbrauch, Einzelergebnisse
 - 🔄 **Review-Modus** — Nach Abgabe alle Fragen mit farblicher Korrektur durchgehen
 - 📱 **Responsive Design** — Funktioniert auf Desktop, Tablet und Smartphone
@@ -160,10 +159,3 @@ cc-pruefung/
 ## 📄 Lizenz
 
 Dieses Projekt ist ein privates Community-Projekt. Fragen zur Nutzung gerne per Issue.
-
----
-
-<p align="center">
-  <img src="images/logo-seal.png" alt="Capybara" width="80" /><br/>
-  <em>Bleib chill. Besteh die Prüfung. 🐾</em>
-</p>

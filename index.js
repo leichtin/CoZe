@@ -495,7 +495,6 @@ function setupEventListeners() {
     // Footer actions
     document.getElementById("btn-cancel").addEventListener("click", confirmAbort);
     document.getElementById("btn-star").addEventListener("click", toggleStar);
-    document.getElementById("btn-resolve").addEventListener("click", resolveCurrentQuestion);
 
     // Main Weiter button above footer
     const btnNextMain = document.getElementById("btn-next-main");
@@ -699,7 +698,7 @@ function loadQuestion(index) {
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";
 
-    const isResolved = resolvedQuestions[index] || reviewMode;
+    const isResolved = reviewMode;
 
     // Render Multiple-Choice options with dynamic A), B), C), D) prefixes
     q.answers.forEach((ans, aIdx) => {
@@ -755,24 +754,17 @@ function loadQuestion(index) {
 
 
 
-    // Toggle Abgeben label on last question
-    if (index === questions.length - 1 && !reviewMode) {
-        document.getElementById("btn-resolve").textContent = "Abgeben";
-    } else {
-        document.getElementById("btn-resolve").textContent = reviewMode ? "Auswertung" : "Auflösung";
-    }
-
-    // Update main Weiter button above footer
+    // Update main Weiter button in the footer
     const btnNextMain = document.getElementById("btn-next-main");
     if (btnNextMain) {
         if (index === questions.length - 1) {
             if (reviewMode) {
-                btnNextMain.innerHTML = 'Auswertung anzeigen <i class="fa-solid fa-chart-pie"></i>';
+                btnNextMain.textContent = "Auswertung";
             } else {
-                btnNextMain.innerHTML = 'Prüfung abgeben <i class="fa-solid fa-check-double"></i>';
+                btnNextMain.textContent = "Abgeben";
             }
         } else {
-            btnNextMain.innerHTML = 'Weiter <i class="fa-solid fa-arrow-right"></i>';
+            btnNextMain.textContent = "Weiter";
         }
     }
 }
@@ -788,20 +780,6 @@ function toggleStar() {
     starredQuestions[currentIndex] = !starredQuestions[currentIndex];
     loadQuestion(currentIndex);
     updateNavigationFooter();
-}
-
-// Practice Mode Resolution ("Auflösung" button click)
-function resolveCurrentQuestion() {
-    if (currentIndex === questions.length - 1 && !reviewMode) {
-        openSubmitModal();
-    } else if (reviewMode) {
-        document.getElementById("quiz-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-    } else {
-        resolvedQuestions[currentIndex] = true;
-        loadQuestion(currentIndex);
-        updateNavigationFooter();
-    }
 }
 
 // Build Navigation Footer
@@ -833,7 +811,7 @@ function updateNavigationFooter() {
             if (starredQuestions[idx]) {
                 symbols.push("★");
             }
-            if (reviewMode || resolvedQuestions[idx]) {
+            if (reviewMode) {
                 const isCorrect = checkQuestionCorrectness(idx);
                 symbols.push(isCorrect ? "✓" : "✗");
             } else if (isAnswered) {
