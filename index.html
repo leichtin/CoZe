@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC Prüfung</title>
+    <!-- Favicon (Owl icon) -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- 1. INTRO / WELCOME SCREEN -->
+        <section id="intro-screen" class="app-screen">
+            <!-- Animated background particles -->
+            <div class="intro-particles">
+                <div class="particle p1"></div>
+                <div class="particle p2"></div>
+                <div class="particle p3"></div>
+                <div class="particle p4"></div>
+                <div class="particle p5"></div>
+                <div class="particle p6"></div>
+            </div>
+            <div class="intro-glow"></div>
+
+            <div class="card intro-card">
+                <div class="card-accent-line"></div>
+
+                <!-- Official seal logo -->
+                <div class="seal-container">
+                    <img src="images/logo-seal.png" alt="KI-Dienstleistungs-Schutz" class="seal-logo">
+                </div>
+
+                <div class="logo-container">
+                    <div class="logo-text">
+                        <h1><span class="green-c">C</span>opilot <span class="green-c">C</span>onsultant</h1>
+                        <p class="logo-edition">2026 Edition</p>
+                    </div>
+                </div>
+
+                <p class="welcome-lead"><strong>Willkommen zur</strong></p>
+                <p class="hero-tagline">Einstufungs- und Tauglichkeitsprüfung gemäß <strong>§365 der KI-Betriebssicherheitsverordnung</strong> über das gewerbliche Führen von Großsprachmodellen.</p>
+
+                <div class="divider"></div>
+
+                <div class="exam-info-box">
+                    <h3><i class="fa-solid fa-circle-info"></i> Prüfungs-Informationen:</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-list-check"></i> <strong>Fragen:</strong> 29 Copilot Consultant Fragen</li>
+                        <li><i class="fa-solid fa-clock"></i> <strong>Zeitlimit:</strong> 45:00 Minuten</li>
+                        <li><i class="fa-solid fa-triangle-exclamation"></i> <strong>Bestehensgrenze:</strong> Maximal 10 Fehlerpunkte</li>
+                        <li><i class="fa-solid fa-circle-nodes"></i> <strong>Format:</strong> Single-Choice mit verdeckter Antwort</li>
+                        <li><i class="fa-solid fa-award"></i> <strong>Wertung:</strong> Jede Frage hat 2 bis 5 Fehlerpunkte</li>
+                    </ul>
+                </div>
+
+                <div class="loading-status" id="db-load-status">
+                    <span class="spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                    <span class="status-text">Lade offizielle Fragen-Datenbank...</span>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="start-exam-btn" class="btn btn-primary" disabled>
+                        <i class="fa-solid fa-play"></i> Prüfung starten
+                    </button>
+                </div>
+
+                <div class="disclaimer-btn-wrapper">
+                    <button id="open-legal-modal-btn" class="btn-disclaimer-pill" type="button">
+                        § Disclaimer
+                    </button>
+                </div>
+
+                <p class="intro-footer-note"><i class="fa-solid fa-shield-halved"></i> Keine Registrierung · Kostenlos</p>
+            </div>
+        </section>
+
+        <!-- 2. ACTIVE QUIZ SCREEN (STRICT EXAM LAYOUT MATCH) -->
+        <section id="quiz-screen" class="app-screen hidden">
+            <!-- Header Bar (Strict Color and Layout Match) -->
+            <header class="quiz-header">
+                <div class="header-left">
+                    <span class="info-circle"><i class="fa-solid fa-info"></i></span>
+                    <span id="question-id" class="question-id">Frage 1</span>
+                </div>
+                <div class="header-right">
+                    <span id="timer-display-header" class="timer-display-header">45:00</span>
+                    <span class="header-divider">|</span>
+                    <span class="points-label">Punkte: <span id="current-q-points">4</span></span>
+                    <button id="abort-btn" class="close-x-btn" title="Prüfung beenden">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Canvas Area -->
+            <main class="quiz-canvas">
+                <!-- Question Text (Top) -->
+                <h1 id="question-text" class="question-title">Lädt...</h1>
+
+                <!-- Split Content: Image Left, Options Right -->
+                <div class="canvas-split">
+                    <!-- Left: Media Box -->
+                    <div class="media-column">
+                        <div class="exam-media-box" id="exam-media-box">
+                            <!-- Visual blueprint graphic placeholder -->
+                            <div class="blueprint-lines"></div>
+                            <div class="blueprint-mirror"></div>
+                            <div class="blueprint-speedometer">
+                                <div class="speedo-dial"></div>
+                                <div class="speedo-needle"></div>
+                            </div>
+                            <div class="blueprint-steering-wheel"></div>
+                            <div class="blueprint-road-path"></div>
+                            
+                            <!-- Information text overlay -->
+                            <div class="blueprint-info">
+                                <i class="fa-solid fa-compass-drafting media-icon"></i>
+                                <div class="media-title" id="media-filename">M365-COPILOT</div>
+                                <div class="media-desc" id="media-description">
+                                    [Architektur- und Consulting-Szenario]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Answers Box -->
+                    <div class="answers-column" id="answers-container">
+                        <!-- Options injected dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- Next Question Button (Above Footer, Below Answers) -->
+                <div class="next-question-row">
+                    <button id="btn-next-main" class="btn-weiter">
+                        Weiter <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Floating Question Count Tab -->
+                <div class="floating-questions-tab">
+                    <span id="floating-q-count">29 Fragen</span>
+                </div>
+            </main>
+
+            <!-- Footer Area (Forest Green, Matches Mockup, Single Row Layout) -->
+            <footer class="quiz-footer">
+                <div class="footer-single-row">
+                    <button id="btn-cancel" class="btn-action red-btn">Abbrechen</button>
+                    
+                    <div class="footer-center-group">
+                        <button id="btn-star" class="btn-action yellow-btn" title="Frage markieren">
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                        <select class="nav-dropdown-main" id="question-dropdown-main">
+                            <!-- Options injected dynamically by JS -->
+                        </select>
+                    </div>
+
+                    <button id="btn-resolve" class="btn-action green-btn">Auflösung</button>
+                </div>
+            </footer>
+        </section>
+
+        <!-- 3. CONFIRMATION MODAL -->
+        <div id="submit-modal" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h2>Prüfung abgeben?</h2>
+                <p>Möchten Sie die theoretische Prüfung wirklich beenden und abgeben? Unbeantwortete Fragen werden als falsch gewertet.</p>
+                <div class="modal-stats">
+                    <div class="stat-item">
+                        <span class="stat-val" id="answered-count">0/29</span>
+                        <span class="stat-lbl">Beantwortet</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val" id="unanswered-count">29</span>
+                        <span class="stat-lbl">Offen</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="modal-cancel-btn" class="btn btn-secondary">Weitermachen</button>
+                    <button id="modal-confirm-btn" class="btn btn-success">Ja, abgeben</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. RESULTS SCREEN (Forest Green / Pastel Layout Match) -->
+        <section id="result-screen" class="app-screen hidden">
+            <div class="card result-card">
+                <div class="result-header">
+                    <div id="result-badge" class="result-badge success">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>BESTANDEN</span>
+                    </div>
+                    <h1>Prüfungsergebnis</h1>
+                </div>
+
+                <div class="result-summary-grid">
+                    <div class="summary-box">
+                        <span class="summary-label">Fehlerpunkte</span>
+                        <span class="summary-value" id="res-error-points">0</span>
+                        <span class="summary-detail">(Erlaubt: max. 10)</span>
+                    </div>
+                    <div class="summary-box">
+                        <span class="summary-label">Falsche Fragen</span>
+                        <span class="summary-value" id="res-wrong-count">0 / 29</span>
+                        <span class="summary-detail" id="res-wrong-pct">0% Fehlerquote</span>
+                    </div>
+                    <div class="summary-box">
+                        <span class="summary-label">Verbleibende Zeit</span>
+                        <span class="summary-value" id="res-time-left">45:00</span>
+                        <span class="summary-detail">von 45 Min.</span>
+                    </div>
+                </div>
+
+                <div class="result-details">
+                    <h3>Detaillierte Auswertung:</h3>
+                    <div class="results-table-container">
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>Punkte</th>
+                                    <th>Fehlerpunkte</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-table-body">
+                                <!-- Injected dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button id="review-answers-btn" class="btn btn-primary">
+                        <i class="fa-solid fa-eye"></i> Antworten prüfen
+                    </button>
+                    <button id="restart-exam-btn" class="btn btn-secondary">
+                        <i class="fa-solid fa-rotate-left"></i> Neue Prüfung
+                    </button>
+                </div>
+
+                <p class="result-disclaimer-note">
+                    <i class="fa-solid fa-circle-info"></i> Inoffizielles Ergebnis zu Übungszwecken. Steht in keinerlei Verbindung zur Microsoft Corporation oder zu Arbeitgebern des Betreibers.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- 5. LEGAL DISCLAIMER MODAL -->
+    <div id="legal-modal" class="modal-backdrop hidden">
+        <div class="modal-card legal-modal-card">
+            <div class="legal-modal-header">
+                <h2><i class="fa-solid fa-scale-balanced"></i> Rechtliche Hinweise & Disclaimer</h2>
+                <button id="close-legal-modal-x" class="close-x-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="legal-modal-body">
+                <div class="legal-section">
+                    <h4><i class="fa-solid fa-certificate"></i> 1. Kein offizielles Zertifikat</h4>
+                    <p>Das Absolvieren dieser „CC Prüfung“ gewährt keine offiziell anerkannte Qualifikation, kein Zertifikat und keinen Sachkundenachweis. Es handelt sich um ein inoffizielles Trainings- und Humorwerkzeug.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h4><i class="fa-solid fa-registered"></i> 2. Markenrechtlicher Ausschluss (Microsoft)</h4>
+                    <p>Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook, Purview und weitere genannte Produktbezeichnungen sind eingetragene Marken der Microsoft Corporation in den USA und/oder anderen Ländern. Diese Anwendung wird nicht von Microsoft unterstützt, gesponsert, betrieben oder gepflegt.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h4><i class="fa-solid fa-building-user"></i> 3. Ausschluss von Arbeitgeberverhältnissen</h4>
+                    <p>Dieses Quiz ist ein privates Freizeit- & Community-Projekt des Erstellers. Es repräsentiert weder die Ansichten, Richtlinien, Schulungsmaterialien noch offizielle Vorgaben von aktuellen oder früheren Arbeitgebern des Betreibers.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h4><i class="fa-solid fa-masks-theater"></i> 4. Fiktive Regulierung & Parodie</h4>
+                    <p>Bezüge wie „§ 365 KI-Betriebssicherheitsverordnung“ sind rein fiktive Stilmittel zur Parodierung klassischer Fahrschul-Theorieprüfungen.</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="close-legal-modal-btn" class="btn btn-primary" type="button">Verstanden & Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="index.js" defer></script>
+</body>
+</html>
