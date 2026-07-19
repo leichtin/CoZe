@@ -10,6 +10,7 @@ body {
     background-color: #1f7339; /* Official Forest Green */
     color: #333333;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -20,6 +21,7 @@ body {
 #app-container {
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -46,12 +48,13 @@ body {
 #intro-screen {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 20px;
-    height: 100%;
+    align-items: flex-start;
+    padding: 30px 20px;
+    min-height: 100%;
     background: linear-gradient(135deg, #0a2e14 0%, #19582d 40%, #1f7339 70%, #0d3d1a 100%);
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Animated floating particles */
@@ -357,6 +360,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Header Bar */
@@ -451,8 +455,9 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: calc(100vh - 96px); /* Total height minus header (42px) and footer (54px) */
+    min-height: 0;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .question-title {
@@ -647,7 +652,8 @@ body {
     align-items: center;
     margin-top: auto;
     padding-top: 15px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+    flex-shrink: 0;
 }
 
 .btn-weiter {
@@ -1380,7 +1386,6 @@ body {
    ========================================================================== */
 @media (max-width: 900px) {
     .quiz-canvas {
-        height: calc(100vh - 96px);
         padding: 15px 20px;
     }
     
@@ -1442,6 +1447,49 @@ body {
 }
 
 @media (max-width: 650px) {
+    #intro-screen {
+        padding: 20px 12px;
+        align-items: flex-start;
+    }
+
+    .intro-card {
+        padding: 0 20px 24px;
+        border-radius: 12px;
+    }
+
+    .seal-logo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .logo-text h1 {
+        font-size: 22px;
+    }
+
+    .welcome-lead {
+        font-size: 15px;
+        margin-top: 10px;
+    }
+
+    .hero-tagline {
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+
+    .exam-info-box {
+        padding: 12px;
+        margin-bottom: 18px;
+    }
+
+    .exam-info-box h3 {
+        font-size: 13px;
+    }
+
+    .exam-info-box li {
+        font-size: 12.5px;
+        margin-bottom: 6px;
+    }
+
     .quiz-canvas {
         padding: 10px 15px;
     }
