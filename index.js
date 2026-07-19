@@ -501,7 +501,7 @@ function setupEventListeners() {
     if (btnNextMain) {
         btnNextMain.addEventListener("click", () => {
             if (currentIndex < questions.length - 1) {
-                loadQuestion(currentIndex + 1);
+                loadQuestion(currentIndex + 1, true);
             } else if (!reviewMode) {
                 openSubmitModal();
             } else {
@@ -514,7 +514,7 @@ function setupEventListeners() {
     const dropdown = document.getElementById("question-dropdown-main");
     if (dropdown) {
         dropdown.addEventListener("change", (e) => {
-            loadQuestion(parseInt(e.target.value));
+            loadQuestion(parseInt(e.target.value), true);
         });
     }
 
@@ -581,7 +581,7 @@ function startExam() {
     document.getElementById("quiz-screen").classList.remove("hidden");
 
     buildNavigationFooter();
-    loadQuestion(0);
+    loadQuestion(0, true);
     
     // Timer setup
     clearInterval(timerInterval);
@@ -630,14 +630,16 @@ function updateTimerDisplay() {
 }
 
 // Load Question at Index
-function loadQuestion(index) {
+function loadQuestion(index, scrollToTop = false) {
     currentIndex = index;
     const q = questions[index];
 
-    // Scroll canvas to top
-    const canvas = document.querySelector(".quiz-canvas");
-    if (canvas) {
-        canvas.scrollTop = 0;
+    // Scroll canvas to top only if explicitly requested
+    if (scrollToTop) {
+        const canvas = document.querySelector(".quiz-canvas");
+        if (canvas) {
+            canvas.scrollTop = 0;
+        }
     }
 
     // Meta updates
@@ -943,6 +945,6 @@ function enterReviewMode() {
     document.getElementById("abort-btn").innerHTML = '<i class="fa-solid fa-home"></i>';
     document.getElementById("abort-btn").title = "Prüfung beenden";
 
-    loadQuestion(0);
+    loadQuestion(0, true);
     updateNavigationFooter();
 }
