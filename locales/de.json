@@ -6,7 +6,7 @@
     "title": "CoZe",
     "welcomeLead": "Willkommen zur",
     "welcomeTitle": "Einstufungs- und Tauglichkeitsprüfung",
-    "welcomeSub": "Einstufungs- und Tauglichkeitsprüfung gemäß <strong>§365 der KI-Betriebssicherheitsverordnung</strong> über das gewerbliche Führen von Großsprachmodellen.",
+    "welcomeSub": "Einstufungs- und Tauglichkeitsprüfung<br>gemäß <strong>§365 der KI-Betriebssicherheitsverordnung</strong><br>über das gewerbliche Führen von Großsprachmodellen.",
     "examInfoTitle": "Prüfungs-Informationen:",
     "infoQuestions": "<strong>Fragen:</strong> {count} Copilot Consultant Fragen",
     "infoTimeLimit": "<strong>Zeitlimit:</strong> 45:00 Minuten",

@@ -460,7 +460,14 @@ function loadQuestion(index, scrollToTop = false) {
         } else {
             option.addEventListener("click", () => {
                 toggleAnswerSelection(index, aIdx);
-                loadQuestion(index);
+                const options = answersContainer.querySelectorAll(".answer-option");
+                options.forEach((opt, oIdx) => {
+                    if (oIdx === aIdx) {
+                        opt.classList.add("selected");
+                    } else {
+                        opt.classList.remove("selected");
+                    }
+                });
             });
         }
 

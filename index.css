@@ -452,6 +452,10 @@ h1, h2, h3, h4, h5, h6 {
     color: #ff8882;
 }
 
+#abort-btn:hover {
+    color: #dddddd;
+}
+
 /* Main Canvas Area */
 .quiz-canvas {
     flex-grow: 1;
@@ -1077,6 +1081,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
     color: #1f7339;
     font-weight: bold;
+}
+
+.nav-grid-panel-header .close-x-btn {
+    color: #1f7339;
 }
 
 .nav-grid-panel-body {

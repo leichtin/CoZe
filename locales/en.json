@@ -4,9 +4,9 @@
   },
   "ui": {
     "title": "CoZe",
-    "welcomeLead": "Welcome to the official",
+    "welcomeLead": "Welcome to the",
     "welcomeTitle": "Classification and Aptitude Exam",
-    "welcomeSub": "Classification and aptitude test pursuant to <strong>Section 365 of the AI Operational Safety Regulation</strong> on the commercial operation of Large Language Models.",
+    "welcomeSub": "Classification and aptitude test<br>pursuant to <strong>§365 of the AI Operational Safety Regulation</strong><br>on the commercial operation of Large Language Models.",
     "examInfoTitle": "Exam Regulations:",
     "infoQuestions": "<strong>Questions:</strong> {count} Copilot Consultant Questions",
     "infoTimeLimit": "<strong>Time Limit:</strong> 45:00 minutes",
