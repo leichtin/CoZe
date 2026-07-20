@@ -641,8 +641,12 @@ function submitExam() {
         detailsRows += `
             <tr>
                 <td>${idx + 1}</td>
-                <td>${q.points}</td>
-                <td style="color:${errorPoints > 0 ? '#b32117' : 'inherit'}; font-weight:${errorPoints > 0 ? 'bold' : 'normal'}">${errorPoints}</td>
+                <td>
+                    ${isCorrect 
+                        ? `<span style="color: #666;">0</span>` 
+                        : `<span style="color: #b32117; font-weight: bold;">${q.points}</span>`
+                    }
+                </td>
                 <td>${statusHtml}</td>
             </tr>
         `;
@@ -678,8 +682,8 @@ function enterReviewMode() {
     document.getElementById("result-screen").classList.add("hidden");
     document.getElementById("quiz-screen").classList.remove("hidden");
     
-    document.getElementById("abort-btn").innerHTML = '<i class="fa-solid fa-home"></i>';
-    document.getElementById("abort-btn").title = "Prüfung beenden";
+    document.getElementById("abort-btn").innerHTML = '<i class="fa-solid fa-house"></i>';
+    document.getElementById("abort-btn").title = currentLocaleData ? currentLocaleData.ui.abortTitle : "Zur Startseite";
 
     loadQuestion(0, true);
     updateNavigationFooter();
