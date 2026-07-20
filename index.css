@@ -365,6 +365,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 /* Header Bar */
@@ -907,6 +908,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     flex-grow: 1;
     min-width: 0;
+    gap: 15px;
 }
 
 .nav-dropdown-mobile-select {
@@ -1585,6 +1587,10 @@ h1, h2, h3, h4, h5, h6 {
     .btn-action.red-btn {
         padding: 0 8px;
         font-size: 11px;
+    }
+
+    .footer-center-group {
+        gap: 8px;
     }
 }
 

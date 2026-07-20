@@ -166,7 +166,8 @@ function setupEventListeners() {
     // Navigation Grid Toggle
     const btnGridToggle = document.getElementById("btn-grid-toggle");
     if (btnGridToggle) {
-        btnGridToggle.addEventListener("click", () => {
+        btnGridToggle.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent propagation to document click-outside listener
             const panel = document.getElementById("nav-grid-panel");
             if (panel) {
                 panel.classList.toggle("hidden");
@@ -175,6 +176,13 @@ function setupEventListeners() {
                     caret.style.transform = panel.classList.contains("hidden") ? "" : "rotate(180deg)";
                 }
             }
+        });
+    }
+
+    const panelElement = document.getElementById("nav-grid-panel");
+    if (panelElement) {
+        panelElement.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent clicks inside the panel from closing it
         });
     }
 
