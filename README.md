@@ -2,154 +2,141 @@
   <img src="images/logo-seal.png" alt="CoZe Logo" width="160" />
 </p>
 
-<h1 align="center">Consultant Zertifizierung (kurz CoZe)</h1>
+<h1 align="center">CoZe — Consultant Zertifizierung</h1>
 
 <p align="center">
-  <em>Die inoffizielle „Führerscheinprüfung" für Microsoft 365 Copilot Consultants.</em><br/>
-  <strong>29 Fragen · 45 Minuten · 10 Fehlerpunkte erlaubt · Bestehst du?</strong>
+  <em>The unofficial "driver's license exam" for Microsoft 365 Copilot Consultants.</em><br/>
+  <strong>29 questions · 45 minutes · up to 10 mistakes allowed · do you pass?</strong>
 </p>
 
 <p align="center">
-  📝 <strong>29 Fragen</strong> &nbsp;·&nbsp; 
-  ⏱️ <strong>45 Minuten</strong> &nbsp;·&nbsp; 
-  ⚡ <strong>Vanilla JS</strong> &nbsp;·&nbsp; 
-  🌐 <strong>Static HTML</strong>
-</p>
-
----
-
-## 🚗 Was ist das?
-
-Die **Consultant Zertifizierung (CoZe)** ist ein satirisches Quiz im Stil der deutschen Fahrschul-Theorieprüfung — nur dreht sich hier alles um **Microsoft 365 Copilot Consulting**.
-
-Statt Verkehrsregeln werden Themen abgefragt wie:
-- 🧠 **Grounding & Prompt Engineering** — Warum liefert der Agent Unsinn, wenn der SharePoint-Ordner 6.000 ungepflegte Dokumente enthält?
-- 🔐 **Datenschutz & Oversharing** — Was passiert, wenn der Copilot vertrauliche HR-Daten in der Team-Suche ausspuckt?
-- 🏛️ **Governance & Compliance** — Wie reagiert man auf veraltete Wissensdatenbanken, die gelöschte Standorte zurückgeben?
-- 📊 **Adoption & Change Management** — Warum reicht eine einzige 45-Minuten-Schulung nicht für nachhaltige Copilot-Nutzung?
-- 🤖 **KI-Halluzinationen** — Wenn der Copilot kreativ wird und Zahlen erfindet
-- 💡 **Lizenzierung & Architektur** — E3 vs. E5, Multi-Tenant-Grenzen, Legacy-Systeme ohne REST-API
-
-Jede Frage hat **eine richtige Antwort** und drei humorvolle, aber lehrreiche Distraktoren. Die Distraktoren sind absichtlich überspitzt formuliert — denn Humor bleibt im Gedächtnis.
-
----
-
-## 🎯 Ziel & Motivation
-
-| Ziel | Beschreibung |
-|------|-------------|
-| **Wissen testen** | Copilot Consultants können ihr Praxiswissen in realistischen Szenarien überprüfen |
-| **Lernen durch Lachen** | Satirische Falschantworten machen typische Denkfehler und Anti-Patterns sichtbar |
-| **Team-Einstufung** | Kann als lockerer Einstufungstest in Workshops oder Onboardings eingesetzt werden |
-| **Diskussionsgrundlage** | Jede Frage eignet sich als Gesprächsstarter für tiefergehende Fachgespräche |
-
-> **Hinweis:** Dies ist ausdrücklich **keine offizielle Microsoft-Zertifizierung**. Es ist ein privates Community-Projekt zu Lern- und Unterhaltungszwecken.
-
----
-
-## ✨ Features
-
-- 🎨 **Authentisches Fahrschul-Design** — Grünes Farbschema, Timer, Fehlerpunkte-System, Fortschritts-Navigation
-- 🖼️ **29 Szenario-Bilder** — Jede Frage hat ein thematisches Cockpit-Bild aus Fahrerperspektive als visuelle Metapher
-- ⏱️ **45-Minuten-Countdown** — Automatische Abgabe bei Zeitablauf
-- ⭐ **Fragen markieren** — Schwierige Fragen für später vormerken
-- 📊 **Detaillierte Auswertung** — Fehlerpunkte, Fehlerquote, Zeitverbrauch, Einzelergebnisse
-- 🔄 **Review-Modus** — Nach Abgabe alle Fragen mit farblicher Korrektur durchgehen
-- 📱 **Responsive Design** — Funktioniert auf Desktop, Tablet und Smartphone
-- 🛡️ **Rechtlicher Disclaimer** — Integriertes Modal mit vollständigem Haftungsausschluss
-- 🐾 **Chill Capybara Maskottchen** — Weil jede gute Prüfung ein Maskottchen braucht
-
----
-
-## 🖼️ Szenario-Bilder
-
-Jede Frage wird von einem thematisch passenden Bild begleitet, das die Fahrschul-Metapher visuell transportiert:
-
-<p align="center">
-  <img src="images/q27.jpg" alt="Frage 27 – Veraltete Wegweiser" width="420" style="border-radius:8px; margin:6px;" />
-  <img src="images/q28.jpg" alt="Frage 28 – Fahrlehrer geht" width="420" style="border-radius:8px; margin:6px;" />
-</p>
-<p align="center">
-  <em>Links: Veraltete Wegweiser als Metapher für ungepflegte Wissensdatenbanken (Q27)<br/>
-  Rechts: Der Fahrlehrer winkt und geht — nach nur einer Schulung (Q28)</em>
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green.svg" />
+  <img alt="Static" src="https://img.shields.io/badge/deployment-GitHub%20Pages-blue.svg" />
+  <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-none-brightgreen.svg" />
+  <img alt="Languages" src="https://img.shields.io/badge/languages-EN%20%7C%20DE-orange.svg" />
 </p>
 
 ---
 
-## 🚀 Installation & Start
+## What is CoZe?
 
-Kein Build-Tool, kein Framework, keine Abhängigkeiten. Einfach klonen und öffnen:
+**CoZe (Consultant Zertifizierung)** is a satirical quiz modelled after the German driving theory exam — but instead of traffic rules, it tests knowledge of **Microsoft 365 Copilot Consulting**.
+
+Topics covered include:
+
+- 🧠 **Grounding & Prompt Engineering** — Why does an agent return nonsense when a SharePoint folder contains 6,000 neglected documents?
+- 🔐 **Privacy & Oversharing** — What happens when Copilot surfaces confidential HR data in a Teams search?
+- 🏛️ **Governance & Compliance** — How do you respond to a stale knowledge base that returns references to deleted sites?
+- 📊 **Adoption & Change Management** — Why a single 45-minute training session is not enough for sustainable Copilot adoption.
+- 🤖 **AI Hallucinations** — When Copilot gets creative and fabricates figures.
+
+Each question has **one correct answer** and three plausible-but-wrong distractors. The distractors are intentionally exaggerated — because humour aids retention.
+
+> **Disclaimer:** This is **not** an official Microsoft certification. It is an independent community project for learning and entertainment purposes only. It has no affiliation with Microsoft Corporation or any employer of the author. All trademarks belong to their respective owners.
+
+---
+
+## Key Features
+
+- ⚡ **Zero dependencies** — no build step, no `node_modules`, no bundler required.
+- 🌐 **Multi-language support** — UI strings and question content are fully externalised into `locales/` JSON files (`en.json`, `de.json`).
+- 🏠 **Local-first** — runs entirely in the browser; no server, no backend, no data collection.
+- ⏱️ **45-minute countdown** — auto-submits when time expires.
+- ⭐ **Question flagging** — bookmark difficult questions to review later.
+- 🔄 **Review mode** — step through all answers with colour-coded corrections after submission.
+- 📊 **Detailed results** — mistake count, error rate, time used, and per-question breakdown.
+- 🖼️ **Scenario images** — every question is accompanied by a themed cockpit-view image to reinforce the driving exam metaphor.
+- 📱 **Responsive design** — works on desktop, tablet, and mobile.
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/q27_sample.jpg" alt="Question 27 – Outdated signposts as a metaphor for stale knowledge bases" width="420" style="border-radius:8px; margin:6px;" />
+  <img src="screenshots/q28_sample.jpg" alt="Question 28 – Instructor waves goodbye after a single training session" width="420" style="border-radius:8px; margin:6px;" />
+</p>
+
+---
+
+## Project Structure
+
+```
+CoZe/
+├── index.html          # Application entry point (intro, quiz, results, modal)
+├── index.css           # All styling — no CSS framework
+├── index.js            # Quiz logic, question catalogue, timer, navigation
+├── locales/
+│   ├── en.json         # English UI strings and question content
+│   └── de.json         # German UI strings and question content
+├── images/
+│   ├── logo-seal.png   # Capybara mascot (transparent background)
+│   ├── favicon.png     # Browser tab icon
+│   ├── q01.jpg         # Scenario image for question 1
+│   └── …               # q02.jpg … q29.jpg
+└── screenshots/        # Documentation and preview images
+```
+
+---
+
+## Quick Start
+
+No build tool or package manager is needed.
+
+### Clone and open locally
 
 ```bash
-# Repository klonen
-git clone https://github.com/<DEIN-USERNAME>/cc-pruefung.git
-cd cc-pruefung
+# Clone via SSH
+git clone git@github.com:leichtin/CoZe.git
+cd CoZe
 
-# Im Browser öffnen
-open index.html        # macOS
-xdg-open index.html    # Linux
-start index.html       # Windows
+# Open directly in the browser
+open index.html          # macOS
+xdg-open index.html      # Linux
+start index.html         # Windows
 ```
 
-Alternativ: Die Dateien auf einen beliebigen Webserver (GitHub Pages, Netlify, etc.) hochladen — es handelt sich um eine rein statische Anwendung.
+### VS Code Live Server (recommended for development)
 
-### Voraussetzungen
+1. Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
+2. Open the `CoZe` folder in VS Code.
+3. Click **Go Live** in the status bar — the app reloads automatically on file changes.
 
-- Ein moderner Browser (Chrome, Firefox, Safari, Edge)
-- Das war's. 🎉
+### GitHub Pages (production)
 
----
-
-## 📁 Projektstruktur
-
-```
-cc-pruefung/
-├── index.html          # Haupt-HTML (Intro, Quiz, Modal, Ergebnisse)
-├── index.css           # Vollständiges Styling (kein Framework)
-├── index.js            # Quiz-Logik, Fragenkatalog, Timer, Navigation
-└── images/
-    ├── logo-seal.png   # Capybara-Maskottchen (transparenter Hintergrund)
-    ├── favicon.png     # Browser-Tab-Icon
-    ├── q01.jpg          # Szenario-Bild Frage 1
-    ├── q02.jpg          # Szenario-Bild Frage 2
-    ├── ...
-    └── q29.jpg          # Szenario-Bild Frage 29
-```
+The `main` branch root is served directly via GitHub Pages. Push your changes to `main` and the live site updates automatically.
 
 ---
 
-## 🎓 Themengebiete
+## Contributing & Translations
 
-| # | Bereich | Beispielfragen |
-|---|---------|---------------|
-| 1–3 | **Grounding & Datenqualität** | Unstrukturierter SharePoint, Legacy-Datenbanken, Prompt Engineering |
-| 4–6 | **M365-Werkzeuge** | Teams-Copilot, Outlook-Zusammenfassungen, Word/PowerPoint-Agenten |
-| 7–9 | **Architektur & Grenzen** | Copilot Studio vs. M365, Kanalgrenzen, Kontextwechsel |
-| 10–12 | **Risiken & Compliance** | KI-Halluzinationen, Oversharing, Purview-Labels |
-| 13–15 | **Governance & Datenschutz** | Audit-Logs, Multi-Tenant, Prompt-Datenschutztraining |
-| 16–18 | **Lizenzierung & Infrastruktur** | E3 vs. E5, Tiefgaragen-Netzwerk, Hands-off-Steuerung |
-| 19–21 | **Adoption & Change Management** | Widerstände, KPI-Definitionen, Use-Case-Priorisierung |
-| 22–24 | **Praxis-Szenarien** | Dokumenten-Overload, Prompt-Chaining, Meeting-Protokolle |
-| 25–27 | **Troubleshooting & Lifecycle** | Performance-Probleme, Rollout-Strategie, Data-Lifecycle |
-| 28–29 | **Continuous Learning** | Nachhaltige Enablement-Programme, Stakeholder-Management |
+Contributions are welcome. To add or update a language:
 
----
+1. Copy an existing locale file as a template:
+   ```bash
+   cp locales/en.json locales/<lang>.json
+   ```
+2. Translate all string values. Do **not** change JSON keys.
+3. Register the new locale in `index.js` (look for the language-switcher section).
+4. Open a pull request with your changes.
 
-## ⚖️ Disclaimer
-
-> **Diese Anwendung ist ein inoffizieller, satirisch-funktionaler Fragenkatalog.**
->
-> Sie steht in **keinerlei Verbindung zur Microsoft Corporation**, zu Microsoft Deutschland oder zu aktuellen bzw. ehemaligen Arbeitgebern des Erstellers. Alle genannten Marken (Microsoft, Copilot, Teams, SharePoint, Outlook, Purview u. a.) sind Eigentum ihrer jeweiligen Rechteinhaber.
->
-> Testergebnisse stellen **keine offizielle Zertifizierung** oder rechtlich bindende Qualifikation dar.
->
-> Der „§ 365 der KI-Betriebssicherheitsverordnung" ist ein fiktives Parodie-Konstrukt.
+For bug reports and feature requests, please open a [GitHub Issue](https://github.com/leichtin/CoZe/issues).
 
 ---
 
-## 🛠️ Technologie
+## Technology Stack
 
-- **HTML5 / CSS3 / Vanilla JavaScript** — Zero Dependencies
-- **Google Fonts** (Inter, Poppins, Share Tech Mono)
-- **Font Awesome 6** für Icons
-- Optimierte JPEG-Bilder (~155 KB pro Bild, 4,6 MB gesamt)
+| Layer | Technology |
+|-------|-----------|
+| Structure | HTML5 |
+| Styling | CSS3 (vanilla) |
+| Logic | Vanilla JavaScript (ES2020+) |
+| Fonts | Google Fonts — Inter, Poppins, Share Tech Mono |
+| Icons | Font Awesome 6 |
+| Hosting | GitHub Pages |
+
+---
+
+## License
+
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
