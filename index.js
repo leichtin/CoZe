@@ -640,7 +640,7 @@ function submitExam() {
  
         detailsRows += `
             <tr>
-                <td>${labelPrefix} ${idx + 1}</td>
+                <td>${idx + 1}</td>
                 <td>${q.points}</td>
                 <td style="color:${errorPoints > 0 ? '#b32117' : 'inherit'}; font-weight:${errorPoints > 0 ? 'bold' : 'normal'}">${errorPoints}</td>
                 <td>${statusHtml}</td>
