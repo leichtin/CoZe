@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     background-color: #1f7339; /* Official Forest Green */
     color: #333333;
     height: 100vh;
@@ -16,6 +16,10 @@ body {
     justify-content: center;
     align-items: center;
     user-select: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
 }
 
 #app-container {
@@ -467,9 +471,22 @@ body {
     line-height: 1.4;
     margin-bottom: 25px;
     max-width: 95%;
-    height: 76px; /* Fixed height for ~3 lines */
+    height: 90px; /* Fixed height for ~4 lines to prevent jumping */
     overflow-y: auto;
     scrollbar-width: thin;
+}
+
+.question-title::-webkit-scrollbar {
+    width: 4px;
+}
+
+.question-title::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.question-title::-webkit-scrollbar-thumb {
+    background-color: rgba(31, 115, 57, 0.2);
+    border-radius: 2px;
 }
 
 .canvas-split {
@@ -860,7 +877,7 @@ body {
    3. FOOTER AREA (STRICT SCREENSHOT MATCH)
    ========================================================================== */
 .quiz-footer {
-    height: 54px;
+    height: 58px;
     background-color: #1f7339;
     border-top: 1.5px solid #134f26;
     display: flex;
@@ -868,20 +885,32 @@ body {
     padding: 0 30px;
 }
 
-.footer-single-row {
+.footer-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: 100%;
+    gap: 15px;
+}
+
+.footer-left-group, .footer-right-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
 .footer-center-group {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 0;
 }
 
-.nav-dropdown-main {
+.nav-dropdown-mobile-select {
+    display: none;
     height: 32px;
     background-color: #ffffff;
     border: 1px solid #134f26;
@@ -948,14 +977,6 @@ body {
     border-color: #eaf7ee;
 }
 
-/* Row 2: Navigation Buttons */
-.footer-navigation-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 42px;
-}
-
 .nav-arrows-group {
     display: flex;
     gap: 4px;
@@ -986,48 +1007,92 @@ body {
     cursor: not-allowed;
 }
 
-.nav-numbers-group {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    overflow-x: auto;
-    max-width: calc(100vw - 320px); /* Leave room for arrow buttons on sides */
-    padding: 4px 2px;
-    scrollbar-width: thin;
+.nav-arrow.submit-btn {
+    background-color: #1f7339 !important;
+    color: #ffffff !important;
+    border-color: #1f7339 !important;
 }
 
-.nav-numbers-group::-webkit-scrollbar {
-    height: 4px;
+.nav-arrow.submit-btn:hover {
+    background-color: #134f26 !important;
+    border-color: #134f26 !important;
 }
 
-.nav-numbers-group::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 2px;
-}
-
-.nav-dropdown-mobile {
-    display: none;
+.btn-grid-toggle {
     background-color: #ffffff;
-    border: 1.5px solid #000000;
-    border-radius: 4px;
+    color: #1f7339;
+    border: 1px solid #134f26;
     height: 34px;
+    padding: 0 14px;
     font-size: 13px;
     font-weight: bold;
-    color: #000000;
-    padding: 0 8px;
-    min-width: 180px;
-    outline: none;
+    border-radius: 4px;
     cursor: pointer;
-    margin: 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.btn-grid-toggle:hover {
+    background-color: #f1f7f2;
+    border-color: #1f7339;
+}
+
+.btn-grid-toggle .toggle-caret {
+    font-size: 11px;
+    margin-left: 2px;
+    transition: transform 0.2s;
+}
+
+.nav-grid-panel {
+    position: absolute;
+    bottom: 74px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 2px solid #134f26;
+    border-radius: 8px;
+    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.15);
+    width: 290px;
+    z-index: 1000;
+}
+
+.nav-grid-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1.5px solid #eaeaea;
+    background-color: #f7f9f7;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.nav-grid-panel-header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #1f7339;
+    font-weight: bold;
+}
+
+.nav-grid-panel-body {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    justify-items: center;
 }
 
 .q-nav-box {
-    width: 44px;
+    width: 36px;
     height: 36px;
+    flex-shrink: 0;
     background-color: #ffffff;
     color: #000000;
     border: 1.5px solid #000000;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -1387,6 +1452,13 @@ body {
 /* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
+@media (max-width: 1200px) {
+    .quiz-footer {
+        padding: 0 15px;
+        height: 52px;
+    }
+}
+
 @media (max-width: 900px) {
     .quiz-canvas {
         padding: 15px 20px;
@@ -1430,14 +1502,6 @@ body {
     .answer-text {
         font-size: 14px;
         margin-top: 3px;
-    }
-
-    .nav-numbers-group {
-        display: none !important;
-    }
-
-    .nav-dropdown-mobile {
-        display: block !important;
     }
 
     .result-card {
@@ -1502,30 +1566,25 @@ body {
     }
 
     .quiz-footer {
-        padding: 8px 10px;
-    }
-
-    .q-nav-box {
-        width: 32px;
-        height: 30px;
-        font-size: 12px;
-    }
-    
-    .nav-arrow {
-        width: 32px;
-        height: 30px;
-        font-size: 11px;
-    }
-
-    .btn-action {
-        height: 28px;
         padding: 0 10px;
-        font-size: 11px;
     }
 
-    .btn-weiter {
-        padding: 10px 20px;
-        font-size: 14px;
+    .footer-row {
+        gap: 8px;
+    }
+
+    .footer-left-group, .footer-right-group {
+        gap: 6px;
+    }
+
+    .btn-grid-toggle {
+        padding: 0 8px;
+        gap: 4px;
+    }
+
+    .btn-action.red-btn {
+        padding: 0 8px;
+        font-size: 11px;
     }
 }
 
@@ -1564,13 +1623,6 @@ body {
 
 .btn-disclaimer-pill:active {
     transform: translateY(0);
-}
-    gap: 6px;
-    transition: color 0.2s;
-}
-
-.btn-link-legal:hover {
-    color: #1b5e20;
 }
 
 .result-disclaimer-note {

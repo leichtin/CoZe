@@ -163,11 +163,51 @@ function setupEventListeners() {
         });
     }
 
-    // Question Dropdown for Main
-    const dropdown = document.getElementById("question-dropdown-main");
-    if (dropdown) {
-        dropdown.addEventListener("change", (e) => {
-            loadQuestion(parseInt(e.target.value), true);
+    // Navigation Grid Toggle
+    const btnGridToggle = document.getElementById("btn-grid-toggle");
+    if (btnGridToggle) {
+        btnGridToggle.addEventListener("click", () => {
+            const panel = document.getElementById("nav-grid-panel");
+            if (panel) {
+                panel.classList.toggle("hidden");
+                const caret = btnGridToggle.querySelector(".toggle-caret");
+                if (caret) {
+                    caret.style.transform = panel.classList.contains("hidden") ? "" : "rotate(180deg)";
+                }
+            }
+        });
+    }
+
+    const closeNavGridBtn = document.getElementById("close-nav-grid-btn");
+    if (closeNavGridBtn) {
+        closeNavGridBtn.addEventListener("click", () => {
+            const panel = document.getElementById("nav-grid-panel");
+            if (panel) panel.classList.add("hidden");
+            const caret = document.querySelector("#btn-grid-toggle .toggle-caret");
+            if (caret) caret.style.transform = "";
+        });
+    }
+
+    // Close navigation grid on clicking outside
+    document.addEventListener("click", (e) => {
+        const panel = document.getElementById("nav-grid-panel");
+        const toggleBtn = document.getElementById("btn-grid-toggle");
+        if (panel && toggleBtn && !panel.classList.contains("hidden")) {
+            if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) {
+                panel.classList.add("hidden");
+                const caret = toggleBtn.querySelector(".toggle-caret");
+                if (caret) caret.style.transform = "";
+            }
+        }
+    });
+
+    // Navigation Arrows
+    const btnPrev = document.getElementById("btn-prev");
+    if (btnPrev) {
+        btnPrev.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                loadQuestion(currentIndex - 1, true);
+            }
         });
     }
 
@@ -421,19 +461,26 @@ function loadQuestion(index, scrollToTop = false) {
 
 
 
-    // Update main Weiter button in the footer
+    // Update main Next Arrow button in the footer
     const btnNextMain = document.getElementById("btn-next-main");
     if (btnNextMain) {
         if (index === questions.length - 1) {
+            btnNextMain.classList.add("submit-btn");
             if (reviewMode) {
-                btnNextMain.textContent = currentLocaleData.ui.navEvaluation;
+                btnNextMain.innerHTML = '<i class="fa-solid fa-arrow-right-from-bracket"></i>';
+                btnNextMain.title = currentLocaleData ? currentLocaleData.ui.navEvaluation : "Auswertung";
             } else {
-                btnNextMain.textContent = currentLocaleData.ui.navSubmit;
+                btnNextMain.innerHTML = '<i class="fa-solid fa-check"></i>';
+                btnNextMain.title = currentLocaleData ? currentLocaleData.ui.navSubmit : "Abgeben";
             }
         } else {
-            btnNextMain.textContent = currentLocaleData.ui.navNext;
+            btnNextMain.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+            btnNextMain.classList.remove("submit-btn");
+            btnNextMain.title = currentLocaleData ? currentLocaleData.ui.navNext : "Weiter";
         }
     }
+
+    updateNavigationFooter();
 }
 
 // Single choice selection toggling
@@ -451,46 +498,65 @@ function toggleStar() {
 
 // Build Navigation Footer
 function buildNavigationFooter() {
-    const dropdown = document.getElementById("question-dropdown-main");
-    if (dropdown) {
-        dropdown.innerHTML = "";
-        const labelPrefix = currentLocaleData.ui.questionLabel;
+    const gridContainer = document.getElementById("nav-grid-panel-container");
+    if (gridContainer) {
+        gridContainer.innerHTML = "";
         for (let i = 0; i < questions.length; i++) {
-            const opt = document.createElement("option");
-            opt.value = i;
-            opt.textContent = `${labelPrefix} ${i + 1}`;
-            dropdown.appendChild(opt);
+            const box = document.createElement("div");
+            box.className = "q-nav-box";
+            box.textContent = i + 1;
+            box.addEventListener("click", () => {
+                loadQuestion(i, true);
+                const panel = document.getElementById("nav-grid-panel");
+                if (panel) panel.classList.add("hidden");
+                const caret = document.querySelector("#btn-grid-toggle .toggle-caret");
+                if (caret) caret.style.transform = "";
+            });
+            gridContainer.appendChild(box);
         }
     }
 }
 
 function updateNavigationFooter() {
-    const dropdown = document.getElementById("question-dropdown-main");
-    if (!dropdown) return;
-    const options = dropdown.options;
-    const labelPrefix = currentLocaleData.ui.questionLabel;
-    
-    for (let idx = 0; idx < questions.length; idx++) {
-        const ans = userAnswers[idx];
-        const isAnswered = ans !== undefined && ans.length > 0;
- 
-        if (options && options[idx]) {
-            let label = `${labelPrefix} ${idx + 1}`;
-            let symbols = [];
-            if (starredQuestions[idx]) {
-                symbols.push("★");
+    const labelPrefix = currentLocaleData ? currentLocaleData.ui.questionLabel : "Frage";
+    const gridToggleLabel = document.getElementById("grid-toggle-label");
+    if (gridToggleLabel) {
+        gridToggleLabel.textContent = `${labelPrefix} ${currentIndex + 1} / ${questions.length}`;
+    }
+
+    const gridContainer = document.getElementById("nav-grid-panel-container");
+    if (gridContainer) {
+        const boxes = gridContainer.children;
+        for (let idx = 0; idx < questions.length; idx++) {
+            const box = boxes[idx];
+            if (box) {
+                box.className = "q-nav-box";
+                const ans = userAnswers[idx];
+                const isAnswered = ans !== undefined && ans.length > 0;
+
+                if (idx === currentIndex) {
+                    box.classList.add("active");
+                }
+                if (starredQuestions[idx]) {
+                    box.classList.add("starred");
+                }
+                if (reviewMode) {
+                    const isCorrect = checkQuestionCorrectness(idx);
+                    if (isCorrect) {
+                        box.classList.add("review-correct");
+                    } else {
+                        box.classList.add("review-incorrect");
+                    }
+                } else if (isAnswered) {
+                    box.classList.add("answered");
+                }
             }
-            if (reviewMode) {
-                const isCorrect = checkQuestionCorrectness(idx);
-                symbols.push(isCorrect ? "✓" : "✗");
-            } else if (isAnswered) {
-                symbols.push("●");
-            }
-            if (symbols.length > 0) {
-                label += ` [${symbols.join(" ")}]`;
-            }
-            options[idx].textContent = label;
         }
+    }
+
+    const btnPrev = document.getElementById("btn-prev");
+    if (btnPrev) {
+        btnPrev.disabled = (currentIndex === 0);
     }
 }
 
@@ -609,4 +675,9 @@ function enterReviewMode() {
 
     loadQuestion(0, true);
     updateNavigationFooter();
+}
+
+function showResultScreen() {
+    document.getElementById("quiz-screen").classList.add("hidden");
+    document.getElementById("result-screen").classList.remove("hidden");
 }

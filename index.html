@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div id="app-container">
         <!-- 1. INTRO / WELCOME SCREEN -->
@@ -50,18 +54,29 @@
                 </div>
 
                 <p class="welcome-lead"><strong data-i18n="ui.welcomeLead">Willkommen zur</strong></p>
-                <p class="hero-tagline" data-i18n="ui.welcomeSub">Einstufungs- und Tauglichkeitsprüfung gemäß <strong>§365 der KI-Betriebssicherheitsverordnung</strong> über das gewerbliche Führen von Großsprachmodellen.</p>
+                <p class="hero-tagline" data-i18n="ui.welcomeSub">Einstufungs- und Tauglichkeitsprüfung gemäß
+                    <strong>§365 der KI-Betriebssicherheitsverordnung</strong> über das gewerbliche Führen von
+                    Großsprachmodellen.</p>
 
                 <div class="divider"></div>
 
                 <div class="exam-info-box">
-                    <h3><i class="fa-solid fa-circle-info"></i> <span data-i18n="ui.examInfoTitle">Prüfungs-Informationen:</span></h3>
+                    <h3><i class="fa-solid fa-circle-info"></i> <span
+                            data-i18n="ui.examInfoTitle">Prüfungs-Informationen:</span></h3>
                     <ul>
-                        <li><i class="fa-solid fa-list-check"></i> <span data-i18n="ui.infoQuestions"><strong>Fragen:</strong> 29 Copilot Consultant Fragen</span></li>
-                        <li><i class="fa-solid fa-clock"></i> <span data-i18n="ui.infoTimeLimit"><strong>Zeitlimit:</strong> 45:00 Minuten</span></li>
-                        <li><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="ui.infoPassLimit"><strong>Bestehensgrenze:</strong> Maximal 10 Fehlerpunkte</span></li>
-                        <li><i class="fa-solid fa-circle-nodes"></i> <span data-i18n="ui.infoFormat"><strong>Format:</strong> Single-Choice mit verdeckter Antwort</span></li>
-                        <li><i class="fa-solid fa-award"></i> <span data-i18n="ui.infoPoints"><strong>Wertung:</strong> Jede Frage hat 2 bis 5 Fehlerpunkte</span></li>
+                        <li><i class="fa-solid fa-list-check"></i> <span
+                                data-i18n="ui.infoQuestions"><strong>Fragen:</strong> 29 Copilot Consultant
+                                Fragen</span></li>
+                        <li><i class="fa-solid fa-clock"></i> <span
+                                data-i18n="ui.infoTimeLimit"><strong>Zeitlimit:</strong> 45:00 Minuten</span></li>
+                        <li><i class="fa-solid fa-triangle-exclamation"></i> <span
+                                data-i18n="ui.infoPassLimit"><strong>Bestehensgrenze:</strong> Maximal 10
+                                Fehlerpunkte</span></li>
+                        <li><i class="fa-solid fa-circle-nodes"></i> <span
+                                data-i18n="ui.infoFormat"><strong>Format:</strong> Single-Choice mit verdeckter
+                                Antwort</span></li>
+                        <li><i class="fa-solid fa-award"></i> <span data-i18n="ui.infoPoints"><strong>Wertung:</strong>
+                                Jede Frage hat 2 bis 5 Fehlerpunkte</span></li>
                     </ul>
                 </div>
 
@@ -76,7 +91,8 @@
                     </button>
                 </div>
 
-                <p class="intro-footer-note"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="ui.freeNote">Keine Registrierung · Kostenlos</span></p>
+                <p class="intro-footer-note"><i class="fa-solid fa-shield-halved"></i> <span
+                        data-i18n="ui.freeNote">Keine Registrierung · Kostenlos</span></p>
 
                 <div class="disclaimer-btn-wrapper">
                     <button id="open-legal-modal-btn" class="btn-disclaimer-pill" type="button">
@@ -97,7 +113,8 @@
                 <div class="header-right">
                     <span id="timer-display-header" class="timer-display-header">45:00</span>
                     <span class="header-divider">|</span>
-                    <span class="points-label"><span data-i18n="ui.pointsLabel">Punkte:</span> <span id="current-q-points">4</span></span>
+                    <span class="points-label"><span data-i18n="ui.pointsLabel">Punkte:</span> <span
+                            id="current-q-points">4</span></span>
                     <button id="abort-btn" class="close-x-btn" title="Prüfung beenden">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -123,7 +140,7 @@
                             </div>
                             <div class="blueprint-steering-wheel"></div>
                             <div class="blueprint-road-path"></div>
-                            
+
                             <!-- Information text overlay -->
                             <div class="blueprint-info">
                                 <i class="fa-solid fa-compass-drafting media-icon"></i>
@@ -147,21 +164,48 @@
                 </div>
             </main>
 
-            <!-- Footer Area (Forest Green, Matches Mockup, Single Row Layout) -->
+            <!-- Navigation Grid Popover Panel -->
+            <div id="nav-grid-panel" class="nav-grid-panel hidden">
+                <div class="nav-grid-panel-header">
+                    <h3 data-i18n="ui.questionOverview">Fragenübersicht</h3>
+                    <button id="close-nav-grid-btn" class="close-x-btn" type="button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="nav-grid-panel-body" id="nav-grid-panel-container">
+                    <!-- Dynamically generated boxes -->
+                </div>
+            </div>
+
+            <!-- Footer Area (Forest Green, Unified Single Row Layout) -->
             <footer class="quiz-footer">
-                <div class="footer-single-row">
-                    <button id="btn-cancel" class="btn-action red-btn" data-i18n="ui.abortBtn">Abbrechen</button>
-                    
+                <div class="footer-row">
+                    <!-- Left Actions -->
+                    <div class="footer-left-group">
+                        <button id="btn-cancel" class="btn-action red-btn" data-i18n="ui.abortBtn">Abbrechen</button>
+                        <button id="btn-prev" class="nav-arrow" title="Vorherige Frage" disabled>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Center Navigation (Toggleable Grid) -->
                     <div class="footer-center-group">
+                        <button id="btn-grid-toggle" class="btn-action btn-grid-toggle" type="button">
+                            <i class="fa-solid fa-list-ol"></i>
+                            <span id="grid-toggle-label">Frage 1 / 29</span>
+                            <i class="fa-solid fa-caret-up toggle-caret"></i>
+                        </button>
+                    </div>
+
+                    <!-- Right Actions -->
+                    <div class="footer-right-group">
                         <button id="btn-star" class="btn-action yellow-btn" data-i18n-title="ui.markQuestion" title="Frage markieren">
                             <i class="fa-regular fa-star"></i>
                         </button>
-                        <select class="nav-dropdown-main" id="question-dropdown-main">
-                            <!-- Options injected dynamically by JS -->
-                        </select>
+                        <button id="btn-next-main" class="nav-arrow" title="Nächste Frage">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
                     </div>
-
-                    <button id="btn-next-main" class="btn-action green-btn" data-i18n="ui.nextBtn">Weiter</button>
                 </div>
             </footer>
         </section>
@@ -171,7 +215,8 @@
             <div class="modal-card">
                 <div class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <h2 data-i18n="ui.submitModalTitle">Prüfung abgeben?</h2>
-                <p data-i18n="ui.submitModalText">Möchten Sie die theoretische Prüfung wirklich beenden und abgeben? Unbeantwortete Fragen werden als falsch gewertet.</p>
+                <p data-i18n="ui.submitModalText">Möchten Sie die theoretische Prüfung wirklich beenden und abgeben?
+                    Unbeantwortete Fragen werden als falsch gewertet.</p>
                 <div class="modal-stats">
                     <div class="stat-item">
                         <span class="stat-val" id="answered-count">0/29</span>
@@ -183,8 +228,10 @@
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <button id="modal-cancel-btn" class="btn btn-secondary" data-i18n="ui.continueBtn">Weitermachen</button>
-                    <button id="modal-confirm-btn" class="btn btn-success" data-i18n="ui.confirmSubmitBtn">Ja, abgeben</button>
+                    <button id="modal-cancel-btn" class="btn btn-secondary"
+                        data-i18n="ui.continueBtn">Weitermachen</button>
+                    <button id="modal-confirm-btn" class="btn btn-success" data-i18n="ui.confirmSubmitBtn">Ja,
+                        abgeben</button>
                 </div>
             </div>
         </div>
@@ -247,7 +294,9 @@
                 </div>
 
                 <p class="result-disclaimer-note">
-                    <i class="fa-solid fa-circle-info"></i> <span data-i18n="ui.resultDisclaimer">Inoffizielles Ergebnis zu Übungszwecken. Steht in keinerlei Verbindung zur Microsoft Corporation oder zu Arbeitgebern des Betreibers.</span>
+                    <i class="fa-solid fa-circle-info"></i> <span data-i18n="ui.resultDisclaimer">Inoffizielles Ergebnis
+                        zu Übungszwecken. Steht in keinerlei Verbindung zur Microsoft Corporation oder zu Arbeitgebern
+                        des Betreibers.</span>
                 </p>
             </div>
         </section>
@@ -257,32 +306,47 @@
     <div id="legal-modal" class="modal-backdrop hidden">
         <div class="modal-card legal-modal-card">
             <div class="legal-modal-header">
-                <h2><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="ui.legalTitle">Rechtliche Hinweise & Disclaimer</span></h2>
-                <button id="close-legal-modal-x" class="close-x-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+                <h2><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="ui.legalTitle">Rechtliche Hinweise &
+                        Disclaimer</span></h2>
+                <button id="close-legal-modal-x" class="close-x-btn" type="button"><i
+                        class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="legal-modal-body">
                 <div class="legal-section">
-                    <h4><i class="fa-solid fa-certificate"></i> <span data-i18n="ui.legalSec1Title">1. Kein offizielles Zertifikat</span></h4>
-                    <p data-i18n="ui.legalSec1Text">Das Absolvieren dieser „CC Prüfung“ gewährt keine offiziell anerkannte Qualifikation, kein Zertifikat und keinen Sachkundenachweis. Es handelt sich um ein inoffizielles Trainings- und Humorwerkzeug.</p>
+                    <h4><i class="fa-solid fa-certificate"></i> <span data-i18n="ui.legalSec1Title">1. Kein offizielles
+                            Zertifikat</span></h4>
+                    <p data-i18n="ui.legalSec1Text">Das Absolvieren dieser „CC Prüfung“ gewährt keine offiziell
+                        anerkannte Qualifikation, kein Zertifikat und keinen Sachkundenachweis. Es handelt sich um ein
+                        inoffizielles Trainings- und Humorwerkzeug.</p>
                 </div>
 
                 <div class="legal-section">
-                    <h4><i class="fa-solid fa-registered"></i> <span data-i18n="ui.legalSec2Title">2. Markenrechtlicher Ausschluss (Microsoft)</span></h4>
-                    <p data-i18n="ui.legalSec2Text">Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook, Purview und weitere genannte Produktbezeichnungen sind eingetragene Marken der Microsoft Corporation in den USA und/oder anderen Ländern. Diese Anwendung wird nicht von Microsoft unterstützt, gesponsert, betrieben oder gepflegt.</p>
+                    <h4><i class="fa-solid fa-registered"></i> <span data-i18n="ui.legalSec2Title">2. Markenrechtlicher
+                            Ausschluss (Microsoft)</span></h4>
+                    <p data-i18n="ui.legalSec2Text">Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook,
+                        Purview und weitere genannte Produktbezeichnungen sind eingetragene Marken der Microsoft
+                        Corporation in den USA und/oder anderen Ländern. Diese Anwendung wird nicht von Microsoft
+                        unterstützt, gesponsert, betrieben oder gepflegt.</p>
                 </div>
 
                 <div class="legal-section">
-                    <h4><i class="fa-solid fa-building-user"></i> <span data-i18n="ui.legalSec3Title">3. Ausschluss von Arbeitgeberverhältnissen</span></h4>
-                    <p data-i18n="ui.legalSec3Text">Dieses Quiz ist ein privates Freizeit- & Community-Projekt des Erstellers. Es repräsentiert weder die Ansichten, Richtlinien, Schulungsmaterialien noch offizielle Vorgaben von aktuellen oder früheren Arbeitgebern des Betreibers.</p>
+                    <h4><i class="fa-solid fa-building-user"></i> <span data-i18n="ui.legalSec3Title">3. Ausschluss von
+                            Arbeitgeberverhältnissen</span></h4>
+                    <p data-i18n="ui.legalSec3Text">Dieses Quiz ist ein privates Freizeit- & Community-Projekt des
+                        Erstellers. Es repräsentiert weder die Ansichten, Richtlinien, Schulungsmaterialien noch
+                        offizielle Vorgaben von aktuellen oder früheren Arbeitgebern des Betreibers.</p>
                 </div>
 
                 <div class="legal-section">
-                    <h4><i class="fa-solid fa-masks-theater"></i> <span data-i18n="ui.legalSec4Title">4. Fiktive Regulierung & Parodie</span></h4>
-                    <p data-i18n="ui.legalSec4Text">Bezüge wie „§ 365 KI-Betriebssicherheitsverordnung“ sind rein fiktive Stilmittel zur Parodierung klassischer Fahrschul-Theorieprüfungen.</p>
+                    <h4><i class="fa-solid fa-masks-theater"></i> <span data-i18n="ui.legalSec4Title">4. Fiktive
+                            Regulierung & Parodie</span></h4>
+                    <p data-i18n="ui.legalSec4Text">Bezüge wie „§ 365 KI-Betriebssicherheitsverordnung“ sind rein
+                        fiktive Stilmittel zur Parodierung klassischer Fahrschul-Theorieprüfungen.</p>
                 </div>
             </div>
             <div class="modal-actions">
-                <button id="close-legal-modal-btn" class="btn btn-primary" type="button" data-i18n="ui.legalUnderstoodBtn">Verstanden & Schließen</button>
+                <button id="close-legal-modal-btn" class="btn btn-primary" type="button"
+                    data-i18n="ui.legalUnderstoodBtn">Verstanden & Schließen</button>
             </div>
         </div>
     </div>
@@ -290,4 +354,5 @@
     <!-- Script loading -->
     <script src="index.js" defer></script>
 </body>
+
 </html>

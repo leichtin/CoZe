@@ -62,7 +62,8 @@
     "navNext": "Weiter",
     "navSubmit": "Abgeben",
     "navEvaluation": "Auswertung",
-    "questionLabel": "Frage"
+    "questionLabel": "Frage",
+    "questionOverview": "Fragenübersicht"
   },
   "questions": [
     {
