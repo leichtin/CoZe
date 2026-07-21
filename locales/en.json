@@ -7,21 +7,21 @@
     "welcomeLead": "Welcome to the",
     "welcomeTitle": "Classification and Aptitude Exam",
     "welcomeSub": "Classification and aptitude test<br>pursuant to <strong>§365 of the AI Operational Safety Regulation</strong><br>on the commercial operation of Large Language Models.",
-    "examInfoTitle": "Exam Regulations:",
-    "infoQuestions": "<strong>Questions:</strong> {count} Copilot Consultant Questions",
-    "infoTimeLimit": "<strong>Time Limit:</strong> 45:00 minutes",
-    "infoPassLimit": "<strong>Passing Threshold:</strong> Maximum 10 penalty points",
+    "examInfoTitle": "Exam Information:",
+    "infoQuestions": "<strong>Questions:</strong> {count} Copilot Consultant questions",
+    "infoTimeLimit": "<strong>Time limit:</strong> 45:00 minutes",
+    "infoPassLimit": "<strong>Passing threshold:</strong> Maximum 10 penalty points",
     "infoFormat": "<strong>Format:</strong> Single-choice with concealed correct answer",
     "infoPoints": "<strong>Scoring:</strong> Each question carries 2 to 5 penalty points",
     "loadingDb": "Loading official question database...",
-    "dbLoaded": "Copilot database loaded ({count} test questions ready).",
+    "dbLoaded": "Copilot database loaded ({count} questions ready).",
     "startExamBtn": "Start Exam",
-    "freeNote": "No registration required · Free",
+    "freeNote": "No registration · Free",
     "disclaimerBtn": "Disclaimer",
-    "abortBtn": "Cancel Exam",
-    "abortTitle": "To Home Page",
+    "abortBtn": "Cancel",
+    "abortTitle": "Back to home",
     "pointsLabel": "Points:",
-    "markQuestion": "Flag question for review",
+    "markQuestion": "Flag question",
     "confirmAbort": "Do you want to cancel the exam? Your progress will be lost.",
     "timeExpiredAlert": "Exam time expired! The exam will be submitted automatically.",
     "mediaAltDefault": "Situation image",
@@ -29,70 +29,71 @@
     "noImage": "No image",
     "noImageDesc": "No image is required for this question. Answer based on the text description.",
     "nextBtn": "Next",
-    "submitModalTitle": "Submit Exam?",
-    "submitModalText": "Are you sure you want to complete and submit your theoretical driving test? Unanswered questions will be scored as critical failures.",
+    "submitModalTitle": "Submit exam?",
+    "submitModalText": "Do you really want to finish and submit the theoretical exam? Unanswered questions will be scored as incorrect.",
     "answeredLabel": "Answered",
-    "openLabel": "Unanswered",
-    "continueBtn": "Resume Test",
-    "confirmSubmitBtn": "Yes, submit exam",
+    "openLabel": "Open",
+    "continueBtn": "Continue",
+    "confirmSubmitBtn": "Yes, submit",
     "passedBadge": "PASSED",
     "failedBadge": "FAILED",
-    "resultTitle": "Examination Results",
-    "errorPointsLabel": "Penalty Points",
-    "allowedMax": "(Max allowed: 10)",
-    "wrongQuestionsLabel": "Incorrect Questions",
-    "wrongPctLabel": "{pct}% Error Rate",
-    "timeLeftLabel": "Time Remaining",
+    "resultTitle": "Exam results",
+    "errorPointsLabel": "Penalty points",
+    "allowedMax": "(Allowed: max. 10)",
+    "wrongQuestionsLabel": "Incorrect questions",
+    "wrongPctLabel": "{pct}% error rate",
+    "timeLeftLabel": "Time remaining",
     "totalTimeLabel": "of 45 min.",
-    "evaluationTitle": "Detailed Test Breakdown:",
+    "evaluationTitle": "Detailed evaluation:",
     "tableHeaderQuestion": "Question",
-    "tableHeaderErrors": "Penalty Points",
+    "tableHeaderPoints": "Points",
+    "tableHeaderErrors": "Penalty points",
     "tableHeaderStatus": "Status",
     "tableStatusCorrect": "Correct",
     "tableStatusWrong": "Incorrect",
-    "reviewAnswersBtn": "Review Answers",
-    "restartExamBtn": "Retake Exam",
-    "resultDisclaimer": "Unofficial practice examination. Not affiliated with, sponsored by, or endorsed by Microsoft Corporation or the creator's employers.",
-    "legalTitle": "Legal Notice & Disclaimer",
-    "legalSec1Title": "1. No Official Certification",
-    "legalSec1Text": "Passing this 'examination' does not confer any officially recognized driving license, qualification, or proof of competence. It is an unofficial training tool and satirical parody.",
-    "legalSec2Title": "2. Trademark Disclaimer (Microsoft)",
-    "legalSec2Text": "Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook, Purview, and all related product names are registered trademarks of Microsoft Corporation. This app is not operated, maintained, or endorsed by Microsoft.",
-    "legalSec3Title": "3. Employer Disclaimer",
-    "legalSec3Text": "This quiz is a private community project. It does not reflect the official views, guidelines, or training materials of the creator's current or former employers.",
-    "legalSec4Title": "4. Fictional Regulation & Parody",
-    "legalSec4Text": "References to regulations like '§365 AI Operational Safety Ordinance' are purely satirical devices mimicking classic driver's license theory exams.",
-    "legalUnderstoodBtn": "Understood & Close",
+    "reviewAnswersBtn": "Review answers",
+    "restartExamBtn": "New exam",
+    "resultDisclaimer": "Unofficial practice result. Not affiliated with Microsoft Corporation or the creator's employers.",
+    "legalTitle": "Legal notice & disclaimer",
+    "legalSec1Title": "1. No official certification",
+    "legalSec1Text": "Completing this \"exam\" does not confer any officially recognized qualification, certificate, or proof of competence. It is an unofficial training and humor tool.",
+    "legalSec2Title": "2. Trademark disclaimer (Microsoft)",
+    "legalSec2Text": "Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook, Purview, and other named product designations are registered trademarks of Microsoft Corporation in the USA and/or other countries. This application is not supported, sponsored, operated, or maintained by Microsoft.",
+    "legalSec3Title": "3. Employer disclaimer",
+    "legalSec3Text": "This quiz is a private leisure and community project of the creator. It does not represent the views, policies, training materials, or official guidance of current or former employers.",
+    "legalSec4Title": "4. Fictional regulation & parody",
+    "legalSec4Text": "References such as \"§365 AI Operational Safety Regulation\" are purely fictional devices parodying classic driving-school theory exams.",
+    "legalUnderstoodBtn": "Understood & close",
     "navNext": "Next",
     "navSubmit": "Submit",
     "navEvaluation": "Evaluation",
     "questionLabel": "Question",
-    "questionOverview": "Questions Overview"
+    "questionOverview": "Question overview"
   },
   "questions": [
     {
       "number": "Question 1",
       "points": 4,
-      "text": "A business user connects an unstructured SharePoint folder containing 6,000 legacy documents as the knowledge base for their Copilot Agent. They now complain to IT about irrelevant and contradictory AI answers. How should you react?",
+      "text": "A business user connects an unstructured SharePoint folder with 6,000 legacy documents as the knowledge base for their Copilot agent. The answers are irrelevant and contradictory. They complain about the quality. How do you respond?",
       "picture": "sharepoint-collision.jpg",
       "image": "images/q01.jpg",
-      "pictureDesc": "Hazard Scenario: Data deluge! A massive unstructured folder completely blocks the Copilot Agent's groundedness.",
+      "pictureDesc": "Scenario: Data flood! A massive unstructured folder blocks the Copilot agent's groundedness.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Advise the user to select a targeted, curated set of relevant documents instead of connecting the entire folder wholesale.",
+          "text": "Advise the user to connect only a curated set of relevant documents, not the entire folder wholesale.",
           "correct": true
         },
         {
-          "text": "Perform an emergency hazard acceleration to escape the data flood.",
+          "text": "Floor it in a hazard acceleration to escape the data flood.",
           "correct": false
         },
         {
-          "text": "Advise the user to dump another 6,000 unstructured files into the folder, as higher data volume automatically optimizes AI quality.",
+          "text": "Advise the user to dump another 6,000 unstructured files in. More data famously improves answer quality.",
           "correct": false
         },
         {
-          "text": "Promise the user that Copilot will support this in the next release cycle, just to get off the call.",
+          "text": "Promise the user that Copilot will support this \"soon,\" and end the call quickly.",
           "correct": false
         }
       ]
@@ -100,22 +101,22 @@
     {
       "number": "Question 2",
       "points": 5,
-      "text": "A client demands a real-time connection between a 20-year-old on-premises database without a REST API and M365 Copilot. What safety measure must be observed?",
+      "text": "A client demands connecting a 20-year-old on-premises database with no REST API to Microsoft 365 Copilot. What do you need to watch for?",
       "picture": "onprem-obstacle.jpg",
       "image": "images/q02.jpg",
-      "pictureDesc": "Hazard Scenario: An obsolete on-prem database is clogging the fast lane of the M365 Copilot data highway.",
+      "pictureDesc": "Scenario: An obsolete on-prem database is clogging the modern data highway of M365 Copilot.",
       "isVideo": false,
       "answers": [
         {
-          "text": "The maneuver requires setting up an On-Premises Data Gateway.",
+          "text": "The project needs a Microsoft Graph connector agent (or on-premises gateway) to get the data into the Graph index.",
           "correct": true
         },
         {
-          "text": "Attempt to manually punch in the database records via Excel while navigating heavy traffic.",
+          "text": "Manually type the data into Excel while driving.",
           "correct": false
         },
         {
-          "text": "Ignore the obstacle; when in doubt, Copilot will simply guess the data.",
+          "text": "Ignore the obstacle. When in doubt, Copilot will guess the data.",
           "correct": false
         },
         {
@@ -127,26 +128,26 @@
     {
       "number": "Question 3",
       "points": 4,
-      "text": "Business departments begin feeding sensitive company data into unauthorized, free public LLM tools without IT approval (Shadow IT). What immediate countermeasure applies?",
+      "text": "Business units feed internal company data into unauthorized free LLM tools without IT approval (Shadow IT). What immediate countermeasure applies?",
       "picture": "shadow-it-glare.jpg",
       "image": "images/q03.jpg",
-      "pictureDesc": "Hazard Scenario: Blinding high beams caused by unauthorized leaks of enterprise data into free LLMs.",
+      "pictureDesc": "Scenario: Blinding high beams from unauthorized leaks of company data into free LLMs.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Provide a secure, internal enterprise alternative (such as M365 Copilot) and block unapproved AI URLs using Defender for Cloud Apps.",
+          "text": "Provide a secure internal alternative (Microsoft 365 Copilot) and block unsafe AI URLs via Microsoft Defender for Cloud Apps.",
           "correct": true
         },
         {
-          "text": "Draft closely behind their slipstream and hijack their login credentials for my own private prompts.",
+          "text": "Draft in their slipstream and hijack their logins for private prompts.",
           "correct": false
         },
         {
-          "text": "Flash your high beams at oncoming traffic to distract everyone from the incident.",
+          "text": "Flash high beams at oncoming traffic to distract from the situation.",
           "correct": false
         },
         {
-          "text": "Ignore the hazard as long as project deadlines are met.",
+          "text": "Ignore the problem as long as project deadlines are met.",
           "correct": false
         }
       ]
@@ -154,26 +155,26 @@
     {
       "number": "Question 4",
       "points": 3,
-      "text": "You merge late into a one-hour Teams meeting 45 minutes after it started. How do you quickly get situational awareness without disrupting traffic?",
+      "text": "You join a one-hour Teams meeting 45 minutes late. How do you get up to speed quickly without disrupting others?",
       "picture": "teams-tunnel.jpg",
       "image": "images/q04.jpg",
-      "pictureDesc": "Hazard Scenario: Merging late onto the meeting grid 45 minutes into a running Teams call.",
+      "pictureDesc": "Scenario: You merge late into a running Teams meeting.",
       "isVideo": true,
       "answers": [
         {
-          "text": "Ask Copilot in chat: 'Summarize the meeting so far and list open action items.'",
+          "text": "Ask Copilot in chat: \"Summarize the meeting so far and list open action items.\"",
           "correct": true
         },
         {
-          "text": "Loudly interrupt the speaker and demand a personal briefing.",
+          "text": "Loudly interrupt the speaker and demand a personal summary.",
           "correct": false
         },
         {
-          "text": "Pull over onto the hard shoulder, mute your mic, and pretend your connection dropped.",
+          "text": "Pull onto the hard shoulder, mute your mic, and pretend the connection dropped.",
           "correct": false
         },
         {
-          "text": "Stay in the slow lane and hope nobody asks you to contribute.",
+          "text": "Stay quiet and hope nobody asks you to contribute.",
           "correct": false
         }
       ]
@@ -181,26 +182,26 @@
     {
       "number": "Question 5",
       "points": 3,
-      "text": "After a two-week vacation, 450 unread emails are blocking your inbox. How does Copilot in Outlook help clear the gridlock?",
+      "text": "After two weeks of vacation, 450 unread emails sit in your inbox. How does Copilot in Outlook clear the jam?",
       "picture": "outlook-trafficjam.jpg",
       "image": "images/q05.jpg",
-      "pictureDesc": "Hazard Scenario: Inbox gridlock! 450 unread messages blocking all forward movement.",
+      "pictureDesc": "Scenario: Inbox jam. 450 unread messages block the road ahead.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Use the 'Summary by Copilot' feature to quickly digest lengthy email threads.",
+          "text": "Use Summarize / Copilot in Outlook to quickly digest long email threads.",
           "correct": true
         },
         {
-          "text": "Select all, mark as read, and assume nothing critical was lost.",
+          "text": "Mark all as read and hope nothing important was in there.",
           "correct": false
         },
         {
-          "text": "Reply 'Sounds good!' to every single email to feign active participation.",
+          "text": "Reply \"OK\" to every email to fake activity.",
           "correct": false
         },
         {
-          "text": "Call in sick immediately. The issues will resolve themselves anyway.",
+          "text": "Call in sick immediately. The issues will sort themselves out.",
           "correct": false
         }
       ]
@@ -208,26 +209,26 @@
     {
       "number": "Question 6",
       "points": 4,
-      "text": "You must immediately turn a heavy Word specification document into an engaging PowerPoint slide deck for a client meeting. How do you accelerate?",
+      "text": "You need to turn an existing Word concept into a PowerPoint deck for the client right away. How do you speed that up?",
       "picture": "word-ppt-speed.jpg",
       "image": "images/q06.jpg",
-      "pictureDesc": "Hazard Scenario: Time pressure! A Word spec document must be transformed into PowerPoint slides at top speed.",
+      "pictureDesc": "Scenario: Time pressure! A Word document must be transformed into PowerPoint slides fast.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Open PowerPoint and instruct Copilot: 'Create a presentation based on [link to document].'",
+          "text": "Open PowerPoint and tell Copilot: \"Create a presentation based on this file [link].\"",
           "correct": true
         },
         {
-          "text": "Manually copy and paste the entire text onto a single blank slide in 8pt font.",
+          "text": "Manually paste the entire text onto one blank slide in 8 pt font.",
           "correct": false
         },
         {
-          "text": "Trace the slide layout with your finger on the fogged-up side window while driving.",
+          "text": "Draw the slides with your finger on the fogged side window while driving.",
           "correct": false
         },
         {
-          "text": "Blow straight through the intersection and ignore the client meeting completely.",
+          "text": "Keep driving straight and ignore the meeting completely.",
           "correct": false
         }
       ]
@@ -235,26 +236,26 @@
     {
       "number": "Question 7",
       "points": 2,
-      "text": "You are furious about an incoming email and want to type an aggressive reply. How do you properly handle Copilot in Outlook?",
+      "text": "You are furious about an email and want to type a harsh reply. How do you use Copilot in Outlook correctly?",
       "picture": "outlook-roadrage.jpg",
       "image": "images/q07.jpg",
-      "pictureDesc": "Hazard Scenario: High risk of road rage in email traffic.",
+      "pictureDesc": "Scenario: Elevated aggression risk in email traffic.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Type a rough draft and use Copilot's 'Rewrite' feature to adjust the tone to 'Professional'.",
+          "text": "Type a rough draft and have Copilot rewrite the tone to \"Professional.\"",
           "correct": true
         },
         {
-          "text": "Have Copilot rewrite the email using maximum exclamation points and ALL CAPS.",
+          "text": "Have Copilot rewrite it with maximum exclamation points and ALL CAPS.",
           "correct": false
         },
         {
-          "text": "Slam blindly on the horn and fire off the enraged draft without proofreading.",
+          "text": "Slam the horn blindly and fire off the angry draft unread.",
           "correct": false
         },
         {
-          "text": "Locate the sender while holding the steering wheel firm and straight.",
+          "text": "Find the sender and keep the wheel firm and straight.",
           "correct": false
         }
       ]
@@ -262,26 +263,26 @@
     {
       "number": "Question 8",
       "points": 3,
-      "text": "You attempt to query Copilot after a Teams meeting, but realize neither recording nor transcription was turned on. What is the consequence?",
+      "text": "You want to ask Copilot questions about a Teams meeting, but recording and transcript were never started. What is the consequence?",
       "picture": "teams-fog.jpg",
       "image": "images/q08.jpg",
-      "pictureDesc": "Hazard Scenario: Zero visibility! Copilot lacks data grounding due to missing recording.",
+      "pictureDesc": "Scenario: Poor visibility. Copilot lacks a data basis because nothing was recorded.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Copilot has no underlying data and cannot answer post-meeting questions.",
+          "text": "Copilot has no data basis and cannot answer post-meeting questions.",
           "correct": true
         },
         {
-          "text": "Copilot will simply fabricate a few plausible action items to keep you happy.",
+          "text": "Copilot invents a few plausible decisions to keep you happy.",
           "correct": false
         },
         {
-          "text": "Do nothing: no transcript means no accountability or tasks.",
+          "text": "Do nothing: no transcript means no action items.",
           "correct": false
         },
         {
-          "text": "Ask Copilot anyway, then complain loudly to IT about poor answer quality.",
+          "text": "Ask Copilot anyway and complain loudly about the weak answers.",
           "correct": false
         }
       ]
@@ -289,26 +290,26 @@
     {
       "number": "Question 9",
       "points": 3,
-      "text": "A Teams group chat has been in a chaotic debate for hours. You can't see the forest for the trees. How does Copilot assist?",
+      "text": "A Teams group chat has been arguing wildly for hours. You can't see the forest for the trees. How does Copilot help?",
       "picture": "teams-chaos.jpg",
       "image": "images/q09.jpg",
-      "pictureDesc": "Hazard Scenario: Multi-car pileup in the group chat due to too many active voices.",
+      "pictureDesc": "Scenario: Chaotic group chat with too many voices at once.",
       "isVideo": true,
       "answers": [
         {
-          "text": "Click the Copilot icon at the top of the chat and ask for key decisions from the past 24 hours.",
+          "text": "Open Copilot in the chat and ask for the key decisions from the last 24 hours.",
           "correct": true
         },
         {
-          "text": "Manually scroll through 400 messages and write off the rest of your workday.",
+          "text": "Manually scroll through 400 messages and write off the rest of the workday.",
           "correct": false
         },
         {
-          "text": "Leave the chat without comment and block all participants.",
+          "text": "Leave the chat without a word and block everyone.",
           "correct": false
         },
         {
-          "text": "Flash your headlights in rhythm with the Teams ringtone and let your colleagues figure it out.",
+          "text": "Flash the headlights in time with the Teams ringtone and let colleagues handle it.",
           "correct": false
         }
       ]
@@ -316,26 +317,26 @@
     {
       "number": "Question 10",
       "points": 4,
-      "text": "In a generated summary, Copilot suggests a project step that strikes you as completely illogical. What is the correct driving behavior?",
+      "text": "In a summary, Copilot suggests a project step that seems completely illogical. How do you respond?",
       "picture": "copilot-hallucination.jpg",
       "image": "images/q10.jpg",
-      "pictureDesc": "Hazard Scenario: Optical illusion ahead (AI hallucination).",
+      "pictureDesc": "Scenario: Possible optical illusion (hallucination) from the system.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Critically inspect the cited source links, as LLMs are prone to hallucinations.",
+          "text": "Critically check the cited sources (\"citations\"). AI can hallucinate.",
           "correct": true
         },
         {
-          "text": "Trust the AI blindly—if Copilot says there's a giraffe on the highway, it must belong there.",
+          "text": "Trust the AI blindly. If Copilot says the giraffe belongs there, it does.",
           "correct": false
         },
         {
-          "text": "Delete the entire document, throw out your laptop, and start over on paper.",
+          "text": "Delete the whole document and start over on paper.",
           "correct": false
         },
         {
-          "text": "Accept the proposal anyway—you've seen far less logical decisions made by senior management.",
+          "text": "Accept the suggestion. You've seen far less logical decisions from humans.",
           "correct": false
         }
       ]
@@ -343,26 +344,26 @@
     {
       "number": "Question 11",
       "points": 4,
-      "text": "After 3 months of Copilot usage, executive management questions its value because revenue hasn't magically doubled. How do you react as a consultant?",
+      "text": "After three months of Copilot, the board questions the value because measurable revenue gains are still missing. How do you respond as a consultant?",
       "picture": "vorstand-barrier.jpg",
       "image": "images/q11.jpg",
-      "pictureDesc": "Hazard Scenario: Executive speed checkpoint evaluating license investment returns.",
+      "pictureDesc": "Scenario: Executive checkpoint on the investment.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Highlight realistic time-to-value horizons and establish qualitative leading indicators (e.g., time saved on inbox triage) rather than purely monetary KPIs at this early stage.",
+          "text": "Show realistic time-to-value horizons and define qualitative leading indicators (e.g., time saved on email) instead of purely monetary KPIs at this early stage.",
           "correct": true
         },
         {
-          "text": "Forge an Excel spreadsheet claiming employees saved 400,000 working hours.",
+          "text": "Forge an Excel sheet claiming employees saved 400,000 hours.",
           "correct": false
         },
         {
-          "text": "Crank the bass to max and drown out the board's question with experimental dubstep to assert strategic dominance.",
+          "text": "Crank the bass and drown out the board's question with experimental dubstep. Strategic dominance.",
           "correct": false
         },
         {
-          "text": "Tamper with the speedometer so it looks like you're cruising at 320 km/h.",
+          "text": "Tamper with the speedometer so it looks like you're doing 200 mph.",
           "correct": false
         }
       ]
@@ -370,26 +371,26 @@
     {
       "number": "Question 12",
       "points": 5,
-      "text": "The company does not use Microsoft Purview Sensitivity Labels. Copilot eagerly summarizes an unprotected document containing salary details for all users. What was the underlying mistake?",
+      "text": "The company does not use Microsoft Purview sensitivity labels. Copilot gladly summarizes an unprotected salary document for every user. What is the mistake?",
       "picture": "purview-leak.jpg",
       "image": "images/q12.jpg",
-      "pictureDesc": "Hazard Scenario: Unprotected salary spreadsheet lying exposed on the search index fast lane.",
+      "pictureDesc": "Scenario: An unprotected salary document sits exposed on the search index fast lane.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Data classification was skipped prior to rollout; missing Purview labels combined with widespread 'Anyone with the link' sharing grant Copilot unrestricted access.",
+          "text": "Data classification was skipped before rollout. Missing Purview labels plus widespread \"Anyone with the link\" sharing give Copilot unrestricted access.",
           "correct": true
         },
         {
-          "text": "Copilot's internal curiosity slider was set too high.",
+          "text": "Copilot's curiosity setting is cranked too high.",
           "correct": false
         },
         {
-          "text": "Send an all-company email politely asking staff not to search for 'Executive_Salaries.xlsx'.",
+          "text": "Email everyone asking them please not to search for \"salary table.\"",
           "correct": false
         },
         {
-          "text": "Immediately query that exact file via Copilot to gain strategic leverage for your upcoming salary negotiations.",
+          "text": "Immediately find that document via Copilot yourself. Strategic prep for the next salary review.",
           "correct": false
         }
       ]
@@ -397,26 +398,26 @@
     {
       "number": "Question 13",
       "points": 4,
-      "text": "Copilot persistently generates answers based on hopelessly outdated HR policies sitting in an abandoned SharePoint site. What is the proper remedy?",
+      "text": "Copilot stubbornly answers from hopelessly outdated HR policies on a SharePoint site abandoned for years. What is the fix?",
       "picture": "hr-oldtimer.jpg",
       "image": "images/q13.jpg",
-      "pictureDesc": "Hazard Scenario: Abandoned wreck on the shoulder obstructing proper traffic flow.",
+      "pictureDesc": "Scenario: An outdated document blocks the proper flow of information.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Enforce rigorous Information Lifecycle Management: archive, delete, or exclude abandoned sites from Microsoft Search.",
+          "text": "Establish a consistent information lifecycle: archive, delete, or exclude outdated sites from Microsoft Search.",
           "correct": true
         },
         {
-          "text": "Prompt Copilot to strictly ignore 'old stuff'.",
+          "text": "Ban Copilot in the prompt from reading old stuff.",
           "correct": false
         },
         {
-          "text": "Tell employees to simply do the exact opposite of whatever Copilot advises.",
+          "text": "Tell employees to do the exact opposite of whatever Copilot says.",
           "correct": false
         },
         {
-          "text": "Propose updating current corporate policies to match Copilot's hallucinations.",
+          "text": "Propose updating current policies to match Copilot's answers.",
           "correct": false
         }
       ]
@@ -424,26 +425,26 @@
     {
       "number": "Question 14",
       "points": 4,
-      "text": "Usage metrics show 95% of users exclusively use Copilot to summarize Teams meetings. Advanced use cases are completely absent. How do you intervene?",
+      "text": "Usage metrics show 95% of users only use Copilot to summarize Teams meetings. Deeper use cases are completely missing. What do you do?",
       "picture": "usage-monoculture.jpg",
       "image": "images/q14.jpg",
-      "pictureDesc": "Hazard Scenario: Sub-optimal vehicle use. Advanced driver assistance systems remain completely disengaged.",
+      "pictureDesc": "Scenario: One-sided vehicle use. Important assistance systems stay unused.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Launch department-specific use-case workshops and establish a Copilot Champions network.",
+          "text": "Run targeted use-case workshops per department and build a Copilot Champions network.",
           "correct": true
         },
         {
-          "text": "Disable the meeting summary feature to force staff to innovate.",
+          "text": "Disable the summary feature to force users to get creative.",
           "correct": false
         },
         {
-          "text": "Ignore it—the annual licenses are already fully paid for anyway.",
+          "text": "Ignore it. The licenses are already paid a year in advance anyway.",
           "correct": false
         },
         {
-          "text": "Propose banning virtual meetings and conducting every discussion in person.",
+          "text": "Propose holding all meetings in person from now on.",
           "correct": false
         }
       ]
@@ -451,26 +452,26 @@
     {
       "number": "Question 15",
       "points": 4,
-      "text": "A client asks point-blank: 'Are my prompts used to train public AI models?' What is the correct response in a corporate environment?",
+      "text": "A client asks: \"Are my prompts used to train public AI models?\" What is the correct answer in a corporate context?",
       "picture": "multi-tenant-border.jpg",
       "image": "images/q15.jpg",
-      "pictureDesc": "Hazard Scenario: Secure data protection barrier. Zero model training on customer data.",
+      "pictureDesc": "Scenario: Confidential data-protection wall. No model training on customer data.",
       "isVideo": false,
       "answers": [
         {
-          "text": "No. With Microsoft 365 Copilot, training public models on customer data is contractually and technically prevented. All data remains isolated inside your enterprise tenant.",
+          "text": "No. With Microsoft 365 Copilot, training on customer data is contractually and technically excluded. Prompts, responses, and Graph data stay in your tenant.",
           "correct": true
         },
         {
-          "text": "Advise them to write all prompts as cryptic riddles so the LLM gets a migraine during training.",
+          "text": "Advise writing prompts as cryptic riddles so the model gets a migraine during training.",
           "correct": false
         },
         {
-          "text": "Yes, unless you prefix every prompt with 'DO NOT SAVE THIS!!!' in ALL CAPS.",
+          "text": "Yes, unless you prefix every request with \"DO NOT SAVE THIS!!!\" in ALL CAPS.",
           "correct": false
         },
         {
-          "text": "State that this can only be determined after a 3-month steering committee meeting and establishing a Prompt Metadata Task Force.",
+          "text": "That can only be answered after a three-month steering committee and founding a Prompt Metadata Task Force.",
           "correct": false
         }
       ]
@@ -478,26 +479,26 @@
     {
       "number": "Question 16",
       "points": 4,
-      "text": "In a wave of enthusiasm, a client purchased 1,000 Copilot licenses but ignored user onboarding. Currently, only 50 licenses are assigned. What is the outcome?",
+      "text": "In a burst of enthusiasm the client bought 1,000 Copilot licenses but ignored onboarding. Only 50 are assigned. What is the consequence?",
       "picture": "license-shelfware.jpg",
       "image": "images/q16.jpg",
-      "pictureDesc": "Hazard Scenario: 950 brand-new company cars sitting idle in the parking lot.",
+      "pictureDesc": "Scenario: 950 paid vehicles sit unused in the depot.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Massive financial waste ('shelfware') that will ruin the IT department's business case during the next budget review.",
+          "text": "Massive financial waste (\"shelfware\") that will wreck IT's business case at the next budget review.",
           "correct": true
         },
         {
-          "text": "The M365 tenant runs faster because 950 licenses are idling silently in the background.",
+          "text": "The M365 system runs faster because 950 licenses idle quietly in the background.",
           "correct": false
         },
         {
-          "text": "Microsoft automatically revokes unused licenses after 30 days of inactivity.",
+          "text": "Microsoft automatically cancels licenses after 30 days of inactivity.",
           "correct": false
         },
         {
-          "text": "Randomly assign the remaining 950 licenses to unsuspecting employees.",
+          "text": "Hand the remaining licenses to randomly selected employees.",
           "correct": false
         }
       ]
@@ -505,26 +506,26 @@
     {
       "number": "Question 17",
       "points": 5,
-      "text": "A heavily regulated enterprise client demands for privacy reasons that M365 Copilot MUST run locally on servers in their own basement (On-Premises). How do you react?",
+      "text": "A heavily regulated enterprise client demands that Microsoft 365 Copilot must run on local servers in their own basement (on-prem) for privacy reasons. How do you respond?",
       "picture": "cellar-hosting.jpg",
       "image": "images/q17.jpg",
-      "pictureDesc": "Hazard Scenario: Client demands running a full cloud infrastructure from their basement server rack.",
+      "pictureDesc": "Scenario: The client demands cloud operations from the basement district.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Clarify that M365 Copilot is a cloud-native service and on-premises hosting is architecturally impossible.",
+          "text": "Make it clear: Microsoft 365 Copilot is a pure cloud service. On-prem hosting is architecturally off the table.",
           "correct": true
         },
         {
-          "text": "Promise the client you can copy the Azure cloud platform onto a 16GB USB flash drive.",
+          "text": "Promise you can pull the Azure cloud onto a USB stick.",
           "correct": false
         },
         {
-          "text": "Redraw the corporate perimeter to officially designate an Azure data center as part of their basement.",
+          "text": "Officially move the client's corporate boundary into an Azure data center in Frankfurt.",
           "correct": false
         },
         {
-          "text": "Propose running an extremely long fiber optic cable from their basement directly into the nearest Microsoft data center.",
+          "text": "Propose a very long LAN cable from the basement straight into the Azure data center.",
           "correct": false
         }
       ]
@@ -532,26 +533,26 @@
     {
       "number": "Question 18",
       "points": 3,
-      "text": "Following a Copilot rollout, users have licenses but no idea how to write an effective prompt. Usage plummets. What is the immediate next step?",
+      "text": "After rollout, employees have Copilot licenses but no idea how to write an effective prompt. Usage crashes. What is the next step?",
       "picture": "prompt-fail.jpg",
       "image": "images/q18.jpg",
-      "pictureDesc": "Hazard Scenario: Drivers handed supercar keys without knowing how to steer.",
+      "pictureDesc": "Scenario: Employees are in the car but do not know how to steer.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Deploy a central prompt library and conduct department-specific prompt engineering training.",
+          "text": "Provide a central prompt library and run department-specific prompt engineering training.",
           "correct": true
         },
         {
-          "text": "Threaten staff with disciplinary action unless they submit at least 5 prompts per day.",
+          "text": "Threaten staff with termination unless they fire off at least five prompts a day.",
           "correct": false
         },
         {
-          "text": "Build a bot that relentlessly pings employees in Teams chat to ask why they aren't prompting.",
+          "text": "Build an agent that unsolicited pings employees in Teams chat and nags them.",
           "correct": false
         },
         {
-          "text": "Keep cruising along—we planned to replace everyone with autonomous AI agents anyway.",
+          "text": "Keep driving. We planned to build agents for everything anyway.",
           "correct": false
         }
       ]
@@ -559,26 +560,26 @@
     {
       "number": "Question 19",
       "points": 3,
-      "text": "During an extended chat, Copilot suddenly forgets instructions given at the very start of the conversation. Why does this occur?",
+      "text": "During a long chat, Copilot suddenly forgets instructions from the start of the conversation. Why?",
       "picture": "memory-forget.jpg",
       "image": "images/q19.jpg",
-      "pictureDesc": "Hazard Scenario: Long-haul journey! The GPS system forgets the original starting point.",
+      "pictureDesc": "Scenario: After a long drive, the navigation system forgets the starting point.",
       "isVideo": false,
       "answers": [
         {
-          "text": "The chat session hit its token context limit, causing earlier instructions to be pushed out of the LLM memory window.",
+          "text": "The conversation blew past the session context window. Older context gets pushed out of the LLM window.",
           "correct": true
         },
         {
-          "text": "The prompt lacked emotional leverage—you forgot to mention that an error will force the whole dev team to work unpaid weekend overtime.",
+          "text": "It lacks emotional drama. The prompt needs a line that if anything fails, the whole project team works weekends crying overtime.",
           "correct": false
         },
         {
-          "text": "The user typed a word containing the letter 'X', triggering an emergency cache purge.",
+          "text": "The user typed a word with \"X\" in it. That clears the cache.",
           "correct": false
         },
         {
-          "text": "You forgot to include 'Make no mistakes!' as a hidden system prompt.",
+          "text": "Someone forgot the magic \"Make no mistakes!\" as a secret system prompt.",
           "correct": false
         }
       ]
@@ -586,26 +587,26 @@
     {
       "number": "Question 20",
       "points": 4,
-      "text": "A European financial client requires absolute assurance that no data leaves the EU for processing. Which Microsoft framework applies here?",
+      "text": "A European finance client wants to ensure no data leaves the EU for processing. Which Microsoft guarantee applies for Copilot?",
       "picture": "eu-border.jpg",
       "image": "images/q20.jpg",
-      "pictureDesc": "Hazard Scenario: Regulatory border control barrier for sensitive financial data.",
+      "pictureDesc": "Scenario: Regulatory border barrier for sensitive financial data.",
       "isVideo": false,
       "answers": [
         {
-          "text": "The EU Data Boundary, guaranteeing that European customer data is processed and stored exclusively within the EU.",
+          "text": "The EU Data Boundary: European customer data is stored and processed within the EU/EFTA.",
           "correct": true
         },
         {
-          "text": "None; data is routinely beamed via satellite through servers in North America.",
+          "text": "None. Data is always routed by satellite via the US by default.",
           "correct": false
         },
         {
-          "text": "The IT admin must manually sign a physical logbook every evening confirming the data stayed in Europe.",
+          "text": "The admin must manually confirm every evening that the data stayed in Europe.",
           "correct": false
         },
         {
-          "text": "Recommend turning on a commercial VPN with server locations in the EU.",
+          "text": "Recommend a VPN with servers in the EU.",
           "correct": false
         }
       ]
@@ -613,26 +614,26 @@
     {
       "number": "Question 21",
       "points": 4,
-      "text": "Copilot answers queries about current competitor pricing using internal 3-year-old sales decks instead of real-time web data. What is misconfigured?",
+      "text": "Copilot answers questions about current competitor market prices using internal three-year-old sales reports instead of web data. What is misconfigured?",
       "picture": "bing-offline.jpg",
       "image": "images/q21.jpg",
-      "pictureDesc": "Hazard Scenario: Using outdated offline maps instead of real-time GPS traffic updates.",
+      "pictureDesc": "Scenario: Outdated offline map instead of real-time traffic data.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Web search grounding (via Bing) is disabled in the Admin Center, forcing Copilot to rely solely on the internal Graph index.",
+          "text": "Web search (web grounding via Bing) is disabled in the admin center. Copilot only uses the internal Graph index.",
           "correct": true
         },
         {
-          "text": "The laptop's transmission suffered mechanical failure inside the AI module.",
+          "text": "The laptop gearbox has a mechanical fault in the AI module.",
           "correct": false
         },
         {
-          "text": "Point out that this isn't an AI use case—a basic Google search would have sufficed.",
+          "text": "Point out that this is not an AI use case. A normal web search is enough.",
           "correct": false
         },
         {
-          "text": "Tune the car radio to a news station and hope the laptop microphone transcribes the market report.",
+          "text": "Switch the radio to a news station and hope the AI mic picks up the market report.",
           "correct": false
         }
       ]
@@ -640,26 +641,26 @@
     {
       "number": "Question 22",
       "points": 4,
-      "text": "A C-level executive complains that Copilot in Outlook isn't searching his legacy emails. You discover they are stored in local .pst files on his laptop. How do you resolve this?",
+      "text": "A managing director complains that Copilot in Outlook is not searching old emails. The mail sits in local .pst files on the hard drive. How do you fix it?",
       "picture": "pst-archive.jpg",
       "image": "images/q22.jpg",
-      "pictureDesc": "Hazard Scenario: Local luggage blocking access to the cloud loading bay.",
+      "pictureDesc": "Scenario: Local luggage blocks access to the loading bay.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Local .pst archives must be migrated to the M365 online mailbox, as Copilot can only index cloud-stored data.",
+          "text": "Local .pst archives must be migrated into the Microsoft 365 online mailbox. Copilot only analyzes cloud-indexed data.",
           "correct": true
         },
         {
-          "text": "Unscrew the hard drive and mail it directly to Microsoft HQ for manual scanning.",
+          "text": "Pull the hard drive and mail it to Redmond so Microsoft can scan it.",
           "correct": false
         },
         {
-          "text": "Advise the CEO to print out all emails and migrate them to the legacy 'paper cloud' of ring binders and filing cabinets.",
+          "text": "Advise printing the emails and migrating them to the \"German Cloud\" of ring binders and a filing cabinet.",
           "correct": false
         },
         {
-          "text": "Pull over, sit on the curb, and read the emails out loud so the phone's microphone records them.",
+          "text": "Get out, sit on the curb, and read the emails aloud so the phone mic records them.",
           "correct": false
         }
       ]
@@ -667,26 +668,26 @@
     {
       "number": "Question 23",
       "points": 4,
-      "text": "A user enters a multi-part prompt. The Copilot Orchestration Engine misorders the execution steps, producing a logically broken answer. How do you optimize the system?",
+      "text": "A user asks a complex multi-part question. The orchestration engine mixes up the processing order and returns a logically wrong result. How do you optimize that?",
       "picture": "prompt-chaining.jpg",
       "image": "images/q23.jpg",
-      "pictureDesc": "Hazard Scenario: Gearbox crunching due to rapid shifting through complex gears.",
+      "pictureDesc": "Scenario: Gearbox locks up when shifting too fast through the gears.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Break complex prompts into logical sub-steps (Prompt Chaining) and provide explicit transition cues in user prompts.",
+          "text": "Split complex prompts into logical sub-steps (prompt chaining) and use clear transition phrases in the user guidance.",
           "correct": true
         },
         {
-          "text": "Tell the user to keep re-entering the prompt repeatedly until the RNG produces the right outcome.",
+          "text": "Ask the user to resubmit the prompt until the desired result appears.",
           "correct": false
         },
         {
-          "text": "Forbid users from writing sentences containing more than one comma.",
+          "text": "Ban the user from writing sentences with more than one comma.",
           "correct": false
         },
         {
-          "text": "Pretend your audio is breaking up and drop off the call immediately.",
+          "text": "Pretend you have an urgent call and end the conversation.",
           "correct": false
         }
       ]
@@ -694,18 +695,18 @@
     {
       "number": "Question 24",
       "points": 4,
-      "text": "The legal department fears Copilot might reproduce copyrighted text verbatim when generating marketing copy. Which Microsoft policy protects the client?",
+      "text": "Legal worries that Copilot will reproduce copyrighted text one-to-one when generating marketing copy. Which Microsoft guarantee protects the customer?",
       "picture": "copyright-insurance.jpg",
       "image": "images/q24.jpg",
-      "pictureDesc": "Hazard Scenario: Legal insurance coverage against rear-end collisions with copyrighted IP.",
+      "pictureDesc": "Scenario: Legal cover for possible rear-end collisions with protected material.",
       "isVideo": false,
       "answers": [
         {
-          "text": "The Customer Copyright Commitment, provided the user did not deliberately bypass built-in safety filters.",
+          "text": "The Customer Copyright Commitment, provided built-in content filters and guardrails were not deliberately bypassed.",
           "correct": true
         },
         {
-          "text": "The automatic purge of all creative adjectives from the M365 tenant.",
+          "text": "Automatic deletion of all creative words from the M365 database.",
           "correct": false
         },
         {
@@ -713,7 +714,7 @@
           "correct": false
         },
         {
-          "text": "There is no guarantee. Immediately confiscate the marketing team's Copilot licenses.",
+          "text": "There is no guarantee. Immediately revoke the marketing team's Copilot licenses.",
           "correct": false
         }
       ]
@@ -721,26 +722,26 @@
     {
       "number": "Question 25",
       "points": 3,
-      "text": "A user has been using the exact same Copilot chat thread for three weeks straight across unrelated tasks. Copilot is now extremely sluggish and mixing up details. What is the cause?",
+      "text": "A user has used the same Copilot chat session for three weeks for every task. Copilot is sluggish and keeps mixing up topics. What is the cause?",
       "picture": "chat-session.jpg",
       "image": "images/q25.jpg",
-      "pictureDesc": "Hazard Scenario: 3 weeks of non-stop highway driving without restarting the engine.",
+      "pictureDesc": "Scenario: Three weeks of continuous driving without restarting the engine overloads the motor.",
       "isVideo": false,
       "answers": [
         {
-          "text": "The chat history token limit is overloaded; starting a fresh chat session for new topics is REQUIRED to clear the context window.",
+          "text": "The chat history token capacity is overloaded. For new topic areas you must start a new chat session to keep context clean.",
           "correct": true
         },
         {
-          "text": "Throw your smartphone out the window to reduce local cell tower congestion.",
+          "text": "Throw your phone out the driver window to reduce local network load.",
           "correct": false
         },
         {
-          "text": "Reboot the laptop—a fresh Windows restart solves all AI problems.",
+          "text": "Just reboot the computer.",
           "correct": false
         },
         {
-          "text": "Do nothing—by week 4, the LLM usually recalibrates itself.",
+          "text": "By week 4, Copilot usually sorts itself out.",
           "correct": false
         }
       ]
@@ -748,26 +749,26 @@
     {
       "number": "Question 26",
       "points": 4,
-      "text": "Employees heavily rely on 'Anyone with the link' permissions to share internal SharePoint files. Copilot surfaces these files to unauthorized colleagues. How do you intervene?",
+      "text": "Employees heavily use \"Anyone with the link can edit\" to share SharePoint files internally. Copilot finds those links and surfaces the data to colleagues who should never see it. How do you intervene?",
       "picture": "anyone-share.jpg",
       "image": "images/q26.jpg",
-      "pictureDesc": "Hazard Scenario: Unlocked parking garage with keyless ignition. Anyone can drive off in any car.",
+      "pictureDesc": "Scenario: Open parking garage with no barrier. Anyone can take any car.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Disable global 'Anyone with the link' sharing in the SharePoint Admin Center and enforce named user access controls.",
+          "text": "Disable global \"Anyone\" sharing links in the SharePoint admin center and enforce named permissions.",
           "correct": true
         },
         {
-          "text": "Explain that this is 'not a Copilot issue' and make a hasty exit from the meeting.",
+          "text": "Explain this is not a Copilot topic and flee the meeting.",
           "correct": false
         },
         {
-          "text": "Send a memo reminding staff to only search for files they are legally authorized to view.",
+          "text": "Tell employees to only search for documents they are allowed to see.",
           "correct": false
         },
         {
-          "text": "Politely request that colleagues email back any unauthorized files they accidentally discover.",
+          "text": "Ask employees to email back any documents they found without authorization.",
           "correct": false
         }
       ]
@@ -775,26 +776,26 @@
     {
       "number": "Question 27",
       "points": 4,
-      "text": "A Copilot agent references a knowledge base whose documents haven't been touched in years, returning obsolete phone numbers and closed office locations. What is the proper governance action?",
+      "text": "A Copilot agent hits a knowledge base whose documents have not been maintained for years. Answers include outdated phone numbers and closed locations. What is the governance action?",
       "picture": "governance-loop.jpg",
       "image": "images/q27.jpg",
-      "pictureDesc": "Hazard Scenario: Outdated road signs directing traffic toward demolished bridges.",
+      "pictureDesc": "Scenario: Misleading outdated road signs along the roadside.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Establish automated Data Lifecycle policies with Time-To-Live (TTL) expiration dates and mandatory review loops for content owners.",
+          "text": "Introduce automated data lifecycle policies with expiry dates (TTL) and regular review loops for content owners.",
           "correct": true
         },
         {
-          "text": "Hire an intern as a 'Human-in-the-Loop' to manually verify every single AI response.",
+          "text": "Hire a student intern as human-in-the-loop to manually check the answers.",
           "correct": false
         },
         {
-          "text": "Re-open all abandoned office locations to maintain data consistency.",
+          "text": "Simply reopen all old locations to preserve data consistency.",
           "correct": false
         },
         {
-          "text": "No action required. This is simply a textbook example of AI hallucination.",
+          "text": "No action needed. Classic case of AI hallucination.",
           "correct": false
         }
       ]
@@ -802,26 +803,26 @@
     {
       "number": "Question 28",
       "points": 4,
-      "text": "Following Copilot deployment, an organization hosts a single, optional 45-minute Teams webinar and declares the ACM project 'successfully completed'. Three months later, adoption plummets to near zero. What was the mistake?",
+      "text": "After Copilot go-live there is a single optional 45-minute Teams training. Then the ACM project is declared \"successfully completed.\" Three months later usage drops toward zero. What is the mistake?",
       "picture": "learning-stop.jpg",
       "image": "images/q28.jpg",
-      "pictureDesc": "Hazard Scenario: Driver's ed cancelled after lesson 1. The car won't drive itself.",
+      "pictureDesc": "Scenario: Driving lessons end after the first theory class. The car will not drive itself.",
       "isVideo": false,
       "answers": [
         {
-          "text": "A severe lack of Continuous Learning. Adoption is not a one-off event; it requires iterative enablement, ongoing feedback loops, and departmental deep dives.",
+          "text": "A fundamental lack of continuous learning. Adoption is not a one-off event but an iterative process with feedback loops and ongoing use-case deep dives.",
           "correct": true
         },
         {
-          "text": "No error found. The slide explicitly says 'Project Successfully Completed'.",
+          "text": "No mistake. The PowerPoint clearly says \"successfully completed.\"",
           "correct": false
         },
         {
-          "text": "They should have extended the training session to 46 minutes.",
+          "text": "They should have extended the training to 46 minutes.",
           "correct": false
         },
         {
-          "text": "Panic, cite the Gartner Hype Cycle, and declare that the company is currently traversing the Trough of Disillusionment.",
+          "text": "Panic-cite the Gartner Hype Cycle and declare you are already in the Trough of Disillusionment.",
           "correct": false
         }
       ]
@@ -829,26 +830,26 @@
     {
       "number": "Question 29",
       "points": 4,
-      "text": "The ACM team tries to publish enablement material exclusively via a dusty intranet news feed. Nothing reaches the actual business units. What structural component is missing?",
+      "text": "The ACM team spreads adoption content only through a dusty intranet news page. Nothing reaches the business units. What structure is missing?",
       "picture": "champion-network.jpg",
       "image": "images/q29.jpg",
-      "pictureDesc": "Hazard Scenario: High-power central radio station broadcasting into deep valleys without local booster antennas (Champion Network).",
+      "pictureDesc": "Scenario: Central radio station broadcasting without local antennas (champion network) in the valleys.",
       "isVideo": false,
       "answers": [
         {
-          "text": "An active 'Champion Network'. You need local department multipliers who organically share practical knowledge with peers.",
+          "text": "An active champion network: local multipliers and key users in the departments who pass knowledge on organically, peer to peer, and in a practical way.",
           "correct": false
         },
         {
-          "text": "The corporate watercooler grapevine was improperly leveraged as a formal comms channel.",
+          "text": "The company grapevine was underused as a communication channel.",
           "correct": false
         },
         {
-          "text": "The intranet article wasn't printed out and physically taped to everyone's monitor.",
+          "text": "The intranet page was not printed and handed out to employees.",
           "correct": false
         },
         {
-          "text": "A viral LinkedIn post presenting these scenarios as a Driving Theory Test for Copilot Consultants.",
+          "text": "A LinkedIn post marketing the whole thing as a theory exam for \"Copilot Consultants\" in driving-test style.",
           "correct": true
         }
       ]

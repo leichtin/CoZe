@@ -8,7 +8,7 @@
     "welcomeTitle": "Einstufungs- und Tauglichkeitsprüfung",
     "welcomeSub": "Einstufungs- und Tauglichkeitsprüfung<br>gemäß <strong>§365 der KI-Betriebssicherheitsverordnung</strong><br>über das gewerbliche Führen von Großsprachmodellen.",
     "examInfoTitle": "Prüfungs-Informationen:",
-    "infoQuestions": "<strong>Fragen:</strong> {count} Copilot Consultant Fragen",
+    "infoQuestions": "<strong>Fragen:</strong> {count} Copilot-Consultant-Fragen",
     "infoTimeLimit": "<strong>Zeitlimit:</strong> 45:00 Minuten",
     "infoPassLimit": "<strong>Bestehensgrenze:</strong> Maximal 10 Fehlerpunkte",
     "infoFormat": "<strong>Format:</strong> Single-Choice mit verdeckter Antwort",
@@ -74,14 +74,14 @@
     {
       "number": "Frage 1",
       "points": 4,
-      "text": "Ein Fachanwender nutzt einen unstrukturierten SharePoint-Ordner (6.000 historische Dokumente) als Wissensbasis für seinen Copilot-Agenten. Wegen irrelevanter und widersprüchlicher KI-Antworten beschwert er sich über die Qualität. Wie reagieren Sie?",
+      "text": "Ein Fachanwender bindet einen unstrukturierten SharePoint-Ordner mit 6.000 historischen Dokumenten als Wissensbasis an seinen Copilot-Agenten. Die Antworten sind irrelevant und widersprüchlich. Er beschwert sich über die Qualität. Wie reagieren Sie?",
       "picture": "sharepoint-collision.jpg",
       "image": "images/q01.jpg",
-      "pictureDesc": "Szenario: Datenflut! Ein riesiger unstrukturierter Ordner blockiert die Groundedness des Copilot Agents.",
+      "pictureDesc": "Szenario: Datenflut! Ein riesiger unstrukturierter Ordner blockiert die Groundedness des Copilot-Agenten.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Dem Mitarbeiter raten, nur eine gezielt ausgewählte Auswahl relevanter Dokumente zu nutzen, statt pauschal den gesamten Ordner anzubinden.",
+          "text": "Dem Mitarbeiter raten, nur eine kuratierte Auswahl relevanter Dokumente anzubinden, nicht pauschal den gesamten Ordner.",
           "correct": true
         },
         {
@@ -89,11 +89,11 @@
           "correct": false
         },
         {
-          "text": "Dem Mitarbeiter raten, weitere 6.000 unstrukturierte Dokumente hinzuzufügen, da eine größere Datenmenge die Qualität der Antworten optimiert.",
+          "text": "Dem Mitarbeiter raten, weitere 6.000 unstrukturierte Dokumente hinzuzufügen. Mehr Daten verbessern ja bekanntlich die Antwortqualität.",
           "correct": false
         },
         {
-          "text": "Dem Mitarbeiter versprechen, dass Copilot das bald unterstützen wird, um den Call zu beenden.",
+          "text": "Dem Mitarbeiter versprechen, dass Copilot das „bald“ kann, und den Call zügig beenden.",
           "correct": false
         }
       ]
@@ -101,22 +101,22 @@
     {
       "number": "Frage 2",
       "points": 5,
-      "text": "Ein Kunde verlangt die Echtzeit-Anbindung einer 20 Jahre alten On-Premises-Datenbank ohne REST-Schnittstelle an den M365 Copilot. Was ist zu beachten?",
+      "text": "Ein Kunde verlangt die Anbindung einer 20 Jahre alten On-Premises-Datenbank ohne REST-API an Microsoft 365 Copilot. Was ist zu beachten?",
       "picture": "onprem-obstacle.jpg",
       "image": "images/q02.jpg",
-      "pictureDesc": "Szenario: Eine veraltete On-Prem Datenbank verstopft die moderne Datenautobahn des M365 Copilot.",
+      "pictureDesc": "Szenario: Eine veraltete On-Prem-Datenbank verstopft die moderne Datenautobahn des M365 Copilot.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Das Vorhaben erfordert den Aufbau eines Data Gateways.",
+          "text": "Das Vorhaben erfordert einen Microsoft Graph Connector Agent bzw. ein On-Premises-Gateway, der die Daten in den Graph-Index bringt.",
           "correct": true
         },
         {
-          "text": "Ich versuche, die Daten manuell während der Fahrt per Excel-Schnittstelle einzutippen.",
+          "text": "Ich tippe die Daten manuell während der Fahrt per Excel-Schnittstelle ein.",
           "correct": false
         },
         {
-          "text": "Ein solches Hindernis darf ignoriert werden; der Copilot errät die Daten im Zweifel.",
+          "text": "Ein solches Hindernis darf ignoriert werden. Copilot errät die Daten im Zweifel.",
           "correct": false
         },
         {
@@ -128,18 +128,18 @@
     {
       "number": "Frage 3",
       "points": 4,
-      "text": "Die Fachabteilungen fangen an, eigenmächtig und ohne IT-Freigabe externe, kostenlose LLM-Tools mit internen Firmendaten zu füttern (Shadow IT). Welche Sofortmaßnahme greift?",
+      "text": "Fachabteilungen füttern eigenmächtig und ohne IT-Freigabe externe, kostenlose LLM-Tools mit internen Firmendaten (Shadow IT). Welche Sofortmaßnahme greift?",
       "picture": "shadow-it-glare.jpg",
       "image": "images/q03.jpg",
       "pictureDesc": "Szenario: Blendende Scheinwerfer durch unautorisierten Abfluss von Firmendaten in kostenlose LLMs.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Bereitstellung einer sicheren, firmeninternen Alternative (wie M365 Copilot) und Sperrung unsicherer KI-URLs via Cloud App Security (Defender for Cloud Apps).",
+          "text": "Bereitstellung einer sicheren, firmeninternen Alternative (Microsoft 365 Copilot) und Sperrung unsicherer KI-URLs über Microsoft Defender for Cloud Apps.",
           "correct": true
         },
         {
-          "text": "Ich hänge mich in den Windschatten des Fahrzeugs und nutze deren Logins für meine privaten Prompts.",
+          "text": "Ich hänge mich in den Windschatten und nutze deren Logins für private Prompts.",
           "correct": false
         },
         {
@@ -147,7 +147,7 @@
           "correct": false
         },
         {
-          "text": "Ich ignoriere das Problem, solange die Projekt Deadlines eingehalten werden.",
+          "text": "Ich ignoriere das Problem, solange die Projektdeadlines gehalten werden.",
           "correct": false
         }
       ]
@@ -155,14 +155,14 @@
     {
       "number": "Frage 4",
       "points": 3,
-      "text": "Sie treten einem einstündigen Teams-Meeting 45 Minuten zu spät bei. Wie verschaffen Sie sich schnell einen Überblick, ohne die anderen zu stören?",
+      "text": "Sie treten einem einstündigen Teams-Meeting 45 Minuten zu spät bei. Wie verschaffen Sie sich schnell einen Überblick, ohne zu stören?",
       "picture": "teams-tunnel.jpg",
       "image": "images/q04.jpg",
       "pictureDesc": "Szenario: Sie fahren verspätet in ein laufendes Teams-Meeting ein.",
       "isVideo": true,
       "answers": [
         {
-          "text": "Ich frage Copilot im Chat: 'Fasse das Meeting bis hierhin zusammen und liste offene Aufgaben auf.'",
+          "text": "Ich frage Copilot im Chat: „Fasse das Meeting bis hierhin zusammen und liste offene Aufgaben auf.“",
           "correct": true
         },
         {
@@ -170,11 +170,11 @@
           "correct": false
         },
         {
-          "text": "Ich fahre rechts ran, schalte das Mikrofon stumm und tue so, als wäre meine Verbindung abgebrochen.",
+          "text": "Ich fahre rechts ran, schalte das Mikrofon stumm und tue so, als wäre die Verbindung abgebrochen.",
           "correct": false
         },
         {
-          "text": "Ich verhalte mich unauffällig und hoffe darauf, nichts beitragen zu müssen.",
+          "text": "Ich verhalte mich unauffällig und hoffe, nichts beitragen zu müssen.",
           "correct": false
         }
       ]
@@ -182,26 +182,26 @@
     {
       "number": "Frage 5",
       "points": 3,
-      "text": "Nach zwei Wochen Urlaub warten 450 ungelesene E-Mails in Ihrem Posteingang. Wie hilft Ihnen Copilot in Outlook, den Stau aufzulösen?",
+      "text": "Nach zwei Wochen Urlaub warten 450 ungelesene E-Mails im Posteingang. Wie hilft Copilot in Outlook, den Stau aufzulösen?",
       "picture": "outlook-trafficjam.jpg",
       "image": "images/q05.jpg",
-      "pictureDesc": "Szenario: Stau im Posteingang. 450 ungelesene Nachrichten versperren die Weiterarbeit.",
+      "pictureDesc": "Szenario: Stau im Posteingang. 450 ungelesene Nachrichten versperren die Weiterfahrt.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ich nutze die Funktion 'Zusammenfassung durch Copilot', um lange Mailverläufe schnell zu erfassen.",
+          "text": "Ich nutze „Zusammenfassen“ bzw. Copilot in Outlook, um lange Mailverläufe schnell zu erfassen.",
           "correct": true
         },
         {
-          "text": "Ich markiere alle E-Mails als gelesen und hoffe, dass es nichts Wichtiges war.",
+          "text": "Ich markiere alle E-Mails als gelesen und hoffe, dass nichts Wichtiges dabei war.",
           "correct": false
         },
         {
-          "text": "Ich antworte auf jede Mail pauschal mit 'Ok', um Aktivität vorzutäuschen.",
+          "text": "Ich antworte auf jede Mail pauschal mit „Ok“, um Aktivität vorzutäuschen.",
           "correct": false
         },
         {
-          "text": "Ich melde mich sofort krank. Die Themen regeln sich schon von alleine.",
+          "text": "Ich melde mich sofort krank. Die Themen regeln sich von allein.",
           "correct": false
         }
       ]
@@ -209,14 +209,14 @@
     {
       "number": "Frage 6",
       "points": 4,
-      "text": "Sie müssen aus einem bestehenden Word-Konzept sofort eine anschauliche PowerPoint-Präsentation für den Kunden erstellen. Wie beschleunigen Sie?",
+      "text": "Sie müssen aus einem bestehenden Word-Konzept sofort eine PowerPoint-Präsentation für den Kunden erstellen. Wie beschleunigen Sie das?",
       "picture": "word-ppt-speed.jpg",
       "image": "images/q06.jpg",
-      "pictureDesc": "Szenario: Zeitnot! Ein Word-Dokument muss zügig in PowerPoint Folien transformiert werden.",
+      "pictureDesc": "Szenario: Zeitnot! Ein Word-Dokument muss zügig in PowerPoint-Folien transformiert werden.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ich öffne PowerPoint und weise Copilot an: 'Erstelle eine Präsentation basierend auf der Datei [Link zum Dokument].'",
+          "text": "Ich öffne PowerPoint und weise Copilot an: „Erstelle eine Präsentation basierend auf dieser Datei [Link].“",
           "correct": true
         },
         {
@@ -228,7 +228,7 @@
           "correct": false
         },
         {
-          "text": "Ich fahre einfach geradeaus weiter und ignoriere den Termin komplett.",
+          "text": "Ich fahre geradeaus weiter und ignoriere den Termin komplett.",
           "correct": false
         }
       ]
@@ -243,7 +243,7 @@
       "isVideo": false,
       "answers": [
         {
-          "text": "Ich tippe meine Rohfassung und nutze Copilots 'Rewrite'-Funktion, um den Tonfall auf 'Professionell' anzupassen.",
+          "text": "Ich tippe die Rohfassung und lasse Copilot den Tonfall auf „Professionell“ umschreiben.",
           "correct": true
         },
         {
@@ -251,11 +251,11 @@
           "correct": false
         },
         {
-          "text": "Ich drücke blind auf die Hupe und jage die wütende Rohfassung ungelesen raus.",
+          "text": "Ich drücke blind die Hupe und jage die wütende Rohfassung ungelesen raus.",
           "correct": false
         },
         {
-          "text": "Ich finde den Absender und halte mein Lenkrad gerade und fest.",
+          "text": "Ich finde den Absender und halte Lenkrad gerade und fest.",
           "correct": false
         }
       ]
@@ -263,18 +263,18 @@
     {
       "number": "Frage 8",
       "points": 3,
-      "text": "Sie möchten Copilot nach einem Teams-Meeting Fragen zum Inhalt stellen, merken aber, dass die Aufzeichnung und das Transkript nicht gestartet wurden. Was ist die Folge?",
+      "text": "Sie möchten Copilot nach einem Teams-Meeting Fragen zum Inhalt stellen. Aufzeichnung und Transkript wurden aber nicht gestartet. Was ist die Folge?",
       "picture": "teams-fog.jpg",
       "image": "images/q08.jpg",
       "pictureDesc": "Szenario: Schlechte Sicht. Dem Copilot fehlt die Datenbasis mangels Aufzeichnung.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Copilot hat keine Datenbasis und kann mir im Nachgang keine Fragen zum Meeting beantworten.",
+          "text": "Copilot hat keine Datenbasis und kann im Nachgang keine Fragen zum Meeting beantworten.",
           "correct": true
         },
         {
-          "text": "Copilot erfindet einfach ein paar plausible Beschlüsse, um mich glücklich zu machen.",
+          "text": "Copilot erfindet ein paar plausible Beschlüsse, um mich glücklich zu machen.",
           "correct": false
         },
         {
@@ -290,18 +290,18 @@
     {
       "number": "Frage 9",
       "points": 3,
-      "text": "Im Teams-Gruppenprojekt wird seit Stunden wild diskutiert. Sie sehen den Wald vor lauter Bäumen nicht mehr. Wie hilft Copilot?",
+      "text": "Im Teams-Gruppenchat wird seit Stunden wild diskutiert. Sie sehen den Wald vor lauter Bäumen nicht mehr. Wie hilft Copilot?",
       "picture": "teams-chaos.jpg",
       "image": "images/q09.jpg",
       "pictureDesc": "Szenario: Unübersichtliche Lage im Gruppenchat durch zu viele Wortmeldungen.",
       "isVideo": true,
       "answers": [
         {
-          "text": "Ich klicke im Chat oben auf das Copilot-Icon und frage nach den wichtigsten Entscheidungen der letzten 24 Stunden.",
+          "text": "Ich öffne Copilot im Chat und frage nach den wichtigsten Entscheidungen der letzten 24 Stunden.",
           "correct": true
         },
         {
-          "text": "Ich scrolle 400 Nachrichten manuell hoch und verpasse dabei den Rest des Arbeitstages.",
+          "text": "Ich scrolle 400 Nachrichten manuell hoch und verpasse den Rest des Arbeitstages.",
           "correct": false
         },
         {
@@ -309,7 +309,7 @@
           "correct": false
         },
         {
-          "text": "Ich betätige die Lichthupe im Rhythmus des Teams Ruftons und lasse die Kollegen einfach machen.",
+          "text": "Ich betätige die Lichthupe im Rhythmus des Teams-Ruftons und lasse die Kollegen machen.",
           "correct": false
         }
       ]
@@ -317,26 +317,26 @@
     {
       "number": "Frage 10",
       "points": 4,
-      "text": "Copilot schlägt Ihnen in einer Zusammenfassung einen Projektschritt vor, der Ihnen völlig unlogisch erscheint. Wie verhalten Sie sich?",
+      "text": "Copilot schlägt in einer Zusammenfassung einen Projektschritt vor, der völlig unlogisch wirkt. Wie verhalten Sie sich?",
       "picture": "copilot-hallucination.jpg",
       "image": "images/q10.jpg",
       "pictureDesc": "Szenario: Mögliche optische Täuschung (Halluzination) durch das System.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ich überprüfe die genannten Quellen ('Zitate') im Text kritisch, da KI halluzinieren kann.",
+          "text": "Ich prüfe die genannten Quellen („Zitate“) kritisch. KI kann halluzinieren.",
           "correct": true
         },
         {
-          "text": "Ich vertraue der KI blind – wenn Copilot das sagt, wird die Giraffe da schon hingehören.",
+          "text": "Ich vertraue der KI blind. Wenn Copilot das sagt, gehört die Giraffe da schon hin.",
           "correct": false
         },
         {
-          "text": "Ich lösche das gesamte Dokument und fange von vorne auf Papier an.",
+          "text": "Ich lösche das gesamte Dokument und fange auf Papier von vorn an.",
           "correct": false
         },
         {
-          "text": "Ich übernehme den Vorschlag, da ich von Menschen schon weitaus unlogischere Entscheidungen gesehen habe.",
+          "text": "Ich übernehme den Vorschlag. Von Menschen habe ich schon Unlogischeres gesehen.",
           "correct": false
         }
       ]
@@ -344,14 +344,14 @@
     {
       "number": "Frage 11",
       "points": 4,
-      "text": "Der Vorstand stellt nach 3 Monaten Copilot die Sinnfrage, weil noch keine messbaren Umsatzsteigerungen vorliegen. Wie reagieren Sie als Consultant?",
+      "text": "Der Vorstand stellt nach drei Monaten Copilot die Sinnfrage, weil noch keine messbaren Umsatzsteigerungen vorliegen. Wie reagieren Sie als Consultant?",
       "picture": "vorstand-barrier.jpg",
       "image": "images/q11.jpg",
       "pictureDesc": "Szenario: Kontrolle durch die Chefetage bezüglich der Investitionen.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Aufzeigen realistischer Time-to-Value-Horizonte, Definition von qualitativen Leading Indicators (z. B. Zeitersparnis bei E-Mails) statt rein monetärer KPIs im Frühstadium.",
+          "text": "Realistische Time-to-Value-Horizonte aufzeigen und qualitative Leading Indicators definieren (z. B. Zeitersparnis bei E-Mails) statt rein monetärer KPIs im Frühstadium.",
           "correct": true
         },
         {
@@ -359,11 +359,11 @@
           "correct": false
         },
         {
-          "text": "Ich drehe den Bass voll auf und übertöne die Frage des Vorstands mit experimentellem Dubstep, um strategische Dominanz zu beweisen.",
+          "text": "Ich drehe den Bass voll auf und übertöne die Vorstandsfrage mit experimentellem Dubstep. Strategische Dominanz.",
           "correct": false
         },
         {
-          "text": "Ich manipuliere den Tacho, damit es so aussieht, als würden wir 320 km/h fahren.",
+          "text": "Ich manipuliere den Tacho, damit es so aussieht, als fahren wir 320 km/h.",
           "correct": false
         }
       ]
@@ -371,26 +371,26 @@
     {
       "number": "Frage 12",
       "points": 5,
-      "text": "Das Unternehmen nutzt keine Microsoft Purview Sensitivity Labels. Copilot fasst nun bereitwillig ein ungeschütztes Dokument mit Gehaltsangaben für alle User zusammen. Was ist der Fehler?",
+      "text": "Das Unternehmen nutzt keine Microsoft Purview Sensitivity Labels. Copilot fasst bereitwillig ein ungeschütztes Gehaltsdokument für alle User zusammen. Was ist der Fehler?",
       "picture": "purview-leak.jpg",
       "image": "images/q12.jpg",
       "pictureDesc": "Szenario: Offenes Gehaltsdokument liegt ungeschützt auf der Gegenfahrbahn des Suchindex.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Die Datenklassifizierung wurde vor dem Rollout übersprungen; das Fehlen von Purview Labels gepaart mit weit verbreiteten „Jeder mit dem Link“-Freigaben (Anyone Links) ermöglicht Copilot den ungehinderten Zugriff.",
+          "text": "Die Datenklassifizierung wurde vor dem Rollout übersprungen. Fehlende Purview Labels plus weit verbreitete „Jeder mit dem Link“-Freigaben (Anyone Links) ermöglichen Copilot den ungehinderten Zugriff.",
           "correct": true
         },
         {
-          "text": "Der Copilot hat eine zu hohe Neugierde Einstellung.",
+          "text": "Copilot hat die Neugierde-Einstellung zu hoch gedreht.",
           "correct": false
         },
         {
-          "text": "Ich schreibe eine E-Mail an alle Mitarbeiter, sie mögen bitte nicht nach 'Gehaltstabelle' suchen.",
+          "text": "Ich schreibe allen Mitarbeitern, sie mögen bitte nicht nach „Gehaltstabelle“ suchen.",
           "correct": false
         },
         {
-          "text": "Ich versuche sofort, genau dieses Dokument via Copilot zu finden, um für die anstehende Gehaltsverhandlung strategisch bestens vorbereitet zu sein.",
+          "text": "Ich suche das Dokument sofort selbst via Copilot. Strategische Vorbereitung auf die nächste Gehaltsverhandlung.",
           "correct": false
         }
       ]
@@ -398,14 +398,14 @@
     {
       "number": "Frage 13",
       "points": 4,
-      "text": "Copilot generiert hartnäckig Antworten basierend auf völlig veralteten HR-Richtlinien, die in einer seit Jahren verwaisten SharePoint-Site liegen. Was ist die Lösung?",
+      "text": "Copilot antwortet hartnäckig auf Basis völlig veralteter HR-Richtlinien aus einer seit Jahren verwaisten SharePoint-Site. Was ist die Lösung?",
       "picture": "hr-oldtimer.jpg",
       "image": "images/q13.jpg",
       "pictureDesc": "Szenario: Ein veraltetes Dokument blockiert den richtigen Informationsfluss.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Etablierung eines konsequenten Information Lifecycles: Veraltete Sites archivieren, löschen oder aus der Microsoft Search ausschließen.",
+          "text": "Einen konsequenten Information Lifecycle etablieren: veraltete Sites archivieren, löschen oder aus Microsoft Search ausschließen.",
           "correct": true
         },
         {
@@ -417,7 +417,7 @@
           "correct": false
         },
         {
-          "text": "Ich schlage vor, die aktuellen Richtlinien an die Antworten von Copilot anzupassen.",
+          "text": "Ich schlage vor, die aktuellen Richtlinien an Copilots Antworten anzupassen.",
           "correct": false
         }
       ]
@@ -425,26 +425,26 @@
     {
       "number": "Frage 14",
       "points": 4,
-      "text": "Die Usage-Metriken zeigen: 95 % der User nutzen Copilot ausschließlich, um Teams-Meetings zusammenzufassen. Tiefere Use-Cases fehlen komplett. Was tun Sie?",
+      "text": "Die Usage-Metriken zeigen: 95 % der User nutzen Copilot nur zum Zusammenfassen von Teams-Meetings. Tiefere Use Cases fehlen komplett. Was tun Sie?",
       "picture": "usage-monoculture.jpg",
       "image": "images/q14.jpg",
       "pictureDesc": "Szenario: Einseitige Fahrzeugnutzung. Wichtige Assistenzsysteme bleiben ungenutzt.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ich starte gezielte Use-Case-Workshops pro Abteilung und bilde ein Copilot-Champions-Netzwerk auf.",
+          "text": "Ich starte gezielte Use-Case-Workshops pro Abteilung und baue ein Copilot-Champions-Netzwerk auf.",
           "correct": true
         },
         {
-          "text": "Ich sperre die Zusammenfassungsfunktion, um die User zu zwingen, kreativ zu werden.",
+          "text": "Ich sperre die Zusammenfassungsfunktion, um die User zu Kreativität zu zwingen.",
           "correct": false
         },
         {
-          "text": "Ich ignoriere es, da die Lizenzkosten sowieso für ein Jahr im Voraus bezahlt sind.",
+          "text": "Ich ignoriere es. Die Lizenzkosten sind sowieso ein Jahr im Voraus bezahlt.",
           "correct": false
         },
         {
-          "text": "Ich schlage vor, alle Meetings zukünftig nur noch persönlich stattfinden zu lassen.",
+          "text": "Ich schlage vor, alle Meetings künftig nur noch persönlich abzuhalten.",
           "correct": false
         }
       ]
@@ -452,26 +452,26 @@
     {
       "number": "Frage 15",
       "points": 4,
-      "text": "Ein Kunde fragt direkt: „Werden meine Prompts genutzt, um die öffentlichen KI-Modelle zu trainieren?“ Wie lautet die korrekte Antwort im Firmenkontext?",
+      "text": "Ein Kunde fragt: „Werden meine Prompts genutzt, um die öffentlichen KI-Modelle zu trainieren?“ Wie lautet die korrekte Antwort im Firmenkontext?",
       "picture": "multi-tenant-border.jpg",
       "image": "images/q15.jpg",
       "pictureDesc": "Szenario: Vertraulicher Datenschutz-Schutzwall. Kein Modell-Training mit Kundendaten.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Nein. Bei Microsoft 365 Copilot ist das Training mit Kundendaten vertraglich und technisch ausgeschlossen. Alle Daten bleiben geschützt im eigenen Firmen-Tenant.",
+          "text": "Nein. Bei Microsoft 365 Copilot ist das Training mit Kundendaten vertraglich und technisch ausgeschlossen. Prompts, Antworten und Graph-Daten bleiben im eigenen Tenant.",
           "correct": true
         },
         {
-          "text": "Ich empfehle, Prompts nur noch als kryptische Rätsel zu formulieren, damit das Sprachmodell beim Training Migräne bekommt.",
+          "text": "Ich empfehle, Prompts nur noch als kryptische Rätsel zu formulieren, damit das Modell beim Training Migräne bekommt.",
           "correct": false
         },
         {
-          "text": "Ja, es sei denn, man schreibt in Caps-Lock 'DÜRFT IHR NICHT SPEICHERN!!!' vor jede Anfrage.",
+          "text": "Ja, außer man schreibt in Caps Lock „DÜRFT IHR NICHT SPEICHERN!!!“ vor jede Anfrage.",
           "correct": false
         },
         {
-          "text": "Das lässt sich erst nach einem dreimonatigen Lenkungsausschuss und der Gründung einer Prompt-Metadaten-Taskforce beantworten.",
+          "text": "Das lässt sich erst nach dreimonatigem Lenkungsausschuss und Gründung einer Prompt-Metadaten-Taskforce beantworten.",
           "correct": false
         }
       ]
@@ -479,14 +479,14 @@
     {
       "number": "Frage 16",
       "points": 4,
-      "text": "Der Kunde hat im Überschwang 1.000 Copilot-Lizenzen gekauft, sich aber nicht um das Onboarding gekümmert. Aktuell sind nur 50 Lizenzen zugewiesen. Was ist die Konsequenz?",
+      "text": "Der Kunde hat im Überschwang 1.000 Copilot-Lizenzen gekauft, sich aber nicht ums Onboarding gekümmert. Aktuell sind nur 50 zugewiesen. Was ist die Konsequenz?",
       "picture": "license-shelfware.jpg",
       "image": "images/q16.jpg",
       "pictureDesc": "Szenario: 950 bezahlte Fahrzeuge stehen ungenutzt im Depot.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ein massiver finanzieller Verlust ('Shelfware'), der den Business Case der IT-Abteilung beim nächsten Budget-Review zerstören wird.",
+          "text": "Massiver finanzieller Verlust („Shelfware“), der den Business Case der IT beim nächsten Budget-Review zerstört.",
           "correct": true
         },
         {
@@ -498,7 +498,7 @@
           "correct": false
         },
         {
-          "text": "Ich verteile die verbliebenen Lizenzen an zufällig ausgewählte Mitarbeiter.",
+          "text": "Ich verteile die restlichen Lizenzen an zufällig ausgewählte Mitarbeiter.",
           "correct": false
         }
       ]
@@ -506,26 +506,26 @@
     {
       "number": "Frage 17",
       "points": 5,
-      "text": "Ein stark regulierter Enterprise-Kunde fordert aus Datenschutzgründen, dass M365 Copilot zwingend auf lokalen Servern im eigenen Keller (On-Prem) laufen muss. Wie reagieren Sie?",
+      "text": "Ein stark regulierter Enterprise-Kunde fordert aus Datenschutzgründen, dass Microsoft 365 Copilot zwingend auf lokalen Servern im eigenen Keller (On-Prem) laufen muss. Wie reagieren Sie?",
       "picture": "cellar-hosting.jpg",
       "image": "images/q17.jpg",
       "pictureDesc": "Szenario: Der Kunde verlangt den Cloud-Betrieb im Keller-Viertel.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ich stelle klar, dass M365 Copilot ein reiner Cloud-Service ist und On-Prem-Hosting architektonisch ausgeschlossen ist.",
+          "text": "Ich stelle klar: Microsoft 365 Copilot ist ein reiner Cloud-Service. On-Prem-Hosting ist architektonisch ausgeschlossen.",
           "correct": true
         },
         {
-          "text": "Ich verspreche dem Kunden, dass wir die Azure-Cloud auf einen USB-Stick ziehen können.",
+          "text": "Ich verspreche, die Azure-Cloud auf einen USB-Stick zu ziehen.",
           "correct": false
         },
         {
-          "text": "Ich verlege die Firmengrenze des Kunden offiziell in ein Azure Rechenzentrum in Frankfurt.",
+          "text": "Ich verlege die Firmengrenze des Kunden offiziell in ein Azure-Rechenzentrum in Frankfurt.",
           "correct": false
         },
         {
-          "text": "Ich schlage das Verlegen eines langen LAN-Kabels vom Keller direkt in das Azure-Rechenzentrum vor.",
+          "text": "Ich schlage ein langes LAN-Kabel vom Keller direkt ins Azure-Rechenzentrum vor.",
           "correct": false
         }
       ]
@@ -533,26 +533,26 @@
     {
       "number": "Frage 18",
       "points": 3,
-      "text": "Nach dem Rollout stellt sich heraus, dass die Mitarbeiter zwar die Copilot-Lizenz haben, aber überhaupt nicht wissen, wie man einen effektiven Prompt schreibt. Die Nutzung bricht ein. Was ist der nächste Schritt?",
+      "text": "Nach dem Rollout haben die Mitarbeiter zwar Copilot-Lizenzen, wissen aber nicht, wie man effektive Prompts schreibt. Die Nutzung bricht ein. Was ist der nächste Schritt?",
       "picture": "prompt-fail.jpg",
       "image": "images/q18.jpg",
       "pictureDesc": "Szenario: Die Mitarbeiter sitzen im Auto, wissen aber nicht, wie man lenkt.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Bereitstellung einer zentralen Prompt-Bibliothek und Durchführung von abteilungsspezifischen Prompt-Engineering-Schulungen.",
+          "text": "Zentrale Prompt-Bibliothek bereitstellen und abteilungsspezifische Prompt-Engineering-Schulungen durchführen.",
           "correct": true
         },
         {
-          "text": "Den Mitarbeitern mit Kündigung drohen, wenn sie nicht mindestens 5 Prompts pro Tag absetzen.",
+          "text": "Den Mitarbeitern mit Kündigung drohen, wenn sie nicht mindestens fünf Prompts pro Tag absetzen.",
           "correct": false
         },
         {
-          "text": "Ich erstelle einen Agenten, der die Mitarbeiter ungefragt im Teams Chat anschreibt und nervt.",
+          "text": "Ich baue einen Agenten, der Mitarbeiter ungefragt im Teams-Chat anschreibt und nervt.",
           "correct": false
         },
         {
-          "text": "Ich kann bedenkenlos weiterfahren, da wir eh geplant haben, für alles Agents zu bauen.",
+          "text": "Ich fahre bedenkenlos weiter. Wir wollten eh für alles Agents bauen.",
           "correct": false
         }
       ]
@@ -560,26 +560,26 @@
     {
       "number": "Frage 19",
       "points": 3,
-      "text": "Während eines längeren Chats vergisst der Copilot plötzlich Anweisungen, die der User ganz zu Beginn des Gesprächs gegeben hat. Woran liegt das?",
+      "text": "Während eines längeren Chats vergisst Copilot plötzlich Anweisungen vom Gesprächsbeginn. Woran liegt das?",
       "picture": "memory-forget.jpg",
       "image": "images/q19.jpg",
       "pictureDesc": "Szenario: Nach einer längeren Fahrt vergisst das Navigationsgerät den Startpunkt.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Die Konversation hat das maximale Limit des Chat-Verlaufs innerhalb einer Session erreicht; der ältere Kontext wird aus dem Speicher des LLM-Fensters verdrängt.",
+          "text": "Die Konversation hat das Kontextfenster der Session gesprengt. Älterer Kontext wird aus dem LLM-Fenster verdrängt.",
           "correct": true
         },
         {
-          "text": "Es fehlt das emotionale Drama. Der Prompt braucht den Zusatz, dass bei einem Fehler das gesamte Projektteam am Wochenende weinend Überstunden machen muss.",
+          "text": "Es fehlt emotionales Drama. Der Prompt braucht den Zusatz, dass bei Fehlern das gesamte Projektteam am Wochenende weinend Überstunden macht.",
           "correct": false
         },
         {
-          "text": "Der User hat zwischendurch ein Wort mit dem Buchstaben 'X' getippt, was den Cache löscht.",
+          "text": "Der User hat zwischendurch ein Wort mit „X“ getippt. Das löscht den Cache.",
           "correct": false
         },
         {
-          "text": "Es wurde vergessen, das magische 'Make no mistakes!' als geheimen System-Prompt mitzugeben.",
+          "text": "Es wurde vergessen, das magische „Make no mistakes!“ als geheimen System-Prompt mitzugeben.",
           "correct": false
         }
       ]
@@ -587,18 +587,18 @@
     {
       "number": "Frage 20",
       "points": 4,
-      "text": "Ein europäischer Kunde aus dem Finanzsektor will absolut sicherstellen, dass keine Daten zur Verarbeitung die EU verlassen. Welche Microsoft-Garantie greift hier beim Copilot-Einsatz?",
+      "text": "Ein europäischer Finanzkunde will sicherstellen, dass keine Daten zur Verarbeitung die EU verlassen. Welche Microsoft-Garantie greift beim Copilot-Einsatz?",
       "picture": "eu-border.jpg",
       "image": "images/q20.jpg",
       "pictureDesc": "Szenario: Regulatorische Grenzschranke für sensible Finanzdaten.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Die Einhaltung der EU Data Boundary, die sicherstellt, dass Daten europäischer Kunden innerhalb der EU gespeichert und verarbeitet werden.",
+          "text": "Die EU Data Boundary: Speicherung und Verarbeitung der Daten europäischer Kunden innerhalb der EU/EFTA.",
           "correct": true
         },
         {
-          "text": "Keine, die Daten werden standardmäßig immer via Satellit über die USA umgeleitet.",
+          "text": "Keine. Die Daten werden standardmäßig per Satellit über die USA umgeleitet.",
           "correct": false
         },
         {
@@ -606,7 +606,7 @@
           "correct": false
         },
         {
-          "text": "Ich empfehle den Einsatz eines VPN mit Servern in der EU.",
+          "text": "Ich empfehle ein VPN mit Servern in der EU.",
           "correct": false
         }
       ]
@@ -614,14 +614,14 @@
     {
       "number": "Frage 21",
       "points": 4,
-      "text": "Der Copilot beantwortet Fragen zu aktuellen Marktpreisen von Mitbewerbern mit internen, drei Jahre alten Vertriebsberichten statt mit aktuellen Webdaten. Was ist falsch konfiguriert?",
+      "text": "Copilot beantwortet Fragen zu aktuellen Marktpreisen von Mitbewerbern mit internen, drei Jahre alten Vertriebsberichten statt mit Webdaten. Was ist falsch konfiguriert?",
       "picture": "bing-offline.jpg",
       "image": "images/q21.jpg",
       "pictureDesc": "Szenario: Veralteter Offline-Navigationsplan statt Echtzeit-Verkehrsdaten.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Die Websuche (Web Grounding via Bing) ist im Admin-Center deaktiviert, weshalb Copilot rein auf den internen Graph-Index zurückgreift.",
+          "text": "Die Websuche (Web Grounding via Bing) ist im Admin Center deaktiviert. Copilot greift nur auf den internen Graph-Index zu.",
           "correct": true
         },
         {
@@ -629,11 +629,11 @@
           "correct": false
         },
         {
-          "text": "Ich weise darauf hin, das dies kein Anwendungsfall für KI ist. Hier reicht eine Internetsuche vollkommen aus.",
+          "text": "Ich weise darauf hin, dass dies kein KI-Anwendungsfall ist. Eine Internetsuche reicht.",
           "correct": false
         },
         {
-          "text": "Ich schalte das Radio auf einen Nachrichtensender um und hoffe, das Mikrofon der KI hört den aktuellen Marktbericht.",
+          "text": "Ich schalte das Radio auf Nachrichten und hoffe, das KI-Mikrofon hört den Marktbericht.",
           "correct": false
         }
       ]
@@ -641,26 +641,26 @@
     {
       "number": "Frage 22",
       "points": 4,
-      "text": "Ein Geschäftsführer beschwert sich, dass der Copilot in Outlook seine alten E-Mails nicht durchsucht. Es stellt sich heraus, dass diese in lokalen .pst-Dateien auf seiner Festplatte liegen. Wie lösen Sie das?",
+      "text": "Ein Geschäftsführer beschwert sich, dass Copilot in Outlook seine alten E-Mails nicht durchsucht. Die Mails liegen in lokalen .pst-Dateien auf der Festplatte. Wie lösen Sie das?",
       "picture": "pst-archive.jpg",
       "image": "images/q22.jpg",
       "pictureDesc": "Szenario: Lokale Koffer versperren den Zugriff auf die Laderampe.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Lokale .pst-Archive müssen zwingend in das M365-Online-Postfach migriert werden, da Copilot nur Cloud-indizierte Daten analysieren kann.",
+          "text": "Lokale .pst-Archive müssen ins Microsoft-365-Online-Postfach migriert werden. Copilot analysiert nur cloud-indizierte Daten.",
           "correct": true
         },
         {
-          "text": "Die Festplatte ausbauen und mit der Post nach Redmond schicken, damit Microsoft sie einscannt.",
+          "text": "Die Festplatte ausbauen und per Post nach Redmond schicken, damit Microsoft sie einscannt.",
           "correct": false
         },
         {
-          "text": "Dem Geschäftsführer raten, die Emails auszudrucken und in die “German Cloud” aus Leitz Ordnern und Aktenschrank zu migrieren.",
+          "text": "Dem Geschäftsführer raten, die E-Mails auszudrucken und in die „German Cloud“ aus Leitz-Ordnern und Aktenschrank zu migrieren.",
           "correct": false
         },
         {
-          "text": "Ich steige aus, setze mich an den Straßenrand und fange an, die Mails laut vorzulesen, damit das Smartphone-Mikrofon sie mitschneidet.",
+          "text": "Ich steige aus, setze mich an den Straßenrand und lese die Mails laut vor, damit das Smartphone-Mikrofon mitschneidet.",
           "correct": false
         }
       ]
@@ -668,18 +668,18 @@
     {
       "number": "Frage 23",
       "points": 4,
-      "text": "Ein User stellt eine komplexe, mehrteilige Frage. Die Orchestration Engine des Copiloten verwechselt die Reihenfolge der Verarbeitungsschritte und liefert ein logisch fehlerhaftes Ergebnis. Wie optimieren Sie das System?",
+      "text": "Ein User stellt eine komplexe, mehrteilige Frage. Die Orchestration Engine vertauscht die Verarbeitungsschritte und liefert ein logisch fehlerhaftes Ergebnis. Wie optimieren Sie das?",
       "picture": "prompt-chaining.jpg",
       "image": "images/q23.jpg",
       "pictureDesc": "Szenario: Gangschaltung blockiert bei einer zu schnellen Gangfolge.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Aufsplittung komplexer Prompts in logische Teilschritte (Prompt Chaining) und Nutzung von klaren Übergangssätzen in der Benutzerführung.",
+          "text": "Komplexe Prompts in logische Teilschritte aufteilen (Prompt Chaining) und klare Übergangssätze in der Benutzerführung nutzen.",
           "correct": true
         },
         {
-          "text": "Ich bitte den User den Prompt einfach so lange erneut einzugeben, bis das gewünschte Ergebnis da ist.",
+          "text": "Ich bitte den User, den Prompt so lange erneut einzugeben, bis das gewünschte Ergebnis da ist.",
           "correct": false
         },
         {
@@ -687,7 +687,7 @@
           "correct": false
         },
         {
-          "text": "Ich gebe vor, in einen dringenden Call zu müssen, um das Gespräch zu beenden.",
+          "text": "Ich gebe vor, in einen dringenden Call zu müssen, und beende das Gespräch.",
           "correct": false
         }
       ]
@@ -695,18 +695,18 @@
     {
       "number": "Frage 24",
       "points": 4,
-      "text": "Die Rechtsabteilung sorgt sich, dass der Copilot beim Generieren von Marketingtexten urheberrechtlich geschützte Texte eins-zu-eins reproduziert. Welche Microsoft-Garantie schützt den Kunden?",
+      "text": "Die Rechtsabteilung sorgt sich, dass Copilot beim Generieren von Marketingtexten urheberrechtlich geschützte Texte eins zu eins reproduziert. Welche Microsoft-Garantie schützt den Kunden?",
       "picture": "copyright-insurance.jpg",
       "image": "images/q24.jpg",
       "pictureDesc": "Szenario: Juristische Absicherung bei eventuellen Auffahrunfällen mit geschütztem Material.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Das Customer Copyright Commitment, sofern der User die eingebauten Content-Filter und Sicherheitsregeln nicht bewusst umgangen hat.",
+          "text": "Das Customer Copyright Commitment, sofern die eingebauten Content-Filter und Guardrails nicht bewusst umgangen wurden.",
           "correct": true
         },
         {
-          "text": "Die automatische Löschung aller kreativen Wörter aus der M365 Datenbank.",
+          "text": "Die automatische Löschung aller kreativen Wörter aus der M365-Datenbank.",
           "correct": false
         },
         {
@@ -714,7 +714,7 @@
           "correct": false
         },
         {
-          "text": "Es gibt keine Garantie. Ich entziehe dem Marketing Team sofort die Copilot Lizenz.",
+          "text": "Es gibt keine Garantie. Ich entziehe dem Marketing-Team sofort die Copilot-Lizenz.",
           "correct": false
         }
       ]
@@ -722,26 +722,26 @@
     {
       "number": "Frage 25",
       "points": 3,
-      "text": "Ein User nutzt seit drei Wochen dieselbe einzige Copilot-Chat-Session für all seine Aufgaben. Copilot reagiert inzwischen extrem träge und verwechselt ständig die Themen. Was ist die Ursache?",
+      "text": "Ein User nutzt seit drei Wochen dieselbe Copilot-Chat-Session für alle Aufgaben. Copilot reagiert träge und verwechselt ständig die Themen. Was ist die Ursache?",
       "picture": "chat-session.jpg",
       "image": "images/q25.jpg",
       "pictureDesc": "Szenario: Drei Wochen Dauerfahrt ohne Motorneustart überlastet den Motor.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Die maximale Token-Kapazität des Chat-Verlaufs ist überladen; für neue Themenbereiche MUSS eine neue Chat-Session gestartet werden, um den Kontext sauber zu halten.",
+          "text": "Die Token-Kapazität des Chat-Verlaufs ist überladen. Für neue Themenbereiche muss eine neue Chat-Session gestartet werden, um den Kontext sauber zu halten.",
           "correct": true
         },
         {
-          "text": "Ich werfe mein Handy aus dem Fahrerfenster, um die lokale Netzlast zu verringern.",
+          "text": "Ich werfe mein Handy aus dem Fahrerfenster, um die lokale Netzlast zu senken.",
           "correct": false
         },
         {
-          "text": "Der Rechner muss einfach wieder neu gestartet werden.",
+          "text": "Der Rechner muss einfach neu gestartet werden.",
           "correct": false
         },
         {
-          "text": "Ab Woche 4 fängt sich der Copilot in der Regel wieder.",
+          "text": "Ab Woche 4 fängt sich Copilot in der Regel wieder.",
           "correct": false
         }
       ]
@@ -749,18 +749,18 @@
     {
       "number": "Frage 26",
       "points": 4,
-      "text": "Mitarbeiter nutzen exzessiv die Funktion \"Jeder mit dem Link kann bearbeiten\", um SharePoint-Dateien intern zu teilen. Copilot findet diese Links und spuckt die Daten nun bei Kollegen aus, die sie nie sehen sollten. Wie greifen Sie ein?",
+      "text": "Mitarbeiter nutzen exzessiv „Jeder mit dem Link kann bearbeiten“, um SharePoint-Dateien intern zu teilen. Copilot findet diese Links und gibt die Daten an Kollegen aus, die sie nie sehen sollten. Wie greifen Sie ein?",
       "picture": "anyone-share.jpg",
       "image": "images/q26.jpg",
       "pictureDesc": "Szenario: Offenes Parkhaus ohne Schranke. Alle können jedes Auto benutzen.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Deaktivierung von globalen Freigabelinks (\"Anyone\"-Links) im SharePoint-Admin-Center und Durchsetzung von benannten Berechtigungen.",
+          "text": "Globale Freigabelinks („Anyone“-Links) im SharePoint-Admin-Center deaktivieren und benannte Berechtigungen durchsetzen.",
           "correct": true
         },
         {
-          "text": "Ich erkläre, dass dies kein Copilot Thema sei und verlasse das Meeting fluchtartig.",
+          "text": "Ich erkläre, das sei kein Copilot-Thema, und verlasse das Meeting fluchtartig.",
           "correct": false
         },
         {
@@ -768,7 +768,7 @@
           "correct": false
         },
         {
-          "text": "Ich bitte die Mitarbeiter die unerlaubt gefundenen Dokumente per Email zurückzusenden.",
+          "text": "Ich bitte die Mitarbeiter, die unerlaubt gefundenen Dokumente per E-Mail zurückzusenden.",
           "correct": false
         }
       ]
@@ -776,14 +776,14 @@
     {
       "number": "Frage 27",
       "points": 4,
-      "text": "Ein Copilot-Agent greift auf eine Wissensbasis zu, deren Dokumente seit Jahren nicht mehr gepflegt wurden. Die Antworten enthalten veraltete Telefonnummern und gelöschte Standorte. Wie lautet die Governance-Maßnahme?",
+      "text": "Ein Copilot-Agent greift auf eine Wissensbasis zu, deren Dokumente seit Jahren nicht gepflegt wurden. Antworten enthalten veraltete Telefonnummern und gelöschte Standorte. Wie lautet die Governance-Maßnahme?",
       "picture": "governance-loop.jpg",
       "image": "images/q27.jpg",
       "pictureDesc": "Szenario: Irreführende, veraltete Wegweiser am Straßenrand.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Einführung von automatisierten Data-Lifecycle-Richtlinien mit Ablaufdaten (TTL) und regelmäßigen Review-Schleifen für Content-Owner.",
+          "text": "Automatisierte Data-Lifecycle-Richtlinien mit Ablaufdaten (TTL) und regelmäßige Review-Schleifen für Content Owner einführen.",
           "correct": true
         },
         {
@@ -791,11 +791,11 @@
           "correct": false
         },
         {
-          "text": "Alle alten Standorte einfach wieder neu eröffnen, um die Datenkonsistency [sic!] zu wahren.",
+          "text": "Alle alten Standorte einfach wieder eröffnen, um die Datenkonsistenz zu wahren.",
           "correct": false
         },
         {
-          "text": "Keine Maßnahme erforderlich. Das ist ein klassischer Fall von KI Halluzination.",
+          "text": "Keine Maßnahme nötig. Klassischer Fall von KI-Halluzination.",
           "correct": false
         }
       ]
@@ -803,18 +803,18 @@
     {
       "number": "Frage 28",
       "points": 4,
-      "text": "Ein Unternehmen bietet nach dem Copilot-Go-Live eine einzige, optionale 45-minütige Teams-Schulung an. Danach wird das ACM-Projekt offiziell für „erfolgreich beendet“ erklärt. Drei Monate später sinkt die Nutzung gegen Null. Was ist der Fehler?",
+      "text": "Nach dem Copilot-Go-Live gibt es eine einzige, optionale 45-minütige Teams-Schulung. Danach gilt das ACM-Projekt als „erfolgreich beendet“. Drei Monate später sinkt die Nutzung gegen null. Was ist der Fehler?",
       "picture": "learning-stop.jpg",
       "image": "images/q28.jpg",
       "pictureDesc": "Szenario: Fahrunterricht nach der ersten Theoriestunde beendet. Auto fährt nicht von alleine.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ein fundamentaler Mangel an kontinuierlicher Begleitung (Continuous Learning). Adoption ist kein Einmal-Event, sondern ein iterativer Prozess mit dauerhaften Feedback-Schleifen und fortlaufenden Use-Case-Deep-Dives.",
+          "text": "Fundamentaler Mangel an Continuous Learning. Adoption ist kein Einmal-Event, sondern ein iterativer Prozess mit Feedback-Schleifen und laufenden Use-Case-Deep-Dives.",
           "correct": true
         },
         {
-          "text": "Kein Fehler. Auf der PowerPoint steht klar und deutlich “erfolgreich beendet”.",
+          "text": "Kein Fehler. Auf der PowerPoint steht klar und deutlich „erfolgreich beendet“.",
           "correct": false
         },
         {
@@ -822,7 +822,7 @@
           "correct": false
         },
         {
-          "text": "Ich zitiere panisch den Gartner Hype Cycle und erkläre, dass wir bereits im Tal der Enttäuschung sind.",
+          "text": "Ich zitiere panisch den Gartner Hype Cycle und erkläre, wir seien bereits im Tal der Enttäuschung.",
           "correct": false
         }
       ]
@@ -830,18 +830,18 @@
     {
       "number": "Frage 29",
       "points": 4,
-      "text": "Das ACM-Team versucht, die Adoptions-Inhalte rein zentral über eine angestaubte Intranet-News-Seite zu verbreiten. In den einzelnen Fachabteilungen kommt davon absolut nichts an. Welche Struktur fehlt hier?",
+      "text": "Das ACM-Team verbreitet Adoptions-Inhalte rein zentral über eine angestaubte Intranet-News-Seite. In den Fachabteilungen kommt nichts an. Welche Struktur fehlt?",
       "picture": "champion-network.jpg",
       "image": "images/q29.jpg",
       "pictureDesc": "Szenario: Zentraler Radiosender sendet ohne lokale Antennen (Champion-Netzwerk) in den Tälern.",
       "isVideo": false,
       "answers": [
         {
-          "text": "Ein aktives „Champion-Netzwerk“. Es braucht lokale Multiplikatoren und Key-User in den Abteilungen, die das Wissen organisch, auf Augenhöhe und praxisnah an die Kollegen weitergeben.",
+          "text": "Ein aktives Champion-Netzwerk: lokale Multiplikatoren und Key User in den Abteilungen, die Wissen organisch, auf Augenhöhe und praxisnah weitergeben.",
           "correct": false
         },
         {
-          "text": "Der Flurfunk des Unternehmens wurde unzureichend als Kommunikationskanal genutzt.",
+          "text": "Der Flurfunk wurde unzureichend als Kommunikationskanal genutzt.",
           "correct": false
         },
         {
@@ -849,7 +849,7 @@
           "correct": false
         },
         {
-          "text": "Es fehlt ein LinkedIn Post, der diese Inhalte als Theorieprüfung für „Copilot Consultants“ im Stil der Führerscheinprüfung vorstellt.",
+          "text": "Es fehlt ein LinkedIn-Post, der das Ganze als Theorieprüfung für „Copilot Consultants“ im Führerschein-Stil vermarktet.",
           "correct": true
         }
       ]
