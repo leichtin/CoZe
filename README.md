@@ -5,8 +5,8 @@
 <h1 align="center">CoZe — Consultant Zertifizierung</h1>
 
 <p align="center">
-  <em>The unofficial "driver's license exam" for Microsoft 365 Copilot Consultants.</em><br/>
-  <strong>29 questions · 45 minutes · up to 10 mistakes allowed · do you pass?</strong>
+  <em>The unofficial “driver’s license exam” for Microsoft 365 Copilot consultants.</em><br/>
+  <strong>29 questions · 45 minutes · up to 10 mistakes · can you stomach it?</strong>
 </p>
 
 <p align="center">
@@ -20,33 +20,35 @@
 
 ## What is CoZe?
 
-**CoZe (Consultant Zertifizierung)** is a satirical quiz modelled after the German driving theory exam — but instead of traffic rules, it tests knowledge of **Microsoft 365 Copilot Consulting**.
+**CoZe (Consultant Zertifizierung)** is a satirical quiz modelled on the German driving theory exam — traffic rules swapped for the hard-to-swallow realities of **Microsoft 365 Copilot consulting**.
 
-Topics covered include:
+When grounding fails, oversharing surfaces, and a single lunch-and-learn is sold as “adoption,” CoZe is the cockpit check before you go live.
 
-- 🧠 **Grounding & Prompt Engineering** — Why does an agent return nonsense when a SharePoint folder contains 6,000 neglected documents?
-- 🔐 **Privacy & Oversharing** — What happens when Copilot surfaces confidential HR data in a Teams search?
-- 🏛️ **Governance & Compliance** — How do you respond to a stale knowledge base that returns references to deleted sites?
-- 📊 **Adoption & Change Management** — Why a single 45-minute training session is not enough for sustainable Copilot adoption.
-- 🤖 **AI Hallucinations** — When Copilot gets creative and fabricates figures.
+Topics include:
 
-Each question has **one correct answer** and three plausible-but-wrong distractors. The distractors are intentionally exaggerated — because humour aids retention.
+- 🧠 **Grounding & Prompt Engineering** — Why an agent returns nonsense when a SharePoint folder holds 6,000 neglected documents
+- 🔐 **Privacy & Oversharing** — What happens when Copilot surfaces confidential HR data in a Teams search
+- 🏛️ **Governance & Compliance** — How you handle a stale knowledge base that still cites deleted sites
+- 📊 **Adoption & Change Management** — Why one 45-minute training session will not carry sustainable Copilot adoption
+- 🤖 **AI Hallucinations** — When Copilot gets creative and invents the numbers
 
-> **Disclaimer:** This is **not** an official Microsoft certification. It is an independent community project for learning and entertainment purposes only. It has no affiliation with Microsoft Corporation or any employer of the author. All trademarks belong to their respective owners.
+Each item has **one correct answer** and three plausible-but-wrong distractors. The wrong options are deliberately exaggerated — humour sticks better than another slide deck.
+
+> **Disclaimer:** This is **not** an official Microsoft certification. It is an independent community project for learning and entertainment only. It has no affiliation with Microsoft Corporation or any employer of the author. All trademarks belong to their respective owners.
 
 ---
 
 ## Key Features
 
-- ⚡ **Zero dependencies** — no build step, no `node_modules`, no bundler required.
-- 🌐 **Multi-language support** — UI strings and question content are fully externalised into `locales/` JSON files (`en.json`, `de.json`).
-- 🏠 **Local-first** — runs entirely in the browser; no server, no backend, no data collection.
-- ⏱️ **45-minute countdown** — auto-submits when time expires.
-- ⭐ **Question flagging** — bookmark difficult questions to review later.
-- 🔄 **Review mode** — step through all answers with colour-coded corrections after submission.
-- 📊 **Detailed results** — mistake count, error rate, time used, and per-question breakdown.
-- 🖼️ **Scenario images** — every question is accompanied by a themed cockpit-view image to reinforce the driving exam metaphor.
-- 📱 **Responsive design** — works on desktop, tablet, and mobile.
+- ⚡ **Zero dependencies** — no build step, no `node_modules`, no bundler
+- 🌐 **EN | DE** — UI and questions live in `locales/` JSON (`en.json`, `de.json`)
+- 🏠 **Local-first** — runs entirely in the browser; no server, no backend, no data collection
+- ⏱️ **45-minute countdown** — auto-submits when time is up
+- ⭐ **Question flagging** — bookmark tough items and return later
+- 🔄 **Review mode** — walk every answer with colour-coded corrections after submit
+- 📊 **Detailed results** — mistake count, error rate, time used, per-question breakdown
+- 🖼️ **Scenario images** — cockpit-style art on every question to keep the driving-exam metaphor alive
+- 📱 **Responsive** — desktop, tablet, and mobile
 
 ---
 
@@ -79,18 +81,19 @@ CoZe/
 
 ---
 
+
+---
+
 ## Quick Start
 
-No build tool or package manager is needed.
+No build tool or package manager required.
 
 ### Clone and open locally
 
 ```bash
-# Clone via SSH
 git clone git@github.com:leichtin/CoZe.git
 cd CoZe
 
-# Open directly in the browser
 open index.html          # macOS
 xdg-open index.html      # Linux
 start index.html         # Windows
@@ -100,11 +103,11 @@ start index.html         # Windows
 
 1. Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
 2. Open the `CoZe` folder in VS Code.
-3. Click **Go Live** in the status bar — the app reloads automatically on file changes.
+3. Click **Go Live** in the status bar — the app reloads on save.
 
 ### GitHub Pages (production)
 
-The `main` branch root is served directly via GitHub Pages. Push your changes to `main` and the live site updates automatically.
+The `main` branch root is served via GitHub Pages. Push to `main` and the live site updates automatically.
 
 ---
 
@@ -112,31 +115,31 @@ The `main` branch root is served directly via GitHub Pages. Push your changes to
 
 Contributions are welcome. To add or update a language:
 
-1. Copy an existing locale file as a template:
+1. Copy an existing locale as a template:
    ```bash
    cp locales/en.json locales/<lang>.json
    ```
 2. Translate all string values. Do **not** change JSON keys.
-3. Register the new locale in `index.js` (look for the language-switcher section).
-4. Open a pull request with your changes.
+3. Register the locale in `index.js` (language-switcher section).
+4. Open a pull request.
 
-For bug reports and feature requests, please open a [GitHub Issue](https://github.com/leichtin/CoZe/issues).
+Bug reports and feature ideas: [GitHub Issues](https://github.com/leichtin/CoZe/issues).
 
 ---
 
 ## Technology Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Structure | HTML5 |
-| Styling | CSS3 (vanilla) |
-| Logic | Vanilla JavaScript (ES2020+) |
-| Fonts | Google Fonts — Inter, Poppins, Share Tech Mono |
-| Icons | Font Awesome 6 |
-| Hosting | GitHub Pages |
+| Layer     | Technology                                      |
+|-----------|--------------------------------------------------|
+| Structure | HTML5                                            |
+| Styling   | CSS3 (vanilla)                                   |
+| Logic     | Vanilla JavaScript (ES2020+)                     |
+| Fonts     | Google Fonts — Inter, Poppins, Share Tech Mono   |
+| Icons     | Font Awesome 6                                   |
+| Hosting   | GitHub Pages                                     |
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
+Licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
