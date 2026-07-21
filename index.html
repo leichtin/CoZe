@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CC Prüfung</title>
-    <!-- Favicon (Owl icon) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
 
 <body>
     <div id="app-container">
-        <!-- 1. INTRO / WELCOME SCREEN -->
+        <!-- Intro screen -->
         <section id="intro-screen" class="app-screen">
             <!-- Animated background particles -->
             <div class="intro-particles">
@@ -102,9 +102,9 @@
             </div>
         </section>
 
-        <!-- 2. ACTIVE QUIZ SCREEN (STRICT EXAM LAYOUT MATCH) -->
+        <!-- Quiz screen -->
         <section id="quiz-screen" class="app-screen hidden">
-            <!-- Header Bar (Strict Color and Layout Match) -->
+            <!-- Header -->
             <header class="quiz-header">
                 <div class="header-left">
                     <span class="info-circle"><i class="fa-solid fa-info"></i></span>
@@ -121,17 +121,12 @@
                 </div>
             </header>
 
-            <!-- Main Canvas Area -->
             <main class="quiz-canvas">
-                <!-- Question Text (Top) -->
                 <h1 id="question-text" class="question-title">Lädt...</h1>
 
-                <!-- Split Content: Image Left, Options Right -->
                 <div class="canvas-split">
-                    <!-- Left: Media Box -->
                     <div class="media-column">
                         <div class="exam-media-box" id="exam-media-box">
-                            <!-- Visual blueprint graphic placeholder -->
                             <div class="blueprint-lines"></div>
                             <div class="blueprint-mirror"></div>
                             <div class="blueprint-speedometer">
@@ -141,7 +136,6 @@
                             <div class="blueprint-steering-wheel"></div>
                             <div class="blueprint-road-path"></div>
 
-                            <!-- Information text overlay -->
                             <div class="blueprint-info">
                                 <i class="fa-solid fa-compass-drafting media-icon"></i>
                                 <div class="media-title" id="media-filename">M365-COPILOT</div>
@@ -152,19 +146,11 @@
                         </div>
                     </div>
 
-                    <!-- Right: Answers Box -->
-                    <div class="answers-column" id="answers-container">
-                        <!-- Options injected dynamically by JS -->
-                    </div>
-                </div>
-
-                <!-- Floating Question Count Tab -->
-                <div class="floating-questions-tab">
-                    <span id="floating-q-count">29 Fragen</span>
+                    <div class="answers-column" id="answers-container"></div>
                 </div>
             </main>
 
-            <!-- Navigation Grid Popover Panel -->
+            <!-- Navigation grid -->
             <div id="nav-grid-panel" class="nav-grid-panel hidden">
                 <div class="nav-grid-panel-header">
                     <h3 data-i18n="ui.questionOverview">Fragenübersicht</h3>
@@ -172,15 +158,11 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <div class="nav-grid-panel-body" id="nav-grid-panel-container">
-                    <!-- Dynamically generated boxes -->
-                </div>
+                <div class="nav-grid-panel-body" id="nav-grid-panel-container"></div>
             </div>
 
-            <!-- Footer Area (Forest Green, Unified Single Row Layout) -->
             <footer class="quiz-footer">
                 <div class="footer-row">
-                    <!-- Left Actions -->
                     <div class="footer-left-group">
                         <button id="btn-cancel" class="btn-action red-btn" data-i18n="ui.abortBtn">Abbrechen</button>
                         <button id="btn-prev" class="nav-arrow" title="Vorherige Frage" disabled>
@@ -188,7 +170,6 @@
                         </button>
                     </div>
 
-                    <!-- Center Navigation (Toggleable Grid) -->
                     <div class="footer-center-group">
                         <button id="btn-star" class="btn-action yellow-btn" data-i18n-title="ui.markQuestion" title="Frage markieren">
                             <i class="fa-regular fa-star"></i>
@@ -200,7 +181,6 @@
                         </button>
                     </div>
 
-                    <!-- Right Actions -->
                     <div class="footer-right-group">
                         <button id="btn-next-main" class="nav-arrow" title="Nächste Frage">
                             <i class="fa-solid fa-arrow-right"></i>
@@ -210,7 +190,7 @@
             </footer>
         </section>
 
-        <!-- 3. CONFIRMATION MODAL -->
+        <!-- Submit confirmation modal -->
         <div id="submit-modal" class="modal-overlay hidden">
             <div class="modal-card">
                 <div class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -236,7 +216,7 @@
             </div>
         </div>
 
-        <!-- 4. RESULTS SCREEN (Forest Green / Pastel Layout Match) -->
+        <!-- Results screen -->
         <section id="result-screen" class="app-screen hidden">
             <div class="card result-card">
                 <div class="result-header">
@@ -276,9 +256,7 @@
                                     <th data-i18n="ui.tableHeaderStatus">Status</th>
                                 </tr>
                             </thead>
-                            <tbody id="results-table-body">
-                                <!-- Injected dynamically by JS -->
-                            </tbody>
+                            <tbody id="results-table-body"></tbody>
                         </table>
                     </div>
                 </div>
@@ -301,7 +279,7 @@
         </section>
     </div>
 
-    <!-- 5. LEGAL DISCLAIMER MODAL -->
+    <!-- Legal disclaimer modal -->
     <div id="legal-modal" class="modal-backdrop hidden">
         <div class="modal-card legal-modal-card">
             <div class="legal-modal-header">
@@ -350,7 +328,6 @@
         </div>
     </div>
 
-    <!-- Script loading -->
     <script src="index.js" defer></script>
 </body>
 
