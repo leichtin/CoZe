@@ -176,6 +176,7 @@ function cacheDomRefs() {
     dom.answersContainer = document.getElementById("answers-container");
     dom.timerDisplay = document.getElementById("timer-display-header");
     dom.quizCanvas = document.querySelector(".quiz-canvas");
+    dom.quizCanvasContainer = document.querySelector(".quiz-canvas-container");
     dom.resultBadge = document.getElementById("result-badge");
     dom.resErrorPoints = document.getElementById("res-error-points");
     dom.resWrongCount = document.getElementById("res-wrong-count");
@@ -208,7 +209,7 @@ function startExam() {
     dom.quizScreen.classList.remove("hidden");
 
     buildNavigationFooter();
-    loadQuestion(0, true);
+    loadQuestion(0, true, "none");
 
     clearInterval(timerInterval);
     updateTimerDisplay();
@@ -320,7 +321,7 @@ function enterReviewMode() {
     dom.abortBtn.innerHTML = '<i class="fa-solid fa-house"></i>';
     dom.abortBtn.title = t("ui.abortTitle");
 
-    loadQuestion(0, true);
+    loadQuestion(0, true, "none");
     updateNavigationFooter();
 }
 
@@ -338,37 +339,60 @@ function updateTimerDisplay() {
 
 /* ── Question rendering ───────────────────────────────────── */
 
-function renderMediaBox(q) {
+async function renderMediaBox(q) {
     const mediaBox = dom.examMediaBox;
+    if (!mediaBox) return;
+
     const blueprintInfo = mediaBox.querySelector(".blueprint-info");
     const blueprintElements = mediaBox.querySelectorAll(
         ".blueprint-lines, .blueprint-mirror, .blueprint-speedometer, .blueprint-steering-wheel, .blueprint-road-path"
     );
-
-    mediaBox.querySelector(".real-question-image")?.remove();
-    mediaBox.classList.remove("media-has-image", "media-blueprint", "media-empty");
+    const oldImg = mediaBox.querySelector(".real-question-image");
 
     if (q.image) {
-        const img = document.createElement("img");
-        img.src = q.image;
-        img.alt = q.pictureDesc || t("ui.mediaAltDefault");
-        img.className = "real-question-image";
-        mediaBox.appendChild(img);
-        blueprintInfo.style.display = "none";
+        const newImg = document.createElement("img");
+        newImg.className = "real-question-image";
+        newImg.alt = q.pictureDesc || t("ui.mediaAltDefault");
+        newImg.src = q.image;
+
+        try {
+            if ("decode" in newImg) {
+                await newImg.decode();
+            }
+        } catch (err) {
+            // Ignore decode cancellation
+        }
+
+        oldImg?.remove();
+        mediaBox.appendChild(newImg);
+
+        requestAnimationFrame(() => {
+            newImg.classList.add("loaded");
+        });
+
+        if (blueprintInfo) blueprintInfo.style.display = "none";
         blueprintElements.forEach((el) => { el.style.display = "none"; });
+        mediaBox.classList.remove("media-blueprint", "media-empty");
         mediaBox.classList.add("media-has-image");
-    } else if (q.picture) {
-        blueprintInfo.style.display = "";
-        blueprintElements.forEach((el) => { el.style.display = ""; });
-        dom.mediaFilename.textContent = q.picture;
-        dom.mediaDescription.textContent = q.pictureDesc || t("ui.mediaDescDefault");
-        mediaBox.classList.add("media-blueprint");
     } else {
-        blueprintInfo.style.display = "";
-        blueprintElements.forEach((el) => { el.style.display = ""; });
-        dom.mediaFilename.textContent = t("ui.noImage");
-        dom.mediaDescription.textContent = t("ui.noImageDesc");
-        mediaBox.classList.add("media-empty");
+        oldImg?.remove();
+        mediaBox.classList.remove("media-has-image");
+
+        if (q.picture) {
+            if (blueprintInfo) blueprintInfo.style.display = "";
+            blueprintElements.forEach((el) => { el.style.display = ""; });
+            if (dom.mediaFilename) dom.mediaFilename.textContent = q.picture;
+            if (dom.mediaDescription) dom.mediaDescription.textContent = q.pictureDesc || t("ui.mediaDescDefault");
+            mediaBox.classList.remove("media-empty");
+            mediaBox.classList.add("media-blueprint");
+        } else {
+            if (blueprintInfo) blueprintInfo.style.display = "";
+            blueprintElements.forEach((el) => { el.style.display = ""; });
+            if (dom.mediaFilename) dom.mediaFilename.textContent = t("ui.noImage");
+            if (dom.mediaDescription) dom.mediaDescription.textContent = t("ui.noImageDesc");
+            mediaBox.classList.remove("media-blueprint");
+            mediaBox.classList.add("media-empty");
+        }
     }
 }
 
@@ -440,7 +464,7 @@ function updateNextButton(index) {
     }
 }
 
-function loadQuestion(index, scrollToTop = false) {
+async function renderQuestionContent(index, scrollToTop = false) {
     currentIndex = index;
     const q = questions[index];
 
@@ -452,7 +476,7 @@ function loadQuestion(index, scrollToTop = false) {
     dom.currentQPoints.textContent = q.points;
     dom.questionText.textContent = q.text;
 
-    renderMediaBox(q);
+    await renderMediaBox(q);
 
     if (starredQuestions[index]) {
         dom.btnStar.classList.add("starred");
@@ -471,6 +495,39 @@ function loadQuestion(index, scrollToTop = false) {
     updateNavigationFooter();
 }
 
+async function loadQuestion(index, scrollToTop = false, dir = "next") {
+    if (!dom.quizCanvasContainer || dir === "none") {
+        await renderQuestionContent(index, scrollToTop);
+        return;
+    }
+
+    const exitClass = dir === "prev" ? "transition-exit-prev" : "transition-exit-next";
+    const enterClass = dir === "prev" ? "transition-enter-prev" : "transition-enter-next";
+
+    dom.quizCanvasContainer.classList.add(exitClass);
+
+    await new Promise((resolve) => setTimeout(resolve, 60));
+
+    await renderQuestionContent(index, scrollToTop);
+
+    dom.quizCanvasContainer.classList.remove(exitClass);
+    dom.quizCanvasContainer.classList.add(enterClass);
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            if (!dom.quizCanvasContainer) return;
+            dom.quizCanvasContainer.classList.remove(enterClass);
+            dom.quizCanvasContainer.classList.add("transition-active");
+
+            setTimeout(() => {
+                if (dom.quizCanvasContainer) {
+                    dom.quizCanvasContainer.classList.remove("transition-active");
+                }
+            }, 180);
+        });
+    });
+}
+
 function toggleAnswerSelection(qIdx, aIdx) {
     userAnswers[qIdx] = aIdx;
     updateNavigationFooter();
@@ -478,7 +535,7 @@ function toggleAnswerSelection(qIdx, aIdx) {
 
 function toggleStar() {
     starredQuestions[currentIndex] = !starredQuestions[currentIndex];
-    loadQuestion(currentIndex);
+    loadQuestion(currentIndex, false, "none");
     updateNavigationFooter();
 }
 
@@ -499,7 +556,7 @@ function buildNavigationFooter() {
         box.className = "q-nav-box";
         box.textContent = i + 1;
         box.addEventListener("click", () => {
-            loadQuestion(i, true);
+            loadQuestion(i, true, i >= currentIndex ? "next" : "prev");
             closeNavGridPanel();
         });
         dom.navGridContainer.appendChild(box);
@@ -578,7 +635,7 @@ function setupEventListeners() {
 
     dom.btnNextMain?.addEventListener("click", () => {
         if (currentIndex < questions.length - 1) {
-            loadQuestion(currentIndex + 1, true);
+            loadQuestion(currentIndex + 1, true, "next");
         } else if (!reviewMode) {
             openSubmitModal();
         } else {
@@ -606,7 +663,7 @@ function setupEventListeners() {
     });
 
     dom.btnPrev?.addEventListener("click", () => {
-        if (currentIndex > 0) loadQuestion(currentIndex - 1, true);
+        if (currentIndex > 0) loadQuestion(currentIndex - 1, true, "prev");
     });
 
     dom.modalCancelBtn.addEventListener("click", closeSubmitModal);

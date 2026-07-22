@@ -36,8 +36,24 @@
 
             <div class="card intro-card">
                 <div class="language-selector">
-                    <button class="lang-btn active" data-lang="de" title="Deutsch">🇩🇪</button>
-                    <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                    <button class="lang-btn active" data-lang="de" title="Deutsch">
+                        <svg class="flag-icon" viewBox="0 0 640 480" width="20" height="15" aria-hidden="true">
+                            <rect width="640" height="160" fill="#000000"/>
+                            <rect y="160" width="640" height="160" fill="#DD0000"/>
+                            <rect y="320" width="640" height="160" fill="#FFCE00"/>
+                        </svg>
+                        <span class="lang-code">DE</span>
+                    </button>
+                    <button class="lang-btn" data-lang="en" title="English">
+                        <svg class="flag-icon" viewBox="0 0 640 480" width="20" height="15" aria-hidden="true">
+                            <path fill="#012169" d="M0 0h640v480H0z"/>
+                            <path fill="#FFF" d="m75 0 245 180L565 0h75v50L395 240l245 190v50h-75L320 300 75 480H0v-50l245-190L0 50V0h75z"/>
+                            <path fill="#C8102E" d="m424 261 216 163v26h-34L376 273l48-12zm-208 0L0 424v26h34l230-177-48-12zM0 30l208 157 48-12L40 0H0v30zm640 0L432 187l-48-12L600 0h40v30z"/>
+                            <path fill="#FFF" d="M240 0v480h160V0H240zM0 160v160h640V160H0z"/>
+                            <path fill="#C8102E" d="M267 0v480h106V0H267zM0 187v106h640V187H0z"/>
+                        </svg>
+                        <span class="lang-code">EN</span>
+                    </button>
                 </div>
                 <div class="card-accent-line"></div>
 
@@ -122,31 +138,33 @@
             </header>
 
             <main class="quiz-canvas">
-                <h1 id="question-text" class="question-title">Lädt...</h1>
+                <div class="quiz-canvas-container">
+                    <h1 id="question-text" class="question-title">Lädt...</h1>
 
-                <div class="canvas-split">
-                    <div class="media-column">
-                        <div class="exam-media-box" id="exam-media-box">
-                            <div class="blueprint-lines"></div>
-                            <div class="blueprint-mirror"></div>
-                            <div class="blueprint-speedometer">
-                                <div class="speedo-dial"></div>
-                                <div class="speedo-needle"></div>
-                            </div>
-                            <div class="blueprint-steering-wheel"></div>
-                            <div class="blueprint-road-path"></div>
+                    <div class="canvas-split">
+                        <div class="media-column">
+                            <div class="exam-media-box" id="exam-media-box">
+                                <div class="blueprint-lines"></div>
+                                <div class="blueprint-mirror"></div>
+                                <div class="blueprint-speedometer">
+                                    <div class="speedo-dial"></div>
+                                    <div class="speedo-needle"></div>
+                                </div>
+                                <div class="blueprint-steering-wheel"></div>
+                                <div class="blueprint-road-path"></div>
 
-                            <div class="blueprint-info">
-                                <i class="fa-solid fa-compass-drafting media-icon"></i>
-                                <div class="media-title" id="media-filename">M365-COPILOT</div>
-                                <div class="media-desc" id="media-description">
-                                    [Architektur- und Consulting-Szenario]
+                                <div class="blueprint-info">
+                                    <i class="fa-solid fa-compass-drafting media-icon"></i>
+                                    <div class="media-title" id="media-filename">M365-COPILOT</div>
+                                    <div class="media-desc" id="media-description">
+                                        [Architektur- und Consulting-Szenario]
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="answers-column" id="answers-container"></div>
+                        <div class="answers-column" id="answers-container"></div>
+                    </div>
                 </div>
             </main>
 
