@@ -538,6 +538,33 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--color-forest);
 }
 
+.exam-media-box.media-loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: media-shimmer 1.5s infinite;
+    pointer-events: none;
+    z-index: 4;
+}
+
+@keyframes media-shimmer {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(50%);
+    }
+}
+
 .exam-media-box.media-blueprint {
     background-color: var(--color-blueprint);
 }

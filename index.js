@@ -185,6 +185,91 @@ function cacheDomRefs() {
     dom.resultsTableBody = document.getElementById("results-table-body");
 }
 
+/* ── Image Preloading & Caching System ──────────────────────── */
+const imageCache = new Map();
+
+function preloadImage(src) {
+    if (!src) return Promise.resolve(null);
+    if (imageCache.has(src)) {
+        return imageCache.get(src);
+    }
+
+    const promise = new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        if (img.complete) {
+            if ("decode" in img) {
+                img.decode().then(() => resolve(img)).catch(() => resolve(img));
+            } else {
+                resolve(img);
+            }
+        } else {
+            img.onload = () => {
+                if ("decode" in img) {
+                    img.decode().then(() => resolve(img)).catch(() => resolve(img));
+                } else {
+                    resolve(img);
+                }
+            };
+            img.onerror = () => resolve(null);
+        }
+    });
+
+    imageCache.set(src, promise);
+    return promise;
+}
+
+function preloadAdjacentImages(centerIdx) {
+    if (!questions || !questions.length) return;
+    const indicesToPreload = [
+        centerIdx,
+        centerIdx + 1,
+        centerIdx + 2,
+        centerIdx - 1,
+        centerIdx + 3,
+    ];
+
+    indicesToPreload.forEach((idx) => {
+        if (idx >= 0 && idx < questions.length) {
+            const q = questions[idx];
+            if (q && q.image) {
+                preloadImage(q.image);
+            }
+        }
+    });
+}
+
+function preloadAllQuestionImages(priorityIndex = 0) {
+    if (!questions || !questions.length) return;
+
+    preloadAdjacentImages(priorityIndex);
+
+    const remainingIndices = questions
+        .map((_, i) => i)
+        .sort((a, b) => Math.abs(a - priorityIndex) - Math.abs(b - priorityIndex));
+
+    let queueIndex = 0;
+    function processNextBatch() {
+        const batchSize = 3;
+        for (let i = 0; i < batchSize && queueIndex < remainingIndices.length; i++, queueIndex++) {
+            const idx = remainingIndices[queueIndex];
+            const q = questions[idx];
+            if (q && q.image) {
+                preloadImage(q.image);
+            }
+        }
+        if (queueIndex < remainingIndices.length) {
+            if ("requestIdleCallback" in window) {
+                requestIdleCallback(() => processNextBatch(), { timeout: 1000 });
+            } else {
+                setTimeout(processNextBatch, 80);
+            }
+        }
+    }
+
+    processNextBatch();
+}
+
 /* ── Exam lifecycle ─────────────────────────────────────── */
 
 function startExam() {
@@ -210,6 +295,7 @@ function startExam() {
 
     buildNavigationFooter();
     loadQuestion(0, true, "none");
+    preloadAllQuestionImages(0);
 
     clearInterval(timerInterval);
     updateTimerDisplay();
@@ -339,7 +425,7 @@ function updateTimerDisplay() {
 
 /* ── Question rendering ───────────────────────────────────── */
 
-async function renderMediaBox(q) {
+function renderMediaBox(q) {
     const mediaBox = dom.examMediaBox;
     if (!mediaBox) return;
 
@@ -350,33 +436,33 @@ async function renderMediaBox(q) {
     const oldImg = mediaBox.querySelector(".real-question-image");
 
     if (q.image) {
-        const newImg = document.createElement("img");
-        newImg.className = "real-question-image";
-        newImg.alt = q.pictureDesc || t("ui.mediaAltDefault");
-        newImg.src = q.image;
-
-        try {
-            if ("decode" in newImg) {
-                await newImg.decode();
-            }
-        } catch (err) {
-            // Ignore decode cancellation
-        }
-
+        const imageSrc = q.image;
         oldImg?.remove();
-        mediaBox.appendChild(newImg);
-
-        requestAnimationFrame(() => {
-            newImg.classList.add("loaded");
-        });
 
         if (blueprintInfo) blueprintInfo.style.display = "none";
         blueprintElements.forEach((el) => { el.style.display = "none"; });
+
         mediaBox.classList.remove("media-blueprint", "media-empty");
-        mediaBox.classList.add("media-has-image");
+        mediaBox.classList.add("media-has-image", "media-loading");
+
+        const newImg = document.createElement("img");
+        newImg.className = "real-question-image";
+        newImg.alt = q.pictureDesc || t("ui.mediaAltDefault");
+
+        preloadImage(imageSrc).then(() => {
+            if (questions[currentIndex]?.image !== imageSrc) return;
+
+            newImg.src = imageSrc;
+            mediaBox.appendChild(newImg);
+            mediaBox.classList.remove("media-loading");
+
+            requestAnimationFrame(() => {
+                newImg.classList.add("loaded");
+            });
+        });
     } else {
         oldImg?.remove();
-        mediaBox.classList.remove("media-has-image");
+        mediaBox.classList.remove("media-has-image", "media-loading");
 
         if (q.picture) {
             if (blueprintInfo) blueprintInfo.style.display = "";
@@ -464,7 +550,7 @@ function updateNextButton(index) {
     }
 }
 
-async function renderQuestionContent(index, scrollToTop = false) {
+function renderQuestionContent(index, scrollToTop = false) {
     currentIndex = index;
     const q = questions[index];
 
@@ -476,7 +562,7 @@ async function renderQuestionContent(index, scrollToTop = false) {
     dom.currentQPoints.textContent = q.points;
     dom.questionText.textContent = q.text;
 
-    await renderMediaBox(q);
+    renderMediaBox(q);
 
     if (starredQuestions[index]) {
         dom.btnStar.classList.add("starred");
@@ -496,8 +582,10 @@ async function renderQuestionContent(index, scrollToTop = false) {
 }
 
 async function loadQuestion(index, scrollToTop = false, dir = "next") {
+    preloadAdjacentImages(index);
+
     if (!dom.quizCanvasContainer || dir === "none") {
-        await renderQuestionContent(index, scrollToTop);
+        renderQuestionContent(index, scrollToTop);
         return;
     }
 
@@ -508,7 +596,7 @@ async function loadQuestion(index, scrollToTop = false, dir = "next") {
 
     await new Promise((resolve) => setTimeout(resolve, 60));
 
-    await renderQuestionContent(index, scrollToTop);
+    renderQuestionContent(index, scrollToTop);
 
     dom.quizCanvasContainer.classList.remove(exitClass);
     dom.quizCanvasContainer.classList.add(enterClass);
