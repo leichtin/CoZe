@@ -126,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Card */
 .intro-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 16px;
@@ -142,6 +142,8 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     z-index: 1;
     overflow: hidden;
+    display: block;
+    box-sizing: border-box;
 }
 
 /* Glowing accent line */
@@ -218,8 +220,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
     color: #555;
     margin-bottom: 18px;
-    line-height: 1.6;
+    line-height: 1.5;
     font-style: italic;
+    display: block;
+    text-align: center;
 }
 
 .hero-tagline strong {
@@ -260,6 +264,8 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px;
     text-align: left;
     margin-bottom: 25px;
+    display: block;
+    box-sizing: border-box;
 }
 
 .exam-info-box h3 {
@@ -1523,8 +1529,11 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .intro-card {
-        padding: 0 20px 24px;
+        padding: 0 16px 24px;
         border-radius: 12px;
+        min-height: auto;
+        display: block;
+        width: 100%;
     }
 
     .seal-logo {
@@ -1543,12 +1552,17 @@ h1, h2, h3, h4, h5, h6 {
 
     .hero-tagline {
         font-size: 13px;
+        line-height: 1.45;
         margin-bottom: 14px;
+        min-height: auto;
+        display: block;
+        text-align: center;
     }
 
     .exam-info-box {
         padding: 12px;
         margin-bottom: 18px;
+        min-height: auto;
     }
 
     .exam-info-box h3 {
@@ -1849,4 +1863,210 @@ h1, h2, h3, h4, h5, h6 {
 
 .lang-btn.active .flag-icon {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   7. ULTRA-HIGH RESOLUTION DESKTOP TIERS (1080p, 1440p, 4K)
+   ========================================================================== */
+
+/* 1080p Standard Desktop (1201px – 1920px) */
+@media (min-width: 1201px) and (max-width: 1920px) {
+    .quiz-canvas-container {
+        max-width: 1380px;
+    }
+
+    .question-title {
+        font-size: 19px;
+    }
+
+    .answer-text {
+        font-size: 16px;
+    }
+
+    .checkbox-square {
+        width: 38px;
+        height: 38px;
+    }
+
+    .checkbox-square i {
+        font-size: 20px;
+    }
+}
+
+/* 1440p QHD / Ultrawide (1921px – 2859px) */
+@media (min-width: 1921px) and (max-width: 2859px) {
+    .quiz-canvas-container {
+        max-width: 1620px;
+    }
+
+    .intro-card {
+        width: 640px;
+        padding: 0 42px 38px;
+    }
+
+    .seal-logo {
+        width: 155px;
+        height: 155px;
+    }
+
+    .logo-text h1 {
+        font-size: 32px;
+    }
+
+    .welcome-lead {
+        font-size: 19px;
+    }
+
+    .hero-tagline {
+        font-size: 15.5px;
+    }
+
+    .question-title {
+        font-size: 22px;
+        line-height: 1.42;
+        margin-bottom: 26px;
+    }
+
+    .answer-text {
+        font-size: 17.5px;
+    }
+
+    .answer-prefix {
+        font-size: 17.5px;
+    }
+
+    .checkbox-square {
+        width: 42px;
+        height: 42px;
+    }
+
+    .checkbox-square i {
+        font-size: 22px;
+    }
+
+    .answers-column {
+        gap: 28px;
+    }
+
+    .quiz-header {
+        height: 48px;
+        font-size: 16px;
+        padding: 0 24px;
+    }
+
+    .quiz-footer {
+        height: 66px;
+        padding: 0 32px;
+    }
+
+    .btn-action {
+        height: 36px;
+        padding: 0 20px;
+        font-size: 14px;
+    }
+
+    .nav-arrow {
+        width: 50px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .btn-grid-toggle {
+        height: 38px;
+        padding: 0 16px;
+        font-size: 14px;
+    }
+}
+
+/* 4K UHD Ultra-Widescreen (≥ 2860px) */
+@media (min-width: 2860px) {
+    .quiz-canvas-container {
+        max-width: 2000px;
+    }
+
+    .intro-card {
+        width: 760px;
+        padding: 0 52px 46px;
+    }
+
+    .seal-logo {
+        width: 180px;
+        height: 180px;
+    }
+
+    .logo-text h1 {
+        font-size: 36px;
+    }
+
+    .welcome-lead {
+        font-size: 22px;
+    }
+
+    .hero-tagline {
+        font-size: 17.5px;
+    }
+
+    .exam-info-box h3 {
+        font-size: 17px;
+    }
+
+    .exam-info-box li {
+        font-size: 15.5px;
+    }
+
+    .question-title {
+        font-size: 26px;
+        line-height: 1.45;
+        margin-bottom: 32px;
+    }
+
+    .answer-text {
+        font-size: 20px;
+    }
+
+    .answer-prefix {
+        font-size: 20px;
+    }
+
+    .checkbox-square {
+        width: 48px;
+        height: 48px;
+    }
+
+    .checkbox-square i {
+        font-size: 26px;
+    }
+
+    .answers-column {
+        gap: 34px;
+    }
+
+    .quiz-header {
+        height: 56px;
+        font-size: 18px;
+        padding: 0 32px;
+    }
+
+    .quiz-footer {
+        height: 72px;
+        padding: 0 40px;
+    }
+
+    .btn-action {
+        height: 42px;
+        padding: 0 24px;
+        font-size: 15px;
+    }
+
+    .nav-arrow {
+        width: 56px;
+        height: 44px;
+        font-size: 17px;
+    }
+
+    .btn-grid-toggle {
+        height: 42px;
+        padding: 0 20px;
+        font-size: 15px;
+    }
 }

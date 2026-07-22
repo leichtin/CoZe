@@ -80,6 +80,15 @@ async function loadLanguage(lang) {
 
         updateDOMTranslations();
 
+        const introCard = document.querySelector(".intro-card");
+        if (introCard) {
+            introCard.style.transition = "opacity 0.08s ease-in-out";
+            introCard.style.opacity = "0.75";
+            setTimeout(() => {
+                introCard.style.opacity = "1";
+            }, 80);
+        }
+
         document.querySelectorAll(".lang-btn").forEach((btn) => {
             btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
         });
