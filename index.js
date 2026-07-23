@@ -1,16 +1,12 @@
 /* ── Configuration ──────────────────────────────────────── */
-
 const CONFIG = {
     EXAM_DURATION_SEC: 45 * 60,
     MAX_ERROR_POINTS: 10,
     TIMER_WARNING_SEC: 300,
     DEFAULT_LANG: "de",
-    SUPPORTED_LANGS: ["de", "en"],
 };
 
 /* ── State ──────────────────────────────────────────────── */
-/** userAnswers maps question index → selected answer index (number) */
-
 let questions = [];
 let currentIndex = 0;
 let userAnswers = {};
@@ -18,523 +14,313 @@ let starredQuestions = {};
 let timeLeft = CONFIG.EXAM_DURATION_SEC;
 let timerInterval = null;
 let reviewMode = false;
-
-let currentLang = CONFIG.DEFAULT_LANG;
 let currentLocaleData = null;
 let questionPool = [];
+let lastResultData = null;
 
-const dom = {};
+/* ── DOM Proxy ─────────────────────────────────────────── */
+const ID_MAP = {
+    timerDisplay: "timer-display-header",
+    navGridContainer: "nav-grid-panel-container",
+    openLegalBtn: "open-legal-modal-btn",
+    closeLegalBtn: "close-legal-modal-btn",
+    closeLegalX: "close-legal-modal-x",
+    dbLoadStatusText: "#db-load-status .status-text",
+    quizCanvas: ".quiz-canvas",
+    quizCanvasContainer: ".quiz-canvas-container",
+    toastContainer: "toast-container"
+};
+const dom = new Proxy({}, {
+    get: (_, p) => ID_MAP[p]
+        ? (ID_MAP[p].startsWith("#") || ID_MAP[p].startsWith(".") ? document.querySelector(ID_MAP[p]) : document.getElementById(ID_MAP[p]))
+        : (document.getElementById(p) || document.getElementById(p.replace(/([A-Z])/g, "-$1").toLowerCase()))
+});
 
 /* ── Utilities ──────────────────────────────────────────── */
-
-function shuffle(array) {
-    const copy = [...array];
-    for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-}
-
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-}
-
-function closeNavGridPanel() {
-    if (dom.navGridPanel) dom.navGridPanel.classList.add("hidden");
+const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
+const formatTime = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+const toggle = (el, show) => el?.classList.toggle("hidden", !show);
+const closeNavGridPanel = () => {
+    toggle(dom.navGridPanel, false);
     const caret = dom.btnGridToggle?.querySelector(".toggle-caret");
     if (caret) caret.style.transform = "";
+};
+
+const getTranslationValue = (o, p) => p.split(".").reduce((acc, k) => acc?.[k], o);
+const t = (k, r = {}) => Object.entries(r).reduce((v, [p, repl]) => v.replaceAll(`{${p}}`, repl), getTranslationValue(currentLocaleData, k) ?? k);
+const checkQuestionCorrectness = idx => questions[idx]?.answers[userAnswers[idx]]?.correct === true;
+const preloadImage = src => { if (src) new Image().src = src; };
+const preloadAllImages = pool => pool.forEach(q => preloadImage(q.image));
+
+function showToast(msg) {
+    if (!dom.toastContainer) return;
+    const toast = document.createElement("div");
+    toast.className = "toast-notification";
+    toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${msg}</span>`;
+    dom.toastContainer.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
 }
 
 /* ── i18n ───────────────────────────────────────────────── */
-
-function getTranslationValue(obj, path) {
-    return path.split(".").reduce((acc, part) => acc && acc[part], obj);
-}
-
-function t(key, replacements = {}) {
-    let val = getTranslationValue(currentLocaleData, key);
-    if (val === undefined) return key;
-    for (const [placeholder, replacement] of Object.entries(replacements)) {
-        val = val.replace(`{${placeholder}}`, replacement);
-    }
-    return val;
-}
-
 async function loadLanguage(lang) {
     try {
         const response = await fetch(`locales/${lang}.json`);
-        if (!response.ok) {
-            throw new Error(`Failed to load locale file: locales/${lang}.json`);
-        }
+        if (!response.ok) throw new Error(`Failed to load locale: ${lang}`);
         const data = await response.json();
 
-        currentLang = lang;
         currentLocaleData = data;
         questionPool = data.questions;
+        preloadAllImages(questionPool);
 
         document.documentElement.lang = lang;
         document.title = data.ui.title;
 
+        // If exam is currently active, update the active questions array text
+        if (questions.length > 0) {
+            questions = questions.map(q => {
+                const match = questionPool.find(item => item.image === q.image || item.number === q.number);
+                if (!match) return q;
+                return {
+                    ...match,
+                    answers: q.answers.map(ans => {
+                        const matchAns = ans.origIndex !== undefined && match.answers[ans.origIndex]
+                            ? match.answers[ans.origIndex]
+                            : (match.answers.find(a => a.correct === ans.correct && a.text === ans.text) || match.answers.find(a => a.correct === ans.correct) || ans);
+                        return { ...matchAns, origIndex: ans.origIndex };
+                    })
+                };
+            });
+        }
+
         updateDOMTranslations();
 
-        const introCard = document.querySelector(".intro-card");
-        if (introCard) {
-            introCard.style.transition = "opacity 0.08s ease-in-out";
-            introCard.style.opacity = "0.75";
-            setTimeout(() => {
-                introCard.style.opacity = "1";
-            }, 80);
-        }
-
-        document.querySelectorAll(".lang-btn").forEach((btn) => {
-            btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
-        });
-
+        const flagMap = {
+            de: `<svg class="flag-icon" viewBox="0 0 640 480" width="16" height="12" aria-hidden="true"><rect width="640" height="160" fill="#000000"/><rect y="160" width="640" height="160" fill="#DD0000"/><rect y="320" width="640" height="160" fill="#FFCE00"/></svg><span>DE</span>`,
+            en: `<svg class="flag-icon" viewBox="0 0 640 480" width="16" height="12" aria-hidden="true"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 245 180L565 0h75v50L395 240l245 190v50h-75L320 300 75 480H0v-50l245-190L0 50V0h75z"/><path fill="#C8102E" d="m424 261 216 163v26h-34L376 273l48-12zm-208 0L0 424v26h34l230-177-48-12zM0 30l208 157 48-12L40 0H0v30zm640 0L432 187l-48-12L600 0h40v30z"/><path fill="#FFF" d="M240 0v480h160V0H240zM0 160v160h640V160H0z"/><path fill="#C8102E" d="M267 0v480h106V0H267zM0 187v106h640V187H0z"/></svg><span>EN</span>`
+        };
+        document.querySelectorAll(".lang-toggle-btn").forEach(btn => btn.innerHTML = flagMap[lang]);
         localStorage.setItem("preferred_language", lang);
 
-        if (dom.dbLoadStatus && dom.dbLoadStatusText && dom.startExamBtn) {
+        if (dom.dbLoadStatus) {
             dom.dbLoadStatus.classList.add("loaded");
-            dom.dbLoadStatusText.innerHTML =
-                `<i class="fa-solid fa-graduation-cap"></i> ${t("ui.dbLoaded", { count: questionPool.length })}`;
-            dom.startExamBtn.disabled = false;
+            if (dom.dbLoadStatusText) dom.dbLoadStatusText.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${t("ui.dbLoaded", { count: questionPool.length })}`;
+            if (dom.startExamBtn) dom.startExamBtn.disabled = false;
         }
-    } catch (error) {
-        console.error("Error loading language:", error);
+
+        if (dom.quizScreen && !dom.quizScreen.classList.contains("hidden")) {
+            loadQuestion(currentIndex, false, "none");
+        }
+    } catch (err) {
+        console.error("Error loading language:", err);
     }
 }
 
 function updateDOMTranslations() {
     if (!currentLocaleData) return;
-
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
-        let val = getTranslationValue(currentLocaleData, key);
-        if (val !== undefined) {
-            if (key === "ui.infoQuestions") {
-                val = t("ui.infoQuestions", { count: questionPool.length });
-            }
-            el.innerHTML = val;
-        }
-    });
-
-    document.querySelectorAll("[data-i18n-title]").forEach((el) => {
-        const key = el.getAttribute("data-i18n-title");
         const val = getTranslationValue(currentLocaleData, key);
-        if (val !== undefined) {
-            el.title = val;
-        }
+        if (val !== undefined) el.innerHTML = key === "ui.infoQuestions" ? t("ui.infoQuestions", { count: questionPool.length }) : val;
+    });
+    document.querySelectorAll("[data-i18n-title]").forEach(el => {
+        const val = getTranslationValue(currentLocaleData, el.getAttribute("data-i18n-title"));
+        if (val !== undefined) el.title = val;
     });
 }
 
 function initLanguage() {
-    let lang = localStorage.getItem("preferred_language");
-
-    if (!lang) {
-        const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang?.startsWith("en")) {
-            lang = "en";
-        } else if (browserLang?.startsWith("de")) {
-            lang = "de";
-        } else {
-            lang = CONFIG.DEFAULT_LANG;
-        }
-    }
-
-    loadLanguage(lang);
+    const saved = localStorage.getItem("preferred_language");
+    const browser = (navigator.language || navigator.userLanguage || "").slice(0, 2);
+    loadLanguage(saved || (["en", "de"].includes(browser) ? browser : CONFIG.DEFAULT_LANG));
 }
 
-/* ── DOM ────────────────────────────────────────────────── */
 
-function cacheDomRefs() {
-    dom.introScreen = document.getElementById("intro-screen");
-    dom.quizScreen = document.getElementById("quiz-screen");
-    dom.resultScreen = document.getElementById("result-screen");
-    dom.startExamBtn = document.getElementById("start-exam-btn");
-    dom.restartExamBtn = document.getElementById("restart-exam-btn");
-    dom.abortBtn = document.getElementById("abort-btn");
-    dom.btnCancel = document.getElementById("btn-cancel");
-    dom.btnStar = document.getElementById("btn-star");
-    dom.btnNextMain = document.getElementById("btn-next-main");
-    dom.btnPrev = document.getElementById("btn-prev");
-    dom.btnGridToggle = document.getElementById("btn-grid-toggle");
-    dom.navGridPanel = document.getElementById("nav-grid-panel");
-    dom.navGridContainer = document.getElementById("nav-grid-panel-container");
-    dom.closeNavGridBtn = document.getElementById("close-nav-grid-btn");
-    dom.gridToggleLabel = document.getElementById("grid-toggle-label");
-    dom.submitModal = document.getElementById("submit-modal");
-    dom.modalCancelBtn = document.getElementById("modal-cancel-btn");
-    dom.modalConfirmBtn = document.getElementById("modal-confirm-btn");
-    dom.answeredCount = document.getElementById("answered-count");
-    dom.unansweredCount = document.getElementById("unanswered-count");
-    dom.legalModal = document.getElementById("legal-modal");
-    dom.openLegalBtn = document.getElementById("open-legal-modal-btn");
-    dom.closeLegalBtn = document.getElementById("close-legal-modal-btn");
-    dom.closeLegalX = document.getElementById("close-legal-modal-x");
-    dom.reviewAnswersBtn = document.getElementById("review-answers-btn");
-    dom.dbLoadStatus = document.getElementById("db-load-status");
-    dom.dbLoadStatusText = document.querySelector("#db-load-status .status-text");
-    dom.questionId = document.getElementById("question-id");
-    dom.currentQPoints = document.getElementById("current-q-points");
-    dom.questionText = document.getElementById("question-text");
-    dom.examMediaBox = document.getElementById("exam-media-box");
-    dom.mediaFilename = document.getElementById("media-filename");
-    dom.mediaDescription = document.getElementById("media-description");
-    dom.answersContainer = document.getElementById("answers-container");
-    dom.timerDisplay = document.getElementById("timer-display-header");
-    dom.quizCanvas = document.querySelector(".quiz-canvas");
-    dom.quizCanvasContainer = document.querySelector(".quiz-canvas-container");
-    dom.resultBadge = document.getElementById("result-badge");
-    dom.resErrorPoints = document.getElementById("res-error-points");
-    dom.resWrongCount = document.getElementById("res-wrong-count");
-    dom.resWrongPct = document.getElementById("res-wrong-pct");
-    dom.resTimeLeft = document.getElementById("res-time-left");
-    dom.resultsTableBody = document.getElementById("results-table-body");
-}
 
-/* ── Image Preloading & Caching System ──────────────────────── */
-const imageCache = new Map();
-
-function preloadImage(src) {
-    if (!src) return Promise.resolve(null);
-    if (imageCache.has(src)) {
-        return imageCache.get(src);
-    }
-
-    const promise = new Promise((resolve) => {
-        const img = new Image();
-        img.src = src;
-        if (img.complete) {
-            if ("decode" in img) {
-                img.decode().then(() => resolve(img)).catch(() => resolve(img));
-            } else {
-                resolve(img);
-            }
-        } else {
-            img.onload = () => {
-                if ("decode" in img) {
-                    img.decode().then(() => resolve(img)).catch(() => resolve(img));
-                } else {
-                    resolve(img);
-                }
-            };
-            img.onerror = () => resolve(null);
-        }
-    });
-
-    imageCache.set(src, promise);
-    return promise;
-}
-
-function preloadAdjacentImages(centerIdx) {
-    if (!questions || !questions.length) return;
-    const indicesToPreload = [
-        centerIdx,
-        centerIdx + 1,
-        centerIdx + 2,
-        centerIdx - 1,
-        centerIdx + 3,
-    ];
-
-    indicesToPreload.forEach((idx) => {
-        if (idx >= 0 && idx < questions.length) {
-            const q = questions[idx];
-            if (q && q.image) {
-                preloadImage(q.image);
-            }
-        }
-    });
-}
-
-function preloadAllQuestionImages(priorityIndex = 0) {
-    if (!questions || !questions.length) return;
-
-    preloadAdjacentImages(priorityIndex);
-
-    const remainingIndices = questions
-        .map((_, i) => i)
-        .sort((a, b) => Math.abs(a - priorityIndex) - Math.abs(b - priorityIndex));
-
-    let queueIndex = 0;
-    function processNextBatch() {
-        const batchSize = 3;
-        for (let i = 0; i < batchSize && queueIndex < remainingIndices.length; i++, queueIndex++) {
-            const idx = remainingIndices[queueIndex];
-            const q = questions[idx];
-            if (q && q.image) {
-                preloadImage(q.image);
-            }
-        }
-        if (queueIndex < remainingIndices.length) {
-            if ("requestIdleCallback" in window) {
-                requestIdleCallback(() => processNextBatch(), { timeout: 1000 });
-            } else {
-                setTimeout(processNextBatch, 80);
-            }
-        }
-    }
-
-    processNextBatch();
-}
-
-/* ── Exam lifecycle ─────────────────────────────────────── */
-
+/* ── Exam Lifecycle ─────────────────────────────────────── */
 function startExam() {
     currentIndex = 0;
     userAnswers = {};
     starredQuestions = {};
     timeLeft = CONFIG.EXAM_DURATION_SEC;
     reviewMode = false;
+    lastResultData = null;
 
-    questions = shuffle(questionPool).map((q) => ({
-        number: q.number,
-        points: q.points,
-        text: q.text,
-        picture: q.picture,
-        image: q.image,
-        pictureDesc: q.pictureDesc,
-        answers: shuffle(q.answers),
-    }));
+    questions = shuffle(questionPool).map(q => ({ ...q, answers: shuffle(q.answers.map((ans, idx) => ({ ...ans, origIndex: idx }))) }));
 
-    dom.introScreen.classList.add("hidden");
-    dom.resultScreen.classList.add("hidden");
-    dom.quizScreen.classList.remove("hidden");
+    toggle(dom.introScreen, false);
+    toggle(dom.resultScreen, false);
+    toggle(dom.quizScreen, true);
+
+    if (dom.btnCancel) {
+        dom.btnCancel.innerHTML = t("ui.abortBtn");
+    }
 
     buildNavigationFooter();
     loadQuestion(0, true, "none");
-    preloadAllQuestionImages(0);
 
     clearInterval(timerInterval);
     updateTimerDisplay();
     timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
+        if (--timeLeft <= 0) {
             clearInterval(timerInterval);
-            autoSubmitExam();
+            alert(t("ui.timeExpiredAlert"));
+            submitExam();
+        } else {
+            updateTimerDisplay();
         }
     }, 1000);
 }
 
-function confirmAbort() {
+const confirmAbort = () => {
     if (reviewMode) {
-        clearInterval(timerInterval);
-        dom.quizScreen.classList.add("hidden");
-        dom.introScreen.classList.remove("hidden");
-        return;
+        toggle(dom.quizScreen, false);
+        toggle(dom.resultScreen, true);
+    } else {
+        toggle(dom.abortModal, true);
     }
-
-    if (confirm(t("ui.confirmAbort"))) {
-        clearInterval(timerInterval);
-        dom.quizScreen.classList.add("hidden");
-        dom.introScreen.classList.remove("hidden");
-    }
-}
-
-function restartExam() {
-    startExam();
-}
-
-function autoSubmitExam() {
-    alert(t("ui.timeExpiredAlert"));
-    submitExam();
-}
+};
 
 function submitExam() {
     clearInterval(timerInterval);
-    closeSubmitModal();
+    toggle(dom.submitModal, false);
 
-    let totalErrorPoints = 0;
-    let wrongQuestionsCount = 0;
-
+    let totalErrorPoints = 0, wrongQuestionsCount = 0;
     dom.resultsTableBody.innerHTML = "";
 
     questions.forEach((q, idx) => {
         const isCorrect = checkQuestionCorrectness(idx);
-        if (!isCorrect) {
-            totalErrorPoints += q.points;
-            wrongQuestionsCount++;
-        }
+        if (!isCorrect) { totalErrorPoints += q.points; wrongQuestionsCount++; }
 
         const row = document.createElement("tr");
-
-        const cellQuestion = document.createElement("td");
-        cellQuestion.textContent = idx + 1;
-
-        const cellPoints = document.createElement("td");
-        if (isCorrect) {
-            const span = document.createElement("span");
-            span.style.color = "#666";
-            span.textContent = "0";
-            cellPoints.appendChild(span);
-        } else {
-            const span = document.createElement("span");
-            span.style.color = "#b32117";
-            span.style.fontWeight = "bold";
-            span.textContent = q.points;
-            cellPoints.appendChild(span);
-        }
-
-        const cellStatus = document.createElement("td");
-        const badge = document.createElement("span");
-        badge.className = `badge-status ${isCorrect ? "correct" : "incorrect"}`;
-        badge.innerHTML = isCorrect
-            ? `<i class="fa-solid fa-circle-check"></i> ${t("ui.tableStatusCorrect")}`
-            : `<i class="fa-solid fa-circle-xmark"></i> ${t("ui.tableStatusWrong")}`;
-        cellStatus.appendChild(badge);
-
-        row.append(cellQuestion, cellPoints, cellStatus);
+        row.title = `${t("ui.questionLabel")} ${idx + 1} — ${t("ui.reviewAnswersBtn")}`;
+        row.innerHTML = `
+            <td><strong>${idx + 1}</strong></td>
+            <td><span class="${isCorrect ? 'pts-ok' : 'pts-wrong'}">${isCorrect ? 0 : q.points}</span></td>
+            <td><span class="badge-status ${isCorrect ? 'correct' : 'incorrect'}"><i class="fa-solid fa-circle-${isCorrect ? 'check' : 'xmark'}"></i> ${t(isCorrect ? 'ui.tableStatusCorrect' : 'ui.tableStatusWrong')}</span></td>
+            <td class="row-chevron"><i class="fa-solid fa-chevron-right"></i></td>
+        `;
+        row.addEventListener("click", () => enterReviewMode(idx));
         dom.resultsTableBody.appendChild(row);
     });
 
     const isPassed = totalErrorPoints <= CONFIG.MAX_ERROR_POINTS;
+    const wrongPct = Math.round((wrongQuestionsCount / questions.length) * 100);
 
-    dom.resultBadge.className = `result-badge ${isPassed ? "success" : "danger"}`;
-    dom.resultBadge.innerHTML = isPassed
-        ? `<i class="fa-solid fa-circle-check"></i> <span>${t("ui.passedBadge")}</span>`
-        : `<i class="fa-solid fa-circle-xmark"></i> <span>${t("ui.failedBadge")}</span>`;
+    lastResultData = {
+        totalErrorPoints,
+        wrongQuestionsCount,
+        totalQuestions: questions.length,
+        wrongPct,
+        timeLeft,
+        isPassed
+    };
+
+    const verdictClass = isPassed ? "is-passed" : "is-failed";
+    dom.resultVerdict.className = `result-verdict ${verdictClass}`;
+    dom.verdictIcon.className = `fa-solid fa-circle-${isPassed ? "check" : "xmark"} verdict-icon`;
+    dom.resultBadge.textContent = t(isPassed ? "ui.passedBadge" : "ui.failedBadge");
+    dom.verdictScore.textContent = t("ui.verdictScore", { points: totalErrorPoints, max: CONFIG.MAX_ERROR_POINTS });
+    document.querySelectorAll(".result-summary-grid .summary-box").forEach(box => { box.className = `summary-box ${verdictClass}`; });
+    const resultsTable = document.querySelector(".results-table");
+    if (resultsTable) resultsTable.className = `results-table ${verdictClass}`;
 
     dom.resErrorPoints.textContent = totalErrorPoints;
     dom.resWrongCount.textContent = `${wrongQuestionsCount} / ${questions.length}`;
-    dom.resWrongPct.textContent = t("ui.wrongPctLabel", {
-        pct: Math.round((wrongQuestionsCount / questions.length) * 100),
-    });
+    dom.resWrongPct.textContent = t("ui.wrongPctLabel", { pct: wrongPct });
     dom.resTimeLeft.textContent = formatTime(timeLeft);
 
-    dom.quizScreen.classList.add("hidden");
-    dom.resultScreen.classList.remove("hidden");
+    toggle(dom.quizScreen, false);
+    toggle(dom.resultScreen, true);
 }
 
-function enterReviewMode() {
+function enterReviewMode(startIdx = 0) {
     reviewMode = true;
-    currentIndex = 0;
-    dom.resultScreen.classList.add("hidden");
-    dom.quizScreen.classList.remove("hidden");
+    currentIndex = startIdx;
+    toggle(dom.resultScreen, false);
+    toggle(dom.quizScreen, true);
 
-    dom.abortBtn.innerHTML = '<i class="fa-solid fa-house"></i>';
-    dom.abortBtn.title = t("ui.abortTitle");
+    if (dom.btnCancel) {
+        dom.btnCancel.innerHTML = `<i class="fa-solid fa-chart-pie"></i> ${t("ui.backToResults")}`;
+    }
 
-    loadQuestion(0, true, "none");
-    updateNavigationFooter();
+    if (dom.abortBtn) {
+        dom.abortBtn.innerHTML = '<i class="fa-solid fa-house"></i>';
+        dom.abortBtn.title = t("ui.abortTitle");
+    }
+
+    loadQuestion(startIdx, true, "none");
 }
 
-function showResultScreen() {
-    dom.quizScreen.classList.add("hidden");
-    dom.resultScreen.classList.remove("hidden");
-}
+const updateTimerDisplay = () => {
+    if (reviewMode) {
+        dom.timerDisplay.innerHTML = `<i class="fa-solid fa-eye"></i> ${t("ui.reviewMode")}`;
+        dom.timerDisplay.classList.remove("timer-warning");
+    } else {
+        dom.timerDisplay.textContent = formatTime(timeLeft);
+        dom.timerDisplay.classList.toggle("timer-warning", timeLeft < CONFIG.TIMER_WARNING_SEC);
+    }
+};
 
-/* ── Timer ──────────────────────────────────────────────── */
-
-function updateTimerDisplay() {
-    dom.timerDisplay.textContent = formatTime(timeLeft);
-    dom.timerDisplay.classList.toggle("timer-warning", timeLeft < CONFIG.TIMER_WARNING_SEC);
-}
-
-/* ── Question rendering ───────────────────────────────────── */
-
+/* ── Question & Media Rendering ─────────────────────────── */
 function renderMediaBox(q) {
-    const mediaBox = dom.examMediaBox;
-    if (!mediaBox) return;
+    const box = dom.examMediaBox;
+    const col = box?.closest(".media-column");
+    if (!box) return;
+    box.querySelector(".real-question-image")?.remove();
 
-    const blueprintInfo = mediaBox.querySelector(".blueprint-info");
-    const blueprintElements = mediaBox.querySelectorAll(
-        ".blueprint-lines, .blueprint-mirror, .blueprint-speedometer, .blueprint-steering-wheel, .blueprint-road-path"
-    );
-    const oldImg = mediaBox.querySelector(".real-question-image");
+    box.className = `exam-media-box ${q.image ? "media-has-image" : "media-empty"}`;
+    col?.classList.toggle("is-empty", !q.image);
 
     if (q.image) {
-        const imageSrc = q.image;
-        oldImg?.remove();
-
-        if (blueprintInfo) blueprintInfo.style.display = "none";
-        blueprintElements.forEach((el) => { el.style.display = "none"; });
-
-        mediaBox.classList.remove("media-blueprint", "media-empty");
-        mediaBox.classList.add("media-has-image", "media-loading");
-
-        const newImg = document.createElement("img");
-        newImg.className = "real-question-image";
-        newImg.alt = q.pictureDesc || t("ui.mediaAltDefault");
-
-        preloadImage(imageSrc).then(() => {
-            if (questions[currentIndex]?.image !== imageSrc) return;
-
-            newImg.src = imageSrc;
-            mediaBox.appendChild(newImg);
-            mediaBox.classList.remove("media-loading");
-
-            requestAnimationFrame(() => {
-                newImg.classList.add("loaded");
-            });
+        const img = Object.assign(document.createElement("img"), {
+            className: "real-question-image loaded",
+            alt: q.pictureDesc || t("ui.mediaAltDefault"),
+            src: q.image
         });
-    } else {
-        oldImg?.remove();
-        mediaBox.classList.remove("media-has-image", "media-loading");
-
-        if (q.picture) {
-            if (blueprintInfo) blueprintInfo.style.display = "";
-            blueprintElements.forEach((el) => { el.style.display = ""; });
-            if (dom.mediaFilename) dom.mediaFilename.textContent = q.picture;
-            if (dom.mediaDescription) dom.mediaDescription.textContent = q.pictureDesc || t("ui.mediaDescDefault");
-            mediaBox.classList.remove("media-empty");
-            mediaBox.classList.add("media-blueprint");
-        } else {
-            if (blueprintInfo) blueprintInfo.style.display = "";
-            blueprintElements.forEach((el) => { el.style.display = ""; });
-            if (dom.mediaFilename) dom.mediaFilename.textContent = t("ui.noImage");
-            if (dom.mediaDescription) dom.mediaDescription.textContent = t("ui.noImageDesc");
-            mediaBox.classList.remove("media-blueprint");
-            mediaBox.classList.add("media-empty");
-        }
+        box.appendChild(img);
     }
 }
 
 function renderAnswerOption(q, qIdx, aIdx, ans, isReview) {
     const option = document.createElement("div");
-    option.className = "answer-option";
-
     const isSelected = userAnswers[qIdx] === aIdx;
-    if (isSelected) option.classList.add("selected");
+    option.className = `answer-option${isSelected ? " selected" : ""}`;
+    option.tabIndex = isReview ? -1 : 0;
+    option.setAttribute("role", "radio");
+    option.setAttribute("aria-checked", isSelected ? "true" : "false");
 
-    const checkbox = document.createElement("div");
-    checkbox.className = "checkbox-square";
-    checkbox.innerHTML = '<i class="fa-solid fa-check"></i>';
-
-    const answerText = document.createElement("div");
-    answerText.className = "answer-text";
-
-    const prefix = document.createElement("span");
-    prefix.className = "answer-prefix";
-    prefix.textContent = `${String.fromCharCode(65 + aIdx)}) `;
-
-    const text = document.createElement("span");
-    text.textContent = ans.text;
-
-    answerText.append(prefix, text);
-    option.append(checkbox, answerText);
-
+    let badgeHTML = "";
     if (isReview) {
         if (ans.correct) {
-            option.classList.add(isSelected ? "correct-choice" : "missed-choice");
+            badgeHTML = `<span class="review-badge-inline correct"><i class="fa-solid fa-check"></i> ${t("ui.correctChoice")}</span>`;
         } else if (isSelected) {
-            option.classList.add("incorrect-choice");
+            badgeHTML = `<span class="review-badge-inline incorrect"><i class="fa-solid fa-xmark"></i> ${t("ui.yourChoice")}</span>`;
         }
+    }
 
-        const badge = document.createElement("span");
-        badge.className = `review-badge-inline ${ans.correct ? "correct" : "incorrect"}`;
-        badge.innerHTML = ans.correct
-            ? `<i class="fa-solid fa-check"></i> ${t("ui.tableStatusCorrect")}`
-            : `<i class="fa-solid fa-xmark"></i> ${t("ui.tableStatusWrong")}`;
-        answerText.appendChild(badge);
+    option.innerHTML = `
+        <div class="checkbox-square"><i class="fa-solid fa-check"></i></div>
+        <div class="answer-text">
+            <span class="answer-prefix">${String.fromCharCode(65 + aIdx)}) </span>
+            <span>${ans.text}</span>
+            ${badgeHTML}
+        </div>
+    `;
+
+    if (isReview) {
+        if (ans.correct) option.classList.add(isSelected ? "correct-choice" : "missed-choice");
+        else if (isSelected) option.classList.add("incorrect-choice");
     } else {
-        option.addEventListener("click", () => {
-            toggleAnswerSelection(qIdx, aIdx);
+        const selectOption = () => {
+            userAnswers[qIdx] = aIdx;
+            updateNavigationFooter();
             dom.answersContainer.querySelectorAll(".answer-option").forEach((opt, oIdx) => {
-                opt.classList.toggle("selected", oIdx === aIdx);
+                const sel = oIdx === aIdx;
+                opt.classList.toggle("selected", sel);
+                opt.setAttribute("aria-checked", sel ? "true" : "false");
             });
-        });
+        };
+        option.addEventListener("click", selectOption);
     }
 
     return option;
@@ -542,30 +328,16 @@ function renderAnswerOption(q, qIdx, aIdx, ans, isReview) {
 
 function updateNextButton(index) {
     if (!dom.btnNextMain) return;
-
-    if (index === questions.length - 1) {
-        dom.btnNextMain.classList.add("submit-btn");
-        if (reviewMode) {
-            dom.btnNextMain.innerHTML = '<i class="fa-solid fa-arrow-right-from-bracket"></i>';
-            dom.btnNextMain.title = t("ui.navEvaluation");
-        } else {
-            dom.btnNextMain.innerHTML = '<i class="fa-solid fa-check"></i>';
-            dom.btnNextMain.title = t("ui.navSubmit");
-        }
-    } else {
-        dom.btnNextMain.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-        dom.btnNextMain.classList.remove("submit-btn");
-        dom.btnNextMain.title = t("ui.navNext");
-    }
+    const isLast = index === questions.length - 1;
+    dom.btnNextMain.classList.toggle("submit-btn", isLast);
+    dom.btnNextMain.innerHTML = `<i class="fa-solid fa-${isLast ? (reviewMode ? 'arrow-right-from-bracket' : 'check') : 'arrow-right'}"></i>`;
+    dom.btnNextMain.title = t(isLast ? (reviewMode ? "ui.navEvaluation" : "ui.navSubmit") : "ui.navNext");
 }
 
 function renderQuestionContent(index, scrollToTop = false) {
     currentIndex = index;
     const q = questions[index];
-
-    if (scrollToTop && dom.quizCanvas) {
-        dom.quizCanvas.scrollTop = 0;
-    }
+    if (scrollToTop && dom.quizCanvas) dom.quizCanvas.scrollTop = 0;
 
     dom.questionId.textContent = `${t("ui.questionLabel")} ${index + 1}`;
     dom.currentQPoints.textContent = q.points;
@@ -573,216 +345,131 @@ function renderQuestionContent(index, scrollToTop = false) {
 
     renderMediaBox(q);
 
-    if (starredQuestions[index]) {
-        dom.btnStar.classList.add("starred");
-        dom.btnStar.innerHTML = '<i class="fa-solid fa-star"></i>';
-    } else {
-        dom.btnStar.classList.remove("starred");
-        dom.btnStar.innerHTML = '<i class="fa-regular fa-star"></i>';
-    }
+    const isStarred = Boolean(starredQuestions[index]);
+    dom.btnStar.classList.toggle("starred", isStarred);
+    dom.btnStar.innerHTML = `<i class="fa-${isStarred ? 'solid' : 'regular'} fa-star"></i>`;
 
     dom.answersContainer.innerHTML = "";
-    q.answers.forEach((ans, aIdx) => {
-        dom.answersContainer.appendChild(renderAnswerOption(q, index, aIdx, ans, reviewMode));
-    });
+    q.answers.forEach((ans, aIdx) => dom.answersContainer.appendChild(renderAnswerOption(q, index, aIdx, ans, reviewMode)));
 
     updateNextButton(index);
     updateNavigationFooter();
 }
 
 async function loadQuestion(index, scrollToTop = false, dir = "next") {
-    preloadAdjacentImages(index);
-
-    if (!dom.quizCanvasContainer || dir === "none") {
-        renderQuestionContent(index, scrollToTop);
-        return;
-    }
-
-    const exitClass = dir === "prev" ? "transition-exit-prev" : "transition-exit-next";
-    const enterClass = dir === "prev" ? "transition-enter-prev" : "transition-enter-next";
-
-    dom.quizCanvasContainer.classList.add(exitClass);
-
-    await new Promise((resolve) => setTimeout(resolve, 60));
-
+    if (!dom.quizCanvasContainer || dir === "none") return renderQuestionContent(index, scrollToTop);
+    dom.quizCanvasContainer.classList.add("fade-out");
+    await new Promise(r => setTimeout(r, 60));
     renderQuestionContent(index, scrollToTop);
-
-    dom.quizCanvasContainer.classList.remove(exitClass);
-    dom.quizCanvasContainer.classList.add(enterClass);
-
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            if (!dom.quizCanvasContainer) return;
-            dom.quizCanvasContainer.classList.remove(enterClass);
-            dom.quizCanvasContainer.classList.add("transition-active");
-
-            setTimeout(() => {
-                if (dom.quizCanvasContainer) {
-                    dom.quizCanvasContainer.classList.remove("transition-active");
-                }
-            }, 180);
-        });
-    });
+    dom.quizCanvasContainer.classList.remove("fade-out");
 }
 
-function toggleAnswerSelection(qIdx, aIdx) {
-    userAnswers[qIdx] = aIdx;
-    updateNavigationFooter();
-}
-
-function toggleStar() {
-    starredQuestions[currentIndex] = !starredQuestions[currentIndex];
-    loadQuestion(currentIndex, false, "none");
-    updateNavigationFooter();
-}
-
-function checkQuestionCorrectness(qIdx) {
-    const selectedIdx = userAnswers[qIdx];
-    if (selectedIdx === undefined) return false;
-    return questions[qIdx].answers[selectedIdx].correct === true;
-}
-
-/* ── Navigation ─────────────────────────────────────────── */
-
+/* ── Navigation & Modals ─────────────────────────────────── */
 function buildNavigationFooter() {
     if (!dom.navGridContainer) return;
-
     dom.navGridContainer.innerHTML = "";
-    for (let i = 0; i < questions.length; i++) {
+    questions.forEach((_, i) => {
         const box = document.createElement("div");
         box.className = "q-nav-box";
         box.textContent = i + 1;
-        box.addEventListener("click", () => {
+        box.tabIndex = 0;
+        box.setAttribute("role", "button");
+        box.setAttribute("aria-label", `${t("ui.questionLabel")} ${i + 1}`);
+
+        const selectBox = () => {
             loadQuestion(i, true, i >= currentIndex ? "next" : "prev");
             closeNavGridPanel();
-        });
+        };
+
+        box.addEventListener("click", selectBox);
         dom.navGridContainer.appendChild(box);
-    }
+    });
 }
 
 function updateNavigationFooter() {
+    const isMobile = !window.matchMedia("(min-width: 640px)").matches;
     if (dom.gridToggleLabel) {
-        dom.gridToggleLabel.textContent = `${t("ui.questionLabel")} ${currentIndex + 1} / ${questions.length}`;
+        dom.gridToggleLabel.textContent = isMobile
+            ? `${currentIndex + 1} / ${questions.length}`
+            : `${t("ui.questionLabel")} ${currentIndex + 1} / ${questions.length}`;
     }
-
     if (dom.navGridContainer) {
-        const boxes = dom.navGridContainer.children;
-        for (let idx = 0; idx < questions.length; idx++) {
-            const box = boxes[idx];
-            if (!box) continue;
-
-            box.className = "q-nav-box";
+        if (!dom.navGridContainer.children.length) buildNavigationFooter();
+        Array.from(dom.navGridContainer.children).forEach((box, idx) => {
             const isAnswered = userAnswers[idx] !== undefined;
-
-            if (idx === currentIndex) box.classList.add("active");
-            if (starredQuestions[idx]) box.classList.add("starred");
-
-            if (reviewMode) {
-                box.classList.add(checkQuestionCorrectness(idx) ? "review-correct" : "review-incorrect");
-            } else if (isAnswered) {
-                box.classList.add("answered");
-            }
-        }
+            box.className = `q-nav-box${idx === currentIndex ? " active" : ""}${starredQuestions[idx] ? " starred" : ""}`;
+            if (reviewMode) box.classList.add(checkQuestionCorrectness(idx) ? "review-correct" : "review-incorrect");
+            else if (isAnswered) box.classList.add("answered");
+        });
     }
-
-    if (dom.btnPrev) {
-        dom.btnPrev.disabled = currentIndex === 0;
-    }
+    if (dom.btnPrev) dom.btnPrev.disabled = currentIndex === 0;
+    updateTimerDisplay();
 }
-
-/* ── Modals ─────────────────────────────────────────────── */
 
 function openSubmitModal() {
-    let answered = 0;
-    for (let i = 0; i < questions.length; i++) {
-        if (userAnswers[i] !== undefined) answered++;
-    }
-
+    const answered = Object.keys(userAnswers).length;
     dom.answeredCount.textContent = `${answered}/${questions.length}`;
     dom.unansweredCount.textContent = questions.length - answered;
-    dom.submitModal.classList.remove("hidden");
+    toggle(dom.submitModal, true);
 }
 
-function closeSubmitModal() {
-    dom.submitModal.classList.add("hidden");
-}
-
-function openLegalModal() {
-    dom.legalModal?.classList.remove("hidden");
-}
-
-function closeLegalModal() {
-    dom.legalModal?.classList.add("hidden");
-}
-
-/* ── Event wiring ───────────────────────────────────────── */
-
+/* ── Event Listeners ─────────────────────────────────────── */
 function setupEventListeners() {
-    document.querySelectorAll(".lang-btn").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            loadLanguage(e.currentTarget.getAttribute("data-lang"));
-        });
-    });
+    const toggleLang = () => loadLanguage((document.documentElement.lang || CONFIG.DEFAULT_LANG) === "de" ? "en" : "de");
+    document.querySelectorAll(".lang-toggle-btn").forEach(btn => btn.addEventListener("click", toggleLang));
 
-    dom.startExamBtn.addEventListener("click", startExam);
-    dom.restartExamBtn.addEventListener("click", restartExam);
-    dom.abortBtn.addEventListener("click", confirmAbort);
-    dom.btnCancel.addEventListener("click", confirmAbort);
-    dom.btnStar.addEventListener("click", toggleStar);
+    dom.startExamBtn?.addEventListener("click", startExam);
+    dom.restartExamBtn?.addEventListener("click", startExam);
+    dom.abortBtn?.addEventListener("click", confirmAbort);
+    dom.btnCancel?.addEventListener("click", confirmAbort);
+    dom.btnStar?.addEventListener("click", () => {
+        starredQuestions[currentIndex] = !starredQuestions[currentIndex];
+        loadQuestion(currentIndex, false, "none");
+    });
 
     dom.btnNextMain?.addEventListener("click", () => {
-        if (currentIndex < questions.length - 1) {
-            loadQuestion(currentIndex + 1, true, "next");
-        } else if (!reviewMode) {
-            openSubmitModal();
-        } else {
-            showResultScreen();
-        }
+        if (currentIndex < questions.length - 1) loadQuestion(currentIndex + 1, true, "next");
+        else if (!reviewMode) openSubmitModal();
+        else { toggle(dom.quizScreen, false); toggle(dom.resultScreen, true); }
     });
 
-    dom.btnGridToggle?.addEventListener("click", (e) => {
+    dom.btnGridToggle?.addEventListener("click", e => {
         e.stopPropagation();
         dom.navGridPanel?.classList.toggle("hidden");
         const caret = dom.btnGridToggle.querySelector(".toggle-caret");
-        if (caret) {
-            caret.style.transform = dom.navGridPanel.classList.contains("hidden") ? "" : "rotate(180deg)";
-        }
+        if (caret) caret.style.transform = dom.navGridPanel.classList.contains("hidden") ? "" : "rotate(180deg)";
     });
 
-    dom.navGridPanel?.addEventListener("click", (e) => e.stopPropagation());
+    dom.navGridPanel?.addEventListener("click", e => e.stopPropagation());
     dom.closeNavGridBtn?.addEventListener("click", closeNavGridPanel);
-
-    document.addEventListener("click", (e) => {
-        if (!dom.navGridPanel || !dom.btnGridToggle || dom.navGridPanel.classList.contains("hidden")) return;
-        if (!dom.navGridPanel.contains(e.target) && !dom.btnGridToggle.contains(e.target)) {
-            closeNavGridPanel();
-        }
+    document.addEventListener("click", e => {
+        if (dom.navGridPanel && !dom.navGridPanel.classList.contains("hidden") && !dom.navGridPanel.contains(e.target) && !dom.btnGridToggle?.contains(e.target)) closeNavGridPanel();
     });
 
-    dom.btnPrev?.addEventListener("click", () => {
-        if (currentIndex > 0) loadQuestion(currentIndex - 1, true, "prev");
-    });
+    dom.btnPrev?.addEventListener("click", () => { if (currentIndex > 0) loadQuestion(currentIndex - 1, true, "prev"); });
+    dom.modalCancelBtn?.addEventListener("click", () => toggle(dom.submitModal, false));
+    dom.modalConfirmBtn?.addEventListener("click", submitExam);
+    dom.submitModal?.addEventListener("click", e => e.target.id === "submit-modal" && toggle(dom.submitModal, false));
 
-    dom.modalCancelBtn.addEventListener("click", closeSubmitModal);
-    dom.modalConfirmBtn.addEventListener("click", submitExam);
-    dom.submitModal.addEventListener("click", (e) => {
-        if (e.target.id === "submit-modal") closeSubmitModal();
-    });
+    dom.abortModalCancelBtn?.addEventListener("click", () => toggle(dom.abortModal, false));
+    dom.abortModalConfirmBtn?.addEventListener("click", () => { clearInterval(timerInterval); toggle(dom.abortModal, false); toggle(dom.quizScreen, false); toggle(dom.introScreen, true); });
+    dom.abortModal?.addEventListener("click", e => e.target.id === "abort-modal" && toggle(dom.abortModal, false));
 
-    dom.openLegalBtn?.addEventListener("click", openLegalModal);
-    dom.closeLegalBtn?.addEventListener("click", closeLegalModal);
-    dom.closeLegalX?.addEventListener("click", closeLegalModal);
-    dom.legalModal?.addEventListener("click", (e) => {
-        if (e.target.id === "legal-modal") closeLegalModal();
-    });
+    const legalModal = dom.legalModal || document.getElementById("legal-modal");
+    const openLegalBtn = dom.openLegalBtn || document.getElementById("open-legal-modal-btn");
+    const closeLegalBtn = dom.closeLegalBtn || document.getElementById("close-legal-modal-btn");
 
-    dom.reviewAnswersBtn.addEventListener("click", enterReviewMode);
+    openLegalBtn?.addEventListener("click", () => toggle(legalModal, true));
+    closeLegalBtn?.addEventListener("click", () => toggle(legalModal, false));
+    legalModal?.addEventListener("click", e => e.target.id === "legal-modal" && toggle(legalModal, false));
+
+    dom.reviewAnswersBtn?.addEventListener("click", () => enterReviewMode(0));
+
+    window.addEventListener("resize", updateNavigationFooter);
 }
 
 /* ── Bootstrap ──────────────────────────────────────────── */
-
 document.addEventListener("DOMContentLoaded", () => {
-    cacheDomRefs();
     initLanguage();
     setupEventListeners();
 });

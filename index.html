@@ -36,23 +36,13 @@
 
             <div class="card intro-card">
                 <div class="language-selector">
-                    <button class="lang-btn active" data-lang="de" title="Deutsch">
-                        <svg class="flag-icon" viewBox="0 0 640 480" width="20" height="15" aria-hidden="true">
+                    <button id="lang-toggle-btn" class="lang-btn lang-toggle-btn" type="button" title="Language / Sprache">
+                        <svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13.5" aria-hidden="true">
                             <rect width="640" height="160" fill="#000000"/>
                             <rect y="160" width="640" height="160" fill="#DD0000"/>
                             <rect y="320" width="640" height="160" fill="#FFCE00"/>
                         </svg>
                         <span class="lang-code">DE</span>
-                    </button>
-                    <button class="lang-btn" data-lang="en" title="English">
-                        <svg class="flag-icon" viewBox="0 0 640 480" width="20" height="15" aria-hidden="true">
-                            <path fill="#012169" d="M0 0h640v480H0z"/>
-                            <path fill="#FFF" d="m75 0 245 180L565 0h75v50L395 240l245 190v50h-75L320 300 75 480H0v-50l245-190L0 50V0h75z"/>
-                            <path fill="#C8102E" d="m424 261 216 163v26h-34L376 273l48-12zm-208 0L0 424v26h34l230-177-48-12zM0 30l208 157 48-12L40 0H0v30zm640 0L432 187l-48-12L600 0h40v30z"/>
-                            <path fill="#FFF" d="M240 0v480h160V0H240zM0 160v160h640V160H0z"/>
-                            <path fill="#C8102E" d="M267 0v480h106V0H267zM0 187v106h640V187H0z"/>
-                        </svg>
-                        <span class="lang-code">EN</span>
                     </button>
                 </div>
                 <div class="card-accent-line"></div>
@@ -127,11 +117,21 @@
                     <span id="question-id" class="question-id">Frage 1</span>
                 </div>
                 <div class="header-right">
+                    <div class="header-lang-selector">
+                        <button id="header-lang-toggle-btn" class="header-lang-btn lang-toggle-btn" type="button" title="Language / Sprache">
+                            <svg class="flag-icon" viewBox="0 0 640 480" width="16" height="12" aria-hidden="true">
+                                <rect width="640" height="160" fill="#000000"/>
+                                <rect y="160" width="640" height="160" fill="#DD0000"/>
+                                <rect y="320" width="640" height="160" fill="#FFCE00"/>
+                            </svg>
+                            <span>DE</span>
+                        </button>
+                    </div>
                     <span id="timer-display-header" class="timer-display-header">45:00</span>
                     <span class="header-divider">|</span>
                     <span class="points-label"><span data-i18n="ui.pointsLabel">Punkte:</span> <span
                             id="current-q-points">4</span></span>
-                    <button id="abort-btn" class="close-x-btn" data-i18n-title="ui.abortTitle" title="Zur Startseite">
+                    <button id="abort-btn" class="close-x-btn" data-i18n-title="ui.abortTitle" title="Zur Startseite" aria-label="Zur Startseite">
                         <i class="fa-solid fa-house"></i>
                     </button>
                 </div>
@@ -139,29 +139,12 @@
 
             <main class="quiz-canvas">
                 <div class="quiz-canvas-container">
-                    <h1 id="question-text" class="question-title">Lädt...</h1>
-
                     <div class="canvas-split">
                         <div class="media-column">
-                            <div class="exam-media-box" id="exam-media-box">
-                                <div class="blueprint-lines"></div>
-                                <div class="blueprint-mirror"></div>
-                                <div class="blueprint-speedometer">
-                                    <div class="speedo-dial"></div>
-                                    <div class="speedo-needle"></div>
-                                </div>
-                                <div class="blueprint-steering-wheel"></div>
-                                <div class="blueprint-road-path"></div>
-
-                                <div class="blueprint-info">
-                                    <i class="fa-solid fa-compass-drafting media-icon"></i>
-                                    <div class="media-title" id="media-filename">M365-COPILOT</div>
-                                    <div class="media-desc" id="media-description">
-                                        [Architektur- und Consulting-Szenario]
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="exam-media-box" id="exam-media-box"></div>
                         </div>
+
+                        <h1 id="question-text" class="question-title">Lädt...</h1>
 
                         <div class="answers-column" id="answers-container"></div>
                     </div>
@@ -209,10 +192,10 @@
         </section>
 
         <!-- Submit confirmation modal -->
-        <div id="submit-modal" class="modal-overlay hidden">
+        <div id="submit-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="submit-modal-title">
             <div class="modal-card">
                 <div class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                <h2 data-i18n="ui.submitModalTitle">Prüfung abgeben?</h2>
+                <h2 id="submit-modal-title" data-i18n="ui.submitModalTitle">Prüfung abgeben?</h2>
                 <p data-i18n="ui.submitModalText">Möchten Sie die theoretische Prüfung wirklich beenden und abgeben?
                     Unbeantwortete Fragen werden als falsch gewertet.</p>
                 <div class="modal-stats">
@@ -234,19 +217,33 @@
             </div>
         </div>
 
+        <!-- Abort confirmation modal -->
+        <div id="abort-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="abort-modal-title">
+            <div class="modal-card">
+                <div class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h2 id="abort-modal-title" data-i18n="ui.abortModalTitle">Prüfung abbrechen?</h2>
+                <p data-i18n="ui.confirmAbort">Möchten Sie die Prüfung abbrechen? Ihr Fortschritt wird gelöscht.</p>
+                <div class="modal-actions">
+                    <button id="abort-modal-cancel-btn" class="btn btn-secondary" data-i18n="ui.continueBtn">Weitermachen</button>
+                    <button id="abort-modal-confirm-btn" class="btn btn-danger" data-i18n="ui.confirmAbortBtn">Ja, abbrechen</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Results screen -->
         <section id="result-screen" class="app-screen hidden">
             <div class="card result-card">
-                <div class="result-header">
-                    <h1 data-i18n="ui.resultTitle">Prüfungsergebnis</h1>
-                    <div id="result-badge" class="result-badge success">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span data-i18n="ui.passedBadge">BESTANDEN</span>
+                <div id="result-verdict" class="result-verdict is-passed">
+                    <i id="verdict-icon" class="fa-solid fa-circle-check verdict-icon"></i>
+                    <div class="verdict-text">
+                        <span class="verdict-overline" data-i18n="ui.resultTitle">Prüfungsergebnis</span>
+                        <span id="result-badge" class="verdict-title">BESTANDEN</span>
+                        <span id="verdict-score" class="verdict-score"></span>
                     </div>
                 </div>
 
                 <div class="result-summary-grid">
-                    <div class="summary-box">
+                    <div id="error-points-box" class="summary-box">
                         <span class="summary-label" data-i18n="ui.errorPointsLabel">Fehlerpunkte</span>
                         <span class="summary-value" id="res-error-points">0</span>
                         <span class="summary-detail" data-i18n="ui.allowedMax">(Erlaubt: max. 10)</span>
@@ -272,6 +269,7 @@
                                     <th data-i18n="ui.tableHeaderQuestion">Frage</th>
                                     <th data-i18n="ui.tableHeaderErrors">Fehlerpunkte</th>
                                     <th data-i18n="ui.tableHeaderStatus">Status</th>
+                                    <th aria-hidden="true"></th>
                                 </tr>
                             </thead>
                             <tbody id="results-table-body"></tbody>
@@ -280,10 +278,10 @@
                 </div>
 
                 <div class="result-actions">
-                    <button id="review-answers-btn" class="btn btn-primary">
+                    <button id="review-answers-btn" class="btn btn-primary" type="button">
                         <i class="fa-solid fa-eye"></i> <span data-i18n="ui.reviewAnswersBtn">Antworten prüfen</span>
                     </button>
-                    <button id="restart-exam-btn" class="btn btn-secondary">
+                    <button id="restart-exam-btn" class="btn btn-secondary" type="button">
                         <i class="fa-solid fa-rotate-left"></i> <span data-i18n="ui.restartExamBtn">Neue Prüfung</span>
                     </button>
                 </div>
@@ -295,56 +293,57 @@
                 </p>
             </div>
         </section>
-    </div>
 
-    <!-- Legal disclaimer modal -->
-    <div id="legal-modal" class="modal-backdrop hidden">
-        <div class="modal-card legal-modal-card">
-            <div class="legal-modal-header">
-                <h2><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="ui.legalTitle">Rechtliche Hinweise &
-                        Disclaimer</span></h2>
-                <button id="close-legal-modal-x" class="close-x-btn" type="button"><i
-                        class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="legal-modal-body">
-                <div class="legal-section">
-                    <h4><i class="fa-solid fa-certificate"></i> <span data-i18n="ui.legalSec1Title">1. Kein offizielles
-                            Zertifikat</span></h4>
-                    <p data-i18n="ui.legalSec1Text">Das Absolvieren dieser „CC Prüfung“ gewährt keine offiziell
-                        anerkannte Qualifikation, kein Zertifikat und keinen Sachkundenachweis. Es handelt sich um ein
-                        inoffizielles Trainings- und Humorwerkzeug.</p>
+        <!-- Legal disclaimer modal -->
+        <div id="legal-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+            <div class="modal-card legal-modal-card">
+                <div class="legal-modal-header">
+                    <h2 id="legal-modal-title"><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="ui.legalTitle">Rechtliche Hinweise &
+                            Disclaimer</span></h2>
                 </div>
+                <div class="legal-modal-body">
+                    <div class="legal-section">
+                        <h4><i class="fa-solid fa-certificate"></i> <span data-i18n="ui.legalSec1Title">1. Kein offizielles
+                                Zertifikat</span></h4>
+                        <p data-i18n="ui.legalSec1Text">Das Absolvieren dieser „CC Prüfung“ gewährt keine offiziell
+                            anerkannte Qualifikation, kein Zertifikat und keinen Sachkundenachweis. Es handelt sich um ein
+                            inoffizielles Trainings- und Humorwerkzeug.</p>
+                    </div>
 
-                <div class="legal-section">
-                    <h4><i class="fa-solid fa-registered"></i> <span data-i18n="ui.legalSec2Title">2. Markenrechtlicher
-                            Ausschluss (Microsoft)</span></h4>
-                    <p data-i18n="ui.legalSec2Text">Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook,
-                        Purview und weitere genannte Produktbezeichnungen sind eingetragene Marken der Microsoft
-                        Corporation in den USA und/oder anderen Ländern. Diese Anwendung wird nicht von Microsoft
-                        unterstützt, gesponsert, betrieben oder gepflegt.</p>
-                </div>
+                    <div class="legal-section">
+                        <h4><i class="fa-solid fa-registered"></i> <span data-i18n="ui.legalSec2Title">2. Markenrechtlicher
+                                Ausschluss (Microsoft)</span></h4>
+                        <p data-i18n="ui.legalSec2Text">Microsoft, Microsoft 365, M365 Copilot, Teams, SharePoint, Outlook,
+                            Purview und weitere genannte Produktbezeichnungen sind eingetragene Marken der Microsoft
+                            Corporation in den USA und/oder anderen Ländern. Diese Anwendung wird nicht von Microsoft
+                            unterstützt, gesponsert, betrieben oder gepflegt.</p>
+                    </div>
 
-                <div class="legal-section">
-                    <h4><i class="fa-solid fa-building-user"></i> <span data-i18n="ui.legalSec3Title">3. Ausschluss von
-                            Arbeitgeberverhältnissen</span></h4>
-                    <p data-i18n="ui.legalSec3Text">Dieses Quiz ist ein privates Freizeit- & Community-Projekt des
-                        Erstellers. Es repräsentiert weder die Ansichten, Richtlinien, Schulungsmaterialien noch
-                        offizielle Vorgaben von aktuellen oder früheren Arbeitgebern des Betreibers.</p>
-                </div>
+                    <div class="legal-section">
+                        <h4><i class="fa-solid fa-building-user"></i> <span data-i18n="ui.legalSec3Title">3. Ausschluss von
+                                Arbeitgeberverhältnissen</span></h4>
+                        <p data-i18n="ui.legalSec3Text">Dieses Quiz ist ein privates Freizeit- & Community-Projekt des
+                            Erstellers. Es repräsentiert weder die Ansichten, Richtlinien, Schulungsmaterialien noch
+                            offizielle Vorgaben von aktuellen oder früheren Arbeitgebern des Betreibers.</p>
+                    </div>
 
-                <div class="legal-section">
-                    <h4><i class="fa-solid fa-masks-theater"></i> <span data-i18n="ui.legalSec4Title">4. Fiktive
-                            Regulierung & Parodie</span></h4>
-                    <p data-i18n="ui.legalSec4Text">Bezüge wie „§ 365 KI-Betriebssicherheitsverordnung“ sind rein
-                        fiktive Stilmittel zur Parodierung klassischer Fahrschul-Theorieprüfungen.</p>
+                    <div class="legal-section">
+                        <h4><i class="fa-solid fa-masks-theater"></i> <span data-i18n="ui.legalSec4Title">4. Fiktive
+                                Regulierung & Parodie</span></h4>
+                        <p data-i18n="ui.legalSec4Text">Bezüge wie „§ 365 KI-Betriebssicherheitsverordnung“ sind rein
+                            fiktive Stilmittel zur Parodierung klassischer Fahrschul-Theorieprüfungen.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-actions">
-                <button id="close-legal-modal-btn" class="btn btn-primary" type="button"
-                    data-i18n="ui.legalUnderstoodBtn">Verstanden & Schließen</button>
+                <div class="modal-actions">
+                    <button id="close-legal-modal-btn" class="btn btn-primary" type="button"
+                        data-i18n="ui.legalUnderstoodBtn">Verstanden & Schließen</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <script src="index.js" defer></script>
 </body>
